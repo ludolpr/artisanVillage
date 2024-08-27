@@ -1,49 +1,43 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "./AuthContext.js";
 import PropTypes from "prop-types";
+import { AuthContext } from "./AuthContext";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  // const token = localStorage.getItem("access_token");
+
   const { token } = useContext(AuthContext);
-
   useEffect(() => {
-    const role = auth.getRoles();
-    const fetchUser = async () => {
-      if (!token) {
-        console.error("Token non disponible");
-        return;
-      }
-
-      try {
-        console.log("Authorization", `Bearer ${token}`);
-
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/currentuser",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-            },
-          }
-        );
-
-        console.log("Response Data:", response.data);
-        setUser(response.data.data.user);
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des informations utilisateur",
-          error
-        );
-      }
-    };
-
     fetchUser();
   }, [token]);
+  console.log(" Token from AuthContext 1:", token);
+
+  const [validationError, setValidationError] = useState({});
+
+  const fetchUser = async () => {
+    if (!token) {
+      console.error("Token non disponible");
+      return;
+    }
+    console.log(" Token from AuthContext 2:", token);
+
+    await axios
+      .get("http://127.0.0.1:8000/api/currentuser", {
+        authorization: `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .catch(({ response }) => {
+        if (response.status === 422) {
+          setValidationError(response.data.errors);
+        }
+      });
+    console.log(" Token from AuthContext 3:", token);
+  };
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };

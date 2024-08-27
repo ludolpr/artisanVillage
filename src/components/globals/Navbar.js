@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { ThemeContext } from "../../hooks/ThemeContext";
 import { AuthContext } from "../../hooks/AuthContext";
 import { UserContext } from "../../hooks/UserContext";
+import { Menu, X, Moon, Sun, Eye } from "lucide-react";
+import Auth from "../../services/token";
 
 const NavLinks = () => {
-  const { isAuthenticated, logout, getRoles } = useContext(AuthContext);
+  const { isAuthenticated, logout } = useContext(AuthContext);
   const user = useContext(UserContext);
 
-  const role = getRoles();
+  const role = Auth.getRoles();
+  console.log("mon user: " + user);
 
   return (
     <>
@@ -20,13 +24,49 @@ const NavLinks = () => {
         </>
       ) : (
         <>
+          <span>Bonjour, {user ? user.name_user : "Utilisateur"}</span>
+          {role == 2 ? <NavLink to="/dashboard">Dashboard</NavLink> : ""}
           <button onClick={logout}>Logout</button>
-          {role === 2 && <NavLink to="/dashboard">Dashboard</NavLink>}
-          <span>Bonjour, {user ? user.name : "Utilisateur"}</span>
         </>
       )}
     </>
   );
 };
 
-export default NavLinks;
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { toggleTheme, theme } = useContext(ThemeContext);
+
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <>
+      <nav className="flex w-1/3 justify-end">
+        <div className="hidden w-full justify-between md:flex">
+          <NavLinks />
+          <button onClick={() => toggleTheme()}>
+            {theme === "dark" ? (
+              <Sun />
+            ) : theme === "light" ? (
+              <Moon />
+            ) : (
+              <Eye />
+            )}
+          </button>
+        </div>
+
+        <div className="md:hidden">
+          <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
+        </div>
+      </nav>
+      {isOpen && (
+        <div className="flex flex-col items-center">
+          <NavLinks />
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Navbar;

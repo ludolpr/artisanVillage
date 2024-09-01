@@ -14,5 +14,13 @@ sass --watch ./src/assets/styles/index.scss:./src/assets/styles/stylesSass.css
 
 HAVE FUN !!
 
-secondayre
+primary
+-[#d9b99b]
+
+secondary :
 -[#9a7d6b]
+
+hover : 
+-[#9a7d6b]
+
+text white 

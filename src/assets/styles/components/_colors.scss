@@ -9,17 +9,19 @@ $primary: (
   800: #574a3e,
   900: #2b251f
 );
+
 $secondary: (
-    100: #ebe5e1,
-    200: #d7cbc4,
-    300: #c2b1a6,
-    400: #ae9789,
-    500: #9a7d6b,
-    600: #7b6456,
-    700: #5c4b40,
-    800: #3e322b,
-    900: #1f1915
+  100: #ebe5e1,
+  200: #d7cbc4,
+  300: #c2b1a6,
+  400: #ae9789,
+  500: #9a7d6b,
+  600: #7b6456,
+  700: #5c4b40,
+  800: #3e322b,
+  900: #1f1915
 );
+
 $tertiary: (
   100: #eadcdc,
   200: #d5bab9,
@@ -44,31 +46,29 @@ $transition: (
   900: #333333
 );
 
-
 @mixin generate-color-classes($color-map, $name) {
-    @each $key, $color in $color-map {
-      .#{$name}-#{$key} {
-        background-color: $color;
-      }
+  @each $key, $color in $color-map {
+    .#{$name}-#{$key} {
+      background-color: $color;
     }
   }
+}
 
+@mixin generate-text-color-classes($color-map, $name) {
+  @each $key, $color in $color-map {
+    .#{$name}-text-#{$key} {
+      color: $color;
+    }
+  }
+}
 
-  @mixin generate-text-color-classes($color-map, $name) {
-    @each $key, $color in $color-map {
-      .#{$name}-text-#{$key} {
-        color: $color;
-      }
+@mixin generate-border-color-classes($color-map, $name) {
+  @each $key, $color in $color-map {
+    .#{$name}-border-#{$key} {
+      border-color: $color;
     }
   }
-  
-  @mixin generate-border-color-classes($color-map, $name) {
-    @each $key, $color in $color-map {
-      .#{$name}-border-#{$key} {
-        border-color: $color;
-      }
-    }
-  }
+}
 
 @mixin generate-hover-color-classes($color-map, $name) {
   @each $key, $color in $color-map {
@@ -94,21 +94,17 @@ $transition: (
   }
 }
 
-// Génération des classes pour les couleurs de fond
 @include generate-color-classes($primary, "primary");
 @include generate-color-classes($secondary, "secondary");
 @include generate-color-classes($tertiary, "tertiary");
 @include generate-color-classes($transition, "transition");
 
-// Génération des classes pour les couleurs de texte
 @include generate-text-color-classes($primary, "primary");
 @include generate-text-color-classes($secondary, "secondary");
 @include generate-text-color-classes($tertiary, "tertiary");
 @include generate-text-color-classes($transition, "transition");
 
-// Génération des classes pour les couleurs de bordure
 @include generate-border-color-classes($primary, "primary");
 @include generate-border-color-classes($secondary, "secondary");
 @include generate-border-color-classes($tertiary, "tertiary");
 @include generate-border-color-classes($transition, "transition");
-  

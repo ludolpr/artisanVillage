@@ -20,12 +20,13 @@ const Footer = () => {
             </ul>
           </div>
           <div className=" col">
-            <h6>
-              Mentions légales et politique de{" "}
-              <p className="font-bold">Confidentialité</p>
+            <h6 className="flex row">
+              Mentions légales et politique de 
+              <p className="font-bold"> Confidentialité</p>
             </h6>
-            <p>
+            <p className="col">
               <a href="">Mensions Légales</a>
+              <br />
               <a href="">Politique de confidentialité</a>
             </p>
           </div>

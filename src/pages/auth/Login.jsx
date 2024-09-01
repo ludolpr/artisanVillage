@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../hooks/UserContext";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { email: "", password: "" } });
+
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
-  const token = localStorage.getItem("access_token");
+  const { login } = useContext(UserContext);
 
-  useEffect(() => {
-    if (token) {
-      setLoading(true);
-    }
-  }, [loading]);
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
     setLoading(true);
     setAuthError(null);
+
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/login",
-        data
+      const formData = new FormData();
+      formData.append("email", data.email);
+      formData.append("password", data.password);
+
+      const res = await axios.post(
+        "http://127.0.0.1:8000/api/login",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
       );
-      localStorage.setItem(
-        "access_token",
-        JSON.stringify(response.data.data.access_token.token)
-      );
-      // console.log("data: ", data);
-      setLoading(true);
-      navigate("/");
-    } catch (error) {
-      console.error("Erreur lors de la connexion:", error);
+
+      if (res.status === 200) {
+        localStorage.setItem("access_token", res.data.data.access_token.token);
+        navigate(from, { replace: true });
+        login(res.data.user);
+      }
+    } catch (err) {
       setAuthError(
-        error.response?.data?.message || "Erreur lors de la connexion"
+        "Échec de la connexion. Veuillez vérifier vos identifiants."
       );
-      setLoading(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,11 +100,7 @@ const Login = () => {
           disabled={loading}
           className="w-full py-2 px-4 primary-500 text-white font-semibold rounded-md shadow-sm hover:bg-[#9a7d6b] focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:ring-offset-2"
         >
-          {authError
-            ? "Connexion"
-            : loading
-            ? "Connexion en cours..."
-            : "Connexion"}
+          {loading ? "Connexion en cours..." : "Connexion"}
         </button>
       </form>
     </div>

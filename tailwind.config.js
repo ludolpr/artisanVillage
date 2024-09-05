@@ -4,25 +4,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          500: "#d9b99b",
-        },
+        primary: "var(--primary-color)",
         secondary: {
-          500: "#9a7d6b",
+          500: "var(--secondary-color)",
         },
         tertiary: {
-          500: "#d5bab9",
+          500: "var(--tertiary-color)",
         },
         transition: {
-          100: "#ffffff",
-          200: "#ffffff",
-          300: "#ffffff",
-          400: "#ffffff",
-          500: "#ffffff",
-          600: "#cccccc",
-          700: "#999999",
-          800: "#666666",
-          900: "#333333",
+          100: "var(--transition-100)",
+          200: "var(--transition-200)",
+          300: "var(--transition-300)",
+          400: "var(--transition-400)",
+          500: "var(--transition-500)",
+          600: "var(--transition-600)",
+          700: "var(--transition-700)",
+          800: "var(--transition-800)",
+          900: "var(--transition-900)",
         },
       },
     },

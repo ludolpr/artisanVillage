@@ -2,77 +2,76 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../../services/baseUrl";
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 
-const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
-  const [roles, setRoles] = useState([]);
-  const [editingRoleId, setEditingRoleId] = useState(null);
-  const [newRoleName, setNewRoleName] = useState("");
+const TagsList = ({ onTagSelect, onEdit, onDelete, refreshKey }) => {
+  const [tags, setTags] = useState([]);
+  const [editingTagId, setEditingTagId] = useState(null);
+  const [newTagName, setNewTagName] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchTags = async () => {
       try {
-        const response = await api.get("/role");
-        setRoles(response.data || []);
+        const response = await api.get("/tag");
+        setTags(response.data || []);
         setError("");
       } catch (error) {
-        console.error("Erreur lors de la récupération des rôles:", error);
-        setError("Erreur lors de la récupération des rôles.");
+        console.error("Erreur lors de la récupération des tags:", error);
+        setError("Erreur lors de la récupération des tags.");
       }
     };
 
-    fetchRoles();
+    fetchTags();
   }, [refreshKey]);
 
-  const handleEditClick = (role) => {
-    setEditingRoleId(role.id);
-    setNewRoleName(role.name_role);
+  const handleEditClick = (tag) => {
+    setEditingTagId(tag.id);
+    setNewTagName(tag.name_tag);
   };
 
-  const handleSaveEdit = async (roleId) => {
+  const handleSaveEdit = async (tagId) => {
     try {
-      await api.put(`/role/${roleId}`, { name_role: newRoleName });
-      setRoles(
-        roles.map((role) =>
-          role.id === roleId ? { ...role, name_role: newRoleName } : role
+      await api.put(`/tag/${tagId}`, { name_tag: newTagName });
+      setTags(
+        tags.map((tag) =>
+          tag.id === tagId ? { ...tag, name_tag: newTagName } : tag
         )
       );
-      setEditingRoleId(null);
-      setSuccessMessage("Rôle modifié avec succès.");
+      setEditingTagId(null);
+      setSuccessMessage("Tag modifié avec succès.");
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error) {
-      console.error("Erreur lors de la modification du rôle:", error);
+      console.error("Erreur lors de la modification du tag:", error);
       setError(
         error.response?.data?.message ||
-          "Erreur lors de la modification du rôle."
+          "Erreur lors de la modification du tag."
       );
     }
   };
 
   const handleCancelEdit = () => {
-    setEditingRoleId(null);
-    setNewRoleName("");
+    setEditingTagId(null);
+    setNewTagName("");
   };
 
-  const handleDelete = async (roleId) => {
+  const handleDelete = async (tagId) => {
     try {
-      await api.delete(`/role/${roleId}`);
-      setRoles(roles.filter((role) => role.id !== roleId));
-      setSuccessMessage("Rôle supprimé avec succès.");
+      await api.delete(`/tag/${tagId}`);
+      setTags(tags.filter((tag) => tag.id !== tagId));
+      setSuccessMessage("Tag supprimé avec succès.");
       setTimeout(() => setSuccessMessage(""), 3000);
       if (onDelete) onDelete();
     } catch (error) {
-      console.error("Erreur lors de la suppression du rôle:", error);
+      console.error("Erreur lors de la suppression du tag:", error);
       setError(
-        error.response?.data?.message ||
-          "Erreur lors de la suppression du rôle."
+        error.response?.data?.message || "Erreur lors de la suppression du tag."
       );
     }
   };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Liste des rôles</h2>
+      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Liste des tags</h2>
       {error && (
         <div className="bg-red-200 text-red-800 p-4 rounded mb-4">{error}</div>
       )}
@@ -82,36 +81,36 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
         </div>
       )}
       <ul>
-        {roles.length > 0 ? (
-          roles.map((role) => (
+        {tags.length > 0 ? (
+          tags.map((tag) => (
             <li
-              key={role.id}
+              key={tag.id}
               className="mb-2 p-4 bg-[#d9b99b] rounded flex items-center justify-between cursor-pointer hover:bg-[#9a7d6b] hover:text-white"
             >
-              {editingRoleId === role.id ? (
+              {editingTagId === tag.id ? (
                 <input
                   type="text"
-                  value={newRoleName}
-                  onChange={(e) => setNewRoleName(e.target.value)}
+                  value={newTagName}
+                  onChange={(e) => setNewTagName(e.target.value)}
                   className="w-full px-3 py-2 border text-black border-gray-300 rounded"
                 />
               ) : (
-                <span onClick={() => onRoleSelect(role)}>{role.name_role}</span>
+                <span onClick={() => onTagSelect(tag)}>{tag.name_tag}</span>
               )}
               <div className="flex space-x-2">
-                {editingRoleId === role.id ? (
+                {editingTagId === tag.id ? (
                   <>
                     <button
-                      onClick={() => handleSaveEdit(role.id)}
+                      onClick={() => handleSaveEdit(tag.id)}
                       className="text-green-500 hover:text-green-700"
-                      aria-label={`Save ${role.name_role}`}
+                      aria-label={`Save ${tag.name_tag}`}
                     >
                       <FaCheck />
                     </button>
                     <button
                       onClick={handleCancelEdit}
                       className="text-red-500 hover:text-red-700"
-                      aria-label={`Cancel ${role.name_role}`}
+                      aria-label={`Cancel ${tag.name_tag}`}
                     >
                       <FaTimes />
                     </button>
@@ -119,16 +118,16 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
                 ) : (
                   <>
                     <button
-                      onClick={() => handleEditClick(role)}
+                      onClick={() => handleEditClick(tag)}
                       className="text-[#d9b99b] hover:text-[#9a7d6b]"
-                      aria-label={`Edit ${role.name_role}`}
+                      aria-label={`Edit ${tag.name_tag}`}
                     >
                       <FaEdit />
                     </button>
                     <button
-                      onClick={() => handleDelete(role.id)}
+                      onClick={() => handleDelete(tag.id)}
                       className="text-[#d9b99b] hover:text-[#9a7d6b]"
-                      aria-label={`Delete ${role.name_role}`}
+                      aria-label={`Delete ${tag.name_tag}`}
                     >
                       <FaTrash />
                     </button>
@@ -138,11 +137,11 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
             </li>
           ))
         ) : (
-          <li>Aucun rôle disponible</li>
+          <li>Aucun tag disponible</li>
         )}
       </ul>
     </div>
   );
 };
 
-export default RolesList;
+export default TagsList;

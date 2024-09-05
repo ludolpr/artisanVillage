@@ -1,12 +1,12 @@
 import React from "react";
-
+import logoImage from "../../assets/images/logo.png";
 const Footer = () => {
   return (
-    <footer className="secondary-500 text-white">
-      <div className=" flex w-full justify-between">
-        <div className="flex row w-2/3 justify-around">
-          <div className="  col">
-            <h6>liens rapides</h6>
+    <footer className=" flex secondary-500 text-[#d9b99b] p-5">
+      <div className=" flex w-full justify-between ">
+        <div className="flex row w-1/2 justify-around ">
+          <div className=" col">
+            <h6 className="text-2xl">liens rapides</h6>
             <ul>
               <li>
                 <a href="">Acceuil</a>
@@ -20,20 +20,38 @@ const Footer = () => {
             </ul>
           </div>
           <div className=" col">
-            <h6 className="flex row">
+            <h6 className="flex row text-2xl">
               Mentions légales et politique de 
               <p className="font-bold"> Confidentialité</p>
             </h6>
-            <p className="col">
+            <p className="col ">
               <a href="">Mensions Légales</a>
               <br />
               <a href="">Politique de confidentialité</a>
             </p>
           </div>
         </div>
-        <div className="w-1/3">
-          <div></div>
-          <div></div>
+        <div className="w-1/2 flex row justify-around">
+          <hr className="verticalLine" />
+
+          <a href="">
+            <img className=" w-36 h-36" src={logoImage} alt="logo" />
+          </a>
+
+          <div className=" col">
+            <h6 className="text-2xl">Services pour les artisans</h6>
+            <ul>
+              <li>
+                <a href="">Crée votre fiche</a>
+              </li>
+              <li>
+                <a href="">Chat avec utilisateurs</a>
+              </li>
+              <li>
+                <a href="/contact">Support et assistance</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>

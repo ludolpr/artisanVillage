@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Kings';
+    src: url('../fonts/Kings-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Définition de la police Ribeye */
+@font-face {
+    font-family: 'Ribeye';
+    src: url('../fonts/Ribeye-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #d9b99b;
     margin: 0;
@@ -6,6 +21,7 @@ body {
     min-height: 100%;
     max-height: auto;
     height: 100vh;
+    font-family: 'Ribeye', Helvetica, sans-serif;
 }
 
 .root {
@@ -15,3 +31,18 @@ body {
     background-color: #d9b99b;
     
 }
+
+.imgMidContainer {
+    background-image: url('../../assets/images/worker1.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+  .verticalLine{
+    border-left: 2px solid #d9b99b;
+    display: inline-block;
+    height: 130px;
+    margin: 0 20px;
+  }

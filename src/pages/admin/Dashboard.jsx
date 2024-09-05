@@ -4,14 +4,14 @@ import UserList from "../admin/users/UserList";
 import UserForm from "../admin/users/UserForm";
 import ProductList from "../admin/products/ProductList";
 import ProductForm from "../admin/products/ProductForm";
-import TagList from "../admin/tags/TagList";
-import TagForm from "../admin/tags/TagForm";
-import CategoryList from "../admin/categories/CategoryList";
-import CategoryForm from "../admin/categories/CategoryForm";
+import TagList from "../admin/tags/TagsList";
+import TagForm from "../admin/tags/TagsForm";
+import CategoryList from "./categories/CategoriesList";
+import CategoryForm from "./categories/CategoriesForm";
 import ChatList from "../admin/chats/ChatList";
 import ChatForm from "../admin/chats/ChatForm";
-import CompanyList from "../admin/companies/CompanyList";
-import CompanyForm from "../admin/companies/CompanyForm";
+import CompaniesList from "./companies/CompaniesList";
+import CompaniesForm from "./companies/CompaiesForm";
 import MessageList from "../admin/messages/MessageList";
 import MessageForm from "../admin/messages/MessageForm";
 import RolesList from "../admin/roles/RolesList";
@@ -41,8 +41,8 @@ const contentComponents = {
     form: <ChatForm chat={null} onSuccess={() => {}} />,
   },
   Entreprises: {
-    list: <CompanyList />,
-    form: <CompanyForm company={null} onSuccess={() => {}} />,
+    list: <CompaniesList />,
+    form: <CompaniesForm company={null} onSuccess={() => {}} />,
   },
   Messages: {
     list: <MessageList />,

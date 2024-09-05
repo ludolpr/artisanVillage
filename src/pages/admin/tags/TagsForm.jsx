@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../../services/baseUrl";
 
-const RolesForm = ({ role, onSuccess, mode }) => {
-  const [formData, setFormData] = useState({ name_role: "" });
+const TagsForm = ({ tag, onSuccess, mode }) => {
+  const [formData, setFormData] = useState({ name_tag: "" });
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (role) {
-      setFormData({ name_role: role.name_role });
+    if (tag) {
+      setFormData({ name_tag: tag.name_tag });
     } else {
-      setFormData({ name_role: "" });
+      setFormData({ name_tag: "" });
     }
-  }, [role]);
+  }, [tag]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,12 +24,12 @@ const RolesForm = ({ role, onSuccess, mode }) => {
     setMessage("");
     setError("");
     try {
-      if (mode === "edit" && role) {
-        await api.put(`/role/${role.id}`, formData);
-        setMessage("Rôle modifié avec succès !");
+      if (mode === "edit" && tag) {
+        await api.put(`/tag/${tag.id}`, formData);
+        setMessage("Tag modifié avec succès !");
       } else {
-        await api.post("/role", formData);
-        setMessage("Rôle ajouté avec succès !");
+        await api.post("/tag", formData);
+        setMessage("Tag ajouté avec succès !");
       }
       onSuccess();
     } catch (err) {
@@ -44,17 +44,17 @@ const RolesForm = ({ role, onSuccess, mode }) => {
       className="bg-white p-6 rounded-lg shadow-md mb-6"
     >
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
-        {mode === "edit" ? "Modifier le rôle" : "Créer un nouveau rôle"}
+        {mode === "edit" ? "Modifier le tag" : "Créer un nouveau tag"}
       </h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name_role">
-          Nom du rôle
+        <label className="block text-gray-700 mb-2" htmlFor="name_tag">
+          Nom du tag
         </label>
         <input
           type="text"
-          id="name_role"
-          name="name_role"
-          value={formData.name_role}
+          id="name_tag"
+          name="name_tag"
+          value={formData.name_tag}
           onChange={handleChange}
           className="w-full px-3 py-2 border border-gray-300 rounded"
           required
@@ -66,10 +66,10 @@ const RolesForm = ({ role, onSuccess, mode }) => {
         type="submit"
         className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
       >
-        {mode === "edit" ? "Sauvegarder les modifications" : "Créer le rôle"}
+        {mode === "edit" ? "Sauvegarder les modifications" : "Créer le tag"}
       </button>
     </form>
   );
 };
 
-export default RolesForm;
+export default TagsForm;

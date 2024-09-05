@@ -27,45 +27,34 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex w-1/3 justify-end">
-        <div>
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-
-        <div className="hidden w-full justify-between md:flex">
-          <div>
-            {!isAuthenticated ? (
-              <>
-                <NavLink className="m-2" to="/login">
-                  Connexion
+      <nav className="flex items-center justify-between p-4 bg-brown-500">
+        {/* Connexion/Enregistrement/Deconnexion */}
+        <div className="hidden md:flex items-center space-x-4">
+          {!isAuthenticated ? (
+            <>
+              <NavLink className="m-2" to="/login">
+                Connexion
+              </NavLink>
+              <NavLink
+                className="primary-500 pl-2 pr-2 bg-light-brown"
+                to="/register"
+              >
+                S'enregistrer
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <span>Bonjour, {user.name_user || "Utilisateur"}</span>
+              {role == 3 && (
+                <NavLink className="m-2" to="/dashboard">
+                  Panel admin
                 </NavLink>
-                <NavLink className="primary-500 pl-2 pr-2" to="/register">
-                  S'enregistrer
-                </NavLink>
-              </>
-            ) : (
-              <>
-                <div>
-                  <span>Bonjour, {user.name_user || "Utilisateur"}</span>
-                  {role == 2 && (
-                    <NavLink className="m-2" to="/dashboard">
-                      Dashboard
-                    </NavLink>
-                  )}
-                  <button className="m-2" onClick={logout}>
-                    Logout
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
+              )}
+              <button className="m-2" onClick={logout}>
+                Déconnexion
+              </button>
+            </>
+          )}
           <button onClick={toggleTheme}>
             {theme === "dark" ? (
               <Sun />
@@ -77,31 +66,60 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Menu burger pour mobile */}
         <div className="md:hidden">
           <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
         </div>
       </nav>
 
+      {/* Menu déroulant pour mobile */}
       {isOpen && (
-        <div className="flex flex-col items-center">
-          <div>
-            {!isAuthenticated ? (
-              <>
-                <NavLink to="/login">Login</NavLink>
-                <NavLink className="primary-500 pl-2 pr-2" to="/register">
-                  S'enregistrer
+        <div className="absolute top-full left-0 w-full bg-brown-500 flex flex-col items-center md:hidden">
+          {!isAuthenticated ? (
+            <>
+              <NavLink to="/login">Connexion</NavLink>
+              <NavLink className="primary-500 pl-2 pr-2" to="/register">
+                S'enregistrer
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <span className="m-2">
+                Bonjour, {user.name_user || "Utilisateur"}
+              </span>
+              <NavLink className="m-2" to="/fiche">
+                Fiche artisans
+              </NavLink>
+              <NavLink className="m-2" to="/createfiche">
+                Déposer une fiche
+              </NavLink>
+              <NavLink className="m-2" to="/contact">
+                Contact
+              </NavLink>
+              {role >= 1 && (
+                <NavLink className="m-2" to="/profil">
+                  Profil
                 </NavLink>
-              </>
-            ) : (
-              <>
-                <span>Bonjour, {user.name_user || "Utilisateur"}</span>
-                {role == 2 && <NavLink to="/dashboard">Dashboard</NavLink>}
-                <button className="m-2" onClick={logout}>
-                  Logout
-                </button>
-              </>
-            )}
-          </div>
+              )}
+              {role === 3 && (
+                <NavLink to="/dashboard" className="m-2">
+                  Panel admin
+                </NavLink>
+              )}
+              <button onClick={toggleTheme}>
+                {theme === "dark" ? (
+                  <Sun />
+                ) : theme === "light" ? (
+                  <Moon />
+                ) : (
+                  <Eye />
+                )}
+              </button>
+              <button className="m-2" onClick={logout}>
+                Déconnexion
+              </button>
+            </>
+          )}
         </div>
       )}
     </>

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100">
+    <div className="flex flex-col items-center justify-center bg-[#d9b99b]">
       <br />
 
-      <h1 className="text-6xl font-bold text-gray-800">404</h1>
+      <h1 className="text-6xl font-bold text">404</h1>
       <br />
 
       <p className="text-xl text-gray-600 mt-4">
@@ -15,7 +15,7 @@ function NotFound() {
         accès.
       </p>
       <br />
-      <Link to="/" className="mt-6 text-blue-500 hover:underline text-lg">
+      <Link to="/" className="mt-6 text-gray-800 hover:underline text-lg">
         Retour à la page principale
       </Link>
     </div>

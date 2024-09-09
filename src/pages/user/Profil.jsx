@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import placeholderImage from "../../assets/images/user.png";
 import { api } from "../../services/baseUrl";
+import { userImage } from "../../assets/images/user.png";
+import { ImageUp } from "lucide-react";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);

@@ -8,11 +8,20 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    // Récupère le token d'accès stocké dans le localStorage du navigateur
     const token = localStorage.getItem("access_token");
+    
+    // Si un token existe, ajoute un header Authorization à la requête
     if (token) {
+      // Le format du header est "Bearer <token>", utilisé pour l'authentification
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Retourne la configuration de la requête (éventuellement modifiée) pour continuer le processus
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    // Si une erreur se produit avant l'envoi de la requête, elle est rejetée et traitée
+    return Promise.reject(error);
+  }
 );

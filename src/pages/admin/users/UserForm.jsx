@@ -92,16 +92,15 @@ const UserForm = ({ user, onSuccess }) => {
         <label className="block text-gray-700 mb-2" htmlFor="role">
           Rôle de l'utilisateur
         </label>
-        <br /> 1 = Utilisateur <br /> 2 = Administrateur
-        <input
-          type="text"
-          id="role"
-          name="role"
+        <select
           value={formData.role}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
-          required
-        />
+          className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+        >
+          <option value="1">Utilisateur</option>
+          <option value="2">Artisan</option>
+          <option value="3">Administrateur</option>
+        </select>
       </div>
 
       <button

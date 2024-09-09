@@ -12,14 +12,19 @@ const CategoriesList = ({ onCategorySelect, onEdit, onDelete, refreshKey }) => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const response = await api.get("/category");
-        setCategories(response.data || []);
-        setError("");
-      } catch (error) {
+
+      const response = api
+      .get("/category")
+      .then((response) => {
+        setCategories(response.data);
+        setError("")
+        console.log("data here:" + response.data);
+      })
+      .catch((error) => {
         console.error("Erreur lors de la récupération des catégories:", error);
-        setError("Erreur lors de la récupération des catégories.");
-      }
+
+        setError(error);
+      });
     };
 
     fetchCategories();
@@ -120,7 +125,7 @@ const CategoriesList = ({ onCategorySelect, onEdit, onDelete, refreshKey }) => {
                   />
                 </div>
               ) : (
-                <div>
+                <div className="pointer-events-none">
                   <div onClick={() => onCategorySelect(category)}>
                     {category.name_category}
                   </div>

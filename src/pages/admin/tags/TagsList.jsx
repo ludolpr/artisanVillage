@@ -95,7 +95,7 @@ const TagsList = ({ onTagSelect, onEdit, onDelete, refreshKey }) => {
                   className="w-full px-3 py-2 border text-black border-gray-300 rounded"
                 />
               ) : (
-                <span onClick={() => onTagSelect(tag)}>{tag.name_tag}</span>
+                <span className="pointer-events-none" onClick={() => onTagSelect(tag)}>{tag.name_tag}</span>
               )}
               <div className="flex space-x-2">
                 {editingTagId === tag.id ? (

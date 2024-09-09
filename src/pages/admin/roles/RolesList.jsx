@@ -96,7 +96,7 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
                   className="w-full px-3 py-2 border text-black border-gray-300 rounded"
                 />
               ) : (
-                <span onClick={() => onRoleSelect(role)}>{role.name_role}</span>
+                <span className="pointer-events-none" onClick={() => onRoleSelect(role)}>{role.name_role}</span>
               )}
               <div className="flex space-x-2">
                 {editingRoleId === role.id ? (

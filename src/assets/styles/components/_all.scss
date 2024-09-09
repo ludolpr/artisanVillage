@@ -1,8 +1,8 @@
 @font-face {
-    font-family: ribeye;
-    src: url(../../fonts/Ribeye-Regular.woff2) format('woff2'),
-         url(../../fonts/Ribeye-Regular.woff) format('woff'),
-         url(../../fonts/Ribeye-Regular.ttf) format('truetype');
+    font-family: Monserrat;
+    src: url(../../fonts/Monserrat.woff2) format('woff2'),
+         url(../../fonts/Monserrat-Regular.woff) format('woff'),
+         url(../../fonts/Monserrat-Regular.ttf) format('truetype');
 }
 
 
@@ -10,6 +10,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: ribeye;
+    font-family: Monserrat;
 }
 

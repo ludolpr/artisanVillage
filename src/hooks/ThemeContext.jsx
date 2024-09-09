@@ -10,8 +10,17 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => {
+      if (prevTheme === "dark") {
+        return "light";
+      } else if (prevTheme === "light") {
+        return "eye";
+      } else {
+        return "dark";
+      }
+    });
   };
+  
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(theme));

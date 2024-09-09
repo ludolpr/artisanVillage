@@ -432,15 +432,15 @@
 }
 
 @font-face {
-  font-family: "Kings";
-  src: url("../fonts/Kings-Regular.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("../fonts/Lora-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 /* Définition de la police Ribeye */
 @font-face {
-  font-family: "Ribeye";
-  src: url("../fonts/Ribeye-Regular.ttf") format("truetype");
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

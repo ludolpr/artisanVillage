@@ -1,26 +1,26 @@
 import { api } from "../../../services/baseUrl";
 
 export const getUsers = async () => {
-  const response = await api.get(`/user`);
+  const response = await api.get(`/users`);
   return response.data;
 };
 
-export const getUser = async (id) => {
-  const response = await api.get(`/user/${id}`);
+export const getUser = async (user) => {
+  const response = await api.get(`/users/${user}`);
   return response.data;
 };
 
 export const createUser = async (userData) => {
-  const response = await api.post(`/user`, userData);
+  const response = await api.post(`/users`, userData);
   return response.data;
 };
 
-export const updateUser = async (id, userData) => {
-  const response = await api.put(`/user/${id}`, userData);
+export const updateUser = async (user, userData) => {
+  const response = await api.put(`/users/${user}`, userData);
   return response.data;
 };
 
-export const deleteUser = async (id) => {
-  const response = await api.delete(`/user/${id}`);
+export const deleteUser = async (user) => {
+  const response = await api.delete(`/users/${user}`);
   return response.data;
 };

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { api } from "../../services/baseUrl";
+import { useNavigate } from "react-router-dom";
 
-const CreateFiche = () => {
-  // State to manage form data
+const CreateSheet = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  // État pour gérer les données du formulaire, y compris les détails de l'entreprise et les coordonnées géographiques
   const [formData, setFormData] = useState({
-    id: "",
     name_company: "",
     description_company: "",
     picture_company: null,
@@ -12,9 +16,11 @@ const CreateFiche = () => {
     address: "",
     siret: "",
     town: "",
+    lat: "",
+    long: "",
   });
 
-  // Handle input changes
+  // Fonction pour gérer les changements dans les champs de texte et mettre à jour l'état formData
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,19 +29,63 @@ const CreateFiche = () => {
     });
   };
 
-  // Handle file upload
+  // Fonction pour gérer le changement de fichier lors du téléchargement de l'image de l'entreprise
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
+      // take the last picture if you try to send more
       picture_company: e.target.files[0],
     });
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  // function for submit form
+  const handleSubmit = async (e) => {
+    // stop sending default form
     e.preventDefault();
-    // Handle form submission logic here (e.g., API call)
-    console.log("Form data submitted:", formData);
+    setLoading(true);
+    // construct full address
+    const completeAddress = `${formData.address}, ${formData.zipcode}, ${formData.town}`;
+
+    try {
+      // catch data lat and long with the address of the input
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`
+      );
+      const data = await response.json();
+
+      if (data.length > 0) {
+        // if the address was found, updating lat and long in formdata
+        const updatedFormData = {
+          ...formData,
+          lat: data[0].lat,
+          long: data[0].lon,
+        };
+
+        // Créer un objet FormData pour l'envoi des données au backend
+        const formDataToSend = new FormData();
+        Object.keys(updatedFormData).forEach((key) => {
+          formDataToSend.append(key, updatedFormData[key]);
+        });
+
+        // Envoyer les données au backend Laravel via l'API
+        await api.post("/company", formDataToSend, {
+          headers: {
+            // Spécifie que les données envoyées sont multipart/form-data
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setLoading(false);
+        navigate("/");
+
+        alert("Fiche créée avec succès !");
+      } else {
+        setLoading(false);
+        alert("Impossible de trouver les coordonnées pour cette adresse.");
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Erreur lors de la soumission : ", error);
+    }
   };
 
   return (
@@ -101,6 +151,7 @@ const CreateFiche = () => {
                 required
               />
             </div>
+
             <div className="col-span-2">
               <label
                 htmlFor="address"
@@ -119,6 +170,7 @@ const CreateFiche = () => {
                 required
               />
             </div>
+
             <div>
               <label
                 htmlFor="zipcode"
@@ -175,6 +227,35 @@ const CreateFiche = () => {
                 required
               />
             </div>
+
+            <div>
+              <label
+                htmlFor="siret"
+                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+              >
+                N° de Siret
+              </label>
+              <input
+                type="text"
+                id="siret"
+                name="siret"
+                value={formData.siret}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg"
+                placeholder="Entrez le numéro SIRET"
+                required
+              />
+            </div>
+
+            <div className="col-span-2">
+              <input type="hidden" id="lat" name="lat" value={formData.lat} />
+              <input
+                type="hidden"
+                id="long"
+                name="long"
+                value={formData.long}
+              />
+            </div>
           </div>
 
           <button
@@ -189,4 +270,4 @@ const CreateFiche = () => {
   );
 };
 
-export default CreateFiche;
+export default CreateSheet;

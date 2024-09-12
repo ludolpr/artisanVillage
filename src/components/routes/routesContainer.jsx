@@ -7,15 +7,20 @@ import Register from "../../pages/auth/Register";
 import Login from "../../pages/auth/Login";
 import Dashboard from "../../pages/admin/Dashboard";
 import NotFound from "../globals/NotFound";
-import Fiche from "../../pages/fiche";
+import Sheet from "../../pages/fiche";
+import CreateSheet from "../../pages/fiche/CreateSheet";
+import ShowSheet from "../../pages/fiche/ShowSheet";
 import Products from "../../pages/fiche/Products";
-import CreateFicche from "../../pages/fiche/CreateFiche";
 import Profil from "../../pages/user/Profil";
 import VerifyEmail from "../../pages/user/VerifyEmail";
 import Contact from "../../pages/user/Contact";
 
 //proteted route for admin
 import ProtectedRoute from "../globals/ProtectedRoute";
+import MentionsLegales from "../informations/MentionsLegales";
+import Policies from "../informations/Policies";
+
+// import ApiDocumentation from "../../configs/swagger";
 
 const RouteContainer = () => {
   return (
@@ -24,21 +29,32 @@ const RouteContainer = () => {
       <div className="root ">
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* auth  */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/fiche" element={<Fiche />} />
+          {/* sheets */}
+          <Route path="/sheet" element={<Sheet />} />
+          <Route path="/createsheet" element={<CreateSheet />} />
+          <Route path="/showsheet/:id" element={<ShowSheet />} />
+          {/* products */}
           <Route path="/product/:id" element={<Products />} />
-          <Route path="/createfiche" element={<CreateFicche />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/email/verify" element={<VerifyEmail />} />
+
+          {/* documentation api  */}
+          {/* <Route part="api/documentation" element={<ApiDocumentation />} /> */}
           <Route path="*" element={<NotFound />} />
+
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute element={<Dashboard />} roleRequired={3} />
             }
           />
+          {/* mentions and policies */}
+          <Route path="/mentions" element={<MentionsLegales />} />
+          <Route path="/policy" element={<Policies />} />
         </Routes>
       </div>
       <Footer />

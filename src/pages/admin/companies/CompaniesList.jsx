@@ -125,6 +125,12 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
             >
               {editingCompanyId === company.id ? (
                 <div className="w-full">
+                  <label
+                    className="block text-gray-700 mb-2"
+                    htmlFor="name_company"
+                  >
+                    Nom de la compagnie
+                  </label>
                   <input
                     type="text"
                     value={formData.name_company}
@@ -203,24 +209,7 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
                     className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
                     placeholder="Ville"
                   />
-                  <input
-                    type="text"
-                    value={formData.lat}
-                    onChange={(e) =>
-                      setFormData({ ...formData, lat: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Latitude"
-                  />
-                  <input
-                    type="text"
-                    value={formData.long}
-                    onChange={(e) =>
-                      setFormData({ ...formData, long: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Longitude"
-                  />
+
                   <button
                     onClick={() => handleSaveEdit(company.id)}
                     className="text-green-500 hover:text-green-700 mr-2"
@@ -242,11 +231,18 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
                     className="flex-1"
                     onClick={() => onCompanySelect(company)}
                   >
-                    <div className="font-bold">{company.name_company}</div>
-                    <div>{company.description_company}</div>
-                    <div>
-                      {company.zipcode}, {company.town}
+                    <div className="font-bold">
+                      <div>Nom de l'entreprise: {company.name_company}</div>
                     </div>
+                    <div>Description:</div>
+                    <div> {company.description_company}</div>
+                    <div>
+                      <div>Adresse complète :</div>
+                      <div>
+                        {company.address}, {company.zipcode}, {company.town}
+                      </div>
+                    </div>
+                    <div>Numéro de téléphone :</div>
                     <div>{company.phone}</div>
                   </div>
                   <div className="flex space-x-2">

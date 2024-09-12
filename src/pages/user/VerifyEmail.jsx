@@ -17,6 +17,10 @@ const VerifyEmail = () => {
         );
         setStatusType("success");
         break;
+      case "created":
+        setMessage("Votre fiche à bien été creer");
+        setStatusType("success");
+        break;
       case "already_verified":
         setMessage("Votre email est déjà vérifié.");
         setStatusType("info");

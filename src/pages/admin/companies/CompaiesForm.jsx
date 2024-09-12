@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../../services/baseUrl";
+import { useNavigate } from "react-router-dom";
 
 const CompaniesForm = ({ company, onSuccess, mode }) => {
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const userId = localStorage.getItem("userId");
+
   const [formData, setFormData] = useState({
     name_company: "",
     description_company: "",
-    picture_company: null, // Changement pour null au lieu d'une chaîne vide
+    picture_company: null,
     zipcode: "",
     phone: "",
     address: "",
@@ -14,77 +21,68 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
     lat: "",
     long: "",
   });
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const userId = localStorage.getItem("userId");
-  useEffect(() => {
-    if (company) {
-      setFormData({
-        name_company: company.name_company,
-        description_company: company.description_company,
-        picture_company: company.picture_company,
-        zipcode: company.zipcode,
-        phone: company.phone,
-        address: company.address,
-        siret: company.siret,
-        town: company.town,
-        lat: company.lat,
-        long: company.long,
-      });
-    } else {
-      setFormData({
-        name_company: "",
-        description_company: "",
-        picture_company: null, // Changement pour null au lieu d'une chaîne vide
-        zipcode: "",
-        phone: "",
-        address: "",
-        siret: "",
-        town: "",
-        lat: "",
-        long: "",
-      });
-    }
-  }, [company]);
 
+  // Fonction pour gérer les changements dans les champs de texte et mettre à jour l'état formData
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    if (type === "file") {
-      setFormData({ ...formData, picture_company: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  // Fonction pour gérer le changement de fichier lors du téléchargement de l'image de l'entreprise
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      // Ne prend que le premier fichier si plusieurs sont sélectionnés
+      picture_company: e.target.files[0],
+    });
   };
 
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (e) => {
+    // Empêche le comportement par défaut de soumission du formulaire
     e.preventDefault();
-    setMessage("");
-    setError("");
+
+    // Construire l'adresse complète en utilisant l'adresse, le code postal et la ville
+    const completeAddress = `${formData.address}, ${formData.zipcode}, ${formData.town}`;
+
     try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === "picture_company") {
-          data.append(key, formData[key]);
-        } else {
-          data.append(key, formData[key] || "");
-        }
-      });
-      data.append("id_user", userId);
-      if (mode === "edit" && company) {
-        await api.put(`/company/${company.id}`, data, {
-          headers: { "Content-Type": "multipart/form-data" },
+      // Récupérer les coordonnées géographiques (latitude et longitude) depuis l'API Nominatim
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`
+      );
+      const data = await response.json();
+
+      if (data.length > 0) {
+        // Si l'adresse est trouvée, on met à jour lat et long dans formData
+        const updatedFormData = {
+          ...formData,
+          lat: data[0].lat,
+          long: data[0].lon,
+        };
+
+        // Créer un objet FormData pour l'envoi des données au backend
+        const formDataToSend = new FormData();
+        Object.keys(updatedFormData).forEach((key) => {
+          formDataToSend.append(key, updatedFormData[key]);
         });
-        setMessage("Compagnie modifiée avec succès !");
+
+        // Envoyer les données au backend Laravel via l'API
+        await api.post("/company", formDataToSend, {
+          headers: {
+            // Spécifie que les données envoyées sont multipart/form-data
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        navigate("/");
+
+        alert("Fiche créée avec succès !");
       } else {
-        await api.post("/company", data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        setMessage("Compagnie ajoutée avec succès !");
+        alert("Impossible de trouver les coordonnées pour cette adresse.");
       }
-      onSuccess();
-    } catch (err) {
-      console.error("Erreur lors de l'envoi des données:", err);
-      setError("Erreur lors de l'envoi des données.");
+    } catch (error) {
+      console.error("Erreur lors de la soumission : ", error);
     }
   };
 
@@ -100,7 +98,7 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
       </h2>
       <div className="mb-4">
         <label className="block text-gray-700 mb-2" htmlFor="name_company">
-          Nom de la compagnie
+          Nom de l'entreprise
         </label>
         <input
           type="text"
@@ -117,7 +115,7 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           className="block text-gray-700 mb-2"
           htmlFor="description_company"
         >
-          Description de la compagnie
+          Description de l'entreprise
         </label>
         <textarea
           id="description_company"
@@ -136,8 +134,10 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           type="file"
           id="picture_company"
           name="picture_company"
-          onChange={handleChange}
+          onChange={handleFileChange}
           className="w-full px-3 py-2 border border-gray-300 rounded"
+          accept="image/*"
+          required
         />
       </div>
       <div className="mb-4">
@@ -153,19 +153,7 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           className="w-full px-3 py-2 border border-gray-300 rounded"
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="phone">
-          Téléphone
-        </label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
-        />
-      </div>
+
       <div className="mb-4">
         <label className="block text-gray-700 mb-2" htmlFor="address">
           Adresse
@@ -175,19 +163,6 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           id="address"
           name="address"
           value={formData.address}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="siret">
-          SIRET
-        </label>
-        <input
-          type="text"
-          id="siret"
-          name="siret"
-          value={formData.siret}
           onChange={handleChange}
           className="w-full px-3 py-2 border border-gray-300 rounded"
         />
@@ -206,27 +181,28 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="lat">
-          Latitude
+        <label className="block text-gray-700 mb-2" htmlFor="siret">
+          SIRET
         </label>
         <input
           type="text"
-          id="lat"
-          name="lat"
-          value={formData.lat}
+          id="siret"
+          name="siret"
+          value={formData.siret}
           onChange={handleChange}
           className="w-full px-3 py-2 border border-gray-300 rounded"
         />
       </div>
+
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="long">
-          Longitude
+        <label className="block text-gray-700 mb-2" htmlFor="phone">
+          Téléphone
         </label>
         <input
-          type="text"
-          id="long"
-          name="long"
-          value={formData.long}
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
           onChange={handleChange}
           className="w-full px-3 py-2 border border-gray-300 rounded"
         />
@@ -246,3 +222,4 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
 };
 
 export default CompaniesForm;
+

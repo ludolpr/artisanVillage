@@ -24,6 +24,10 @@ const contentComponents = {
     list: <UserList />,
     form: <UserForm user={null} onSuccess={() => {}} />,
   },
+  Entreprises: {
+    list: <CompaniesList />,
+    form: <CompaniesForm company={null} onSuccess={() => {}} />,
+  },
   Produits: {
     list: <ProductList />,
     form: <ProductForm product={null} onSuccess={() => {}} />,
@@ -40,10 +44,7 @@ const contentComponents = {
     list: <ChatList />,
     form: <ChatForm chat={null} onSuccess={() => {}} />,
   },
-  Entreprises: {
-    list: <CompaniesList />,
-    form: <CompaniesForm company={null} onSuccess={() => {}} />,
-  },
+
   Messages: {
     list: <MessageList />,
     form: <MessageForm message={null} onSuccess={() => {}} />,

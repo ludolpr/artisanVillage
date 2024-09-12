@@ -478,8 +478,38 @@ body {
   margin: 0 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Kings", sans-serif;
+.margin10 {
+  margin: 0 10px;
+}
+
+.mapStyle {
+  height: 550px;
+  width: 750px;
+  border-radius: 150px;
+}
+@media (max-width: 1200px) {
+  .mapStyle {
+    height: 500px;
+    width: 700px;
+  }
+}
+@media (max-width: 992px) {
+  .mapStyle {
+    height: 450px;
+    width: 650px;
+  }
+}
+@media (max-width: 768px) {
+  .mapStyle {
+    height: 400px;
+    width: 600px;
+  }
+}
+@media (max-width: 576px) {
+  .mapStyle {
+    height: 350px;
+    width: 500px;
+  }
 }
 
 /*# sourceMappingURL=stylesSass.css.map */

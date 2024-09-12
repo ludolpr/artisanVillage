@@ -2,19 +2,19 @@ import React from "react";
 
 const menuItems = [
   { name: "Utilisateurs" },
+  { name: "Roles" },
+  { name: "Entreprises" },
   { name: "Produits" },
   { name: "Tags" },
   { name: "Categories" },
   { name: "Chats" },
-  { name: "Entreprises" },
   { name: "Messages" },
-  { name: "Roles" },
   { name: "Tickets" },
 ];
 
 function Sidebar({ activeItem, setActiveItem }) {
   return (
-    <aside className="bg-gray-100 h-screen text-dark w-64 flex flex-col space-y-6 py-7 px-2">
+    <aside className="bg-gray-100 h-100 h-screen text-dark w-64 flex flex-col space-y-6 py-7 px-2">
       {/* Logo */}
       <div className="text-[#9a7d6b] flex items-center space-x-2 px-4">
         <span className="text-2xl font-extrabold">Dashboard</span>

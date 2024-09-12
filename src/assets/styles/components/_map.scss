@@ -1,0 +1,27 @@
+.mapStyle {
+    height: 550px;
+    width: 750px;
+    border-radius: 150px;
+  
+    // Responsive design
+    @media (max-width: 1200px) {
+      height: 500px;
+      width: 700px;
+    }
+  
+    @media (max-width: 992px) {
+      height: 450px;
+      width: 650px;
+    }
+  
+    @media (max-width: 768px) {
+      height: 400px;
+      width: 600px;
+    }
+  
+    @media (max-width: 576px) {
+      height: 350px;
+      width: 500px;
+    }
+  }
+  

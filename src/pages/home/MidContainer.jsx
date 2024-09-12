@@ -1,54 +1,52 @@
-import React from "react";
-import artisan1 from "../../assets/images/worker1.jpg";
-import artisan2 from "../../assets/images/worker2.jpg";
-import artisan4 from "../../assets/images/worker4.jpg";
+import React, { useState, useEffect } from "react";
+import { api } from "../../services/baseUrl";
 const MidContainer = () => {
+  const [latestFiches, setLatestFiches] = useState([]);
+
+  useEffect(() => {
+    const fetchLatestFiches = () => {
+      api
+        .get("/company/latestid")
+        .then((response) => {
+          // Ensure we only display the last two posts
+          setLatestFiches(response.data.slice(0, 2));
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la récupération des fiches:", error);
+        });
+    };
+
+    fetchLatestFiches();
+  }, []);
+
   return (
-    <div className="imgMidContainer">
-      <div className="absolute inset-0 bg-black opacity-0"></div>
+    <div className="relative imgMidContainer bg-fixed bg-cover bg-center flex flex-col items-center py-12 px-4 lg:px-8 space-y-8">
+      <h2 className="text-white text-3xl lg:text-5xl mt-10 text-center py-4 bg-opacity-80 bg-[#b48a6f] p-6 rounded-lg shadow-md">
+        Découvrez les talents locaux, trouvez l'artisan créatif près de chez
+        vous.
+      </h2>
 
-      <div className="relative z-10 flex flex-col justify-center items-center h-full p-4 lg:p-8">
-        <h2 className="text-white text-2xl lg:text-4xl  text-center py-4 lg:py-8 bg-[#d9b99b] p-4 rounded-lg">
-          Découvrez les talents locaux trouvez l'artisan créatif près de chez
-          vous.
-        </h2>
-
-        <div className="relative z-10 flex flex-col lg:flex-row justify-around p-4 lg:p-8 gap-4 mt-4 lg:mt-8 items-end">
-          <div className="bg-[#9a7d6b] shadow-lg flex flex-col w-full lg:w-1/2 h-auto lg:h-[500px]">
-            <div className="flex flex-col h-full">
-              <div className="p-4   pr-5 pl-5 ">
-                <h3 className="bg-white text-[#9a7d6b] text-2xl  mb-4 p-2 rounded-lg w-1/3">
-                  Nom de la fiche 1
-                </h3>
-                <p className="bg-white text-[#9a7d6b] text-lg mb-4 p-2 rounded-lg">
-                  Description de la fiche 1. Ce texte peut être long ou court
-                  selon les informations à présenter.
-                </p>
-                <img
-                  src={artisan2}
-                  alt="Fiche 1"
-                  className="w-full h-[300px] object-cover mt-auto rounded-lg"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[#d9b99b] shadow-lg flex flex-col lg:flex-row w-full lg:w-1/2 h-auto lg:h-[300px] ">
-            <div className="flex-1 p-4 ">
-              <h3 className="text-white text-2xl  mb-4">Nom de la fiche 2</h3>
-              <p className="text-white text-lg mb-4">
-                Description de la fiche 2. Ce texte peut être long ou court
-                selon les informations à présenter.
-              </p>
-            </div>
-
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-6xl mt-8">
+        {latestFiches.map((fiche, index) => (
+          <div
+            key={fiche.id}
+            className={`shadow-xl rounded-lg p-6 transition-transform transform hover:scale-105 ${
+              index % 2 === 0 ? "bg-[#9a7d6b]" : "bg-[#d9b99b]"
+            }`}
+          >
+            <h3 className="text-xl lg:text-2xl mb-4 font-bold text-white">
+              {fiche.name_company}
+            </h3>
+            <p className="text-base lg:text-lg text-white mb-4">
+              {fiche.description_company}
+            </p>
             <img
-              src={artisan4}
-              alt="Fiche 2"
-              className="w-full lg:w-1/2 h-auto object-cover rounded-lg m-7"
+              src={`http://127.0.0.1:8000/storage/uploads/companies/${fiche.picture_company}`}
+              alt={fiche.name_company}
+              className="w-full h-48 lg:h-64 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
             />
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

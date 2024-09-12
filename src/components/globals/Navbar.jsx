@@ -56,9 +56,9 @@ const Navbar = () => {
             </>
           )}
           <button onClick={toggleTheme}>
-            {theme === "dark" ? (
+            {theme === "light" ? (
               <Sun />
-            ) : theme === "light" ? (
+            ) : theme === "dark" ? (
               <Moon />
             ) : (
               <Eye />
@@ -90,26 +90,29 @@ const Navbar = () => {
               <NavLink className="m-2" to="/fiche">
                 Fiche artisans
               </NavLink>
-              <NavLink className="m-2" to="/createfiche">
-                Déposer une fiche
-              </NavLink>
+              {role >= 1 && (
+                <NavLink className="m-2" to="/createfiche">
+                  Déposer une fiche
+                </NavLink>
+              )}
+
               <NavLink className="m-2" to="/contact">
                 Contact
               </NavLink>
-              {role >= 1 && (
+              {/* {role >= 1 && (
                 <NavLink className="m-2" to="/profil">
                   Profil
                 </NavLink>
-              )}
+              )} */}
               {role === 3 && (
                 <NavLink to="/dashboard" className="m-2">
                   Panel admin
                 </NavLink>
               )}
               <button onClick={toggleTheme}>
-                {theme === "dark" ? (
+                {theme === "light" ? (
                   <Sun />
-                ) : theme === "light" ? (
+                ) : theme === "dark" ? (
                   <Moon />
                 ) : (
                   <Eye />

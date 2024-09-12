@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import placeholderImage from "../../assets/images/user.png";
 import { api } from "../../services/baseUrl";
-import { userImage } from "../../assets/images/user.png";
+import userImage from "../../assets/images/user.png";
 import { ImageUp } from "lucide-react";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);
   const [error, setError] = useState("");
+  const profileImage = user.picture_user
+    ? `http://127.0.0.1:8000/storage/uploads/users/${user.picture_user}`
+    : userImage;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -32,7 +35,7 @@ const UserProfile = () => {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-3xl">
         <div className="relative">
           <img
-            src={`http://127.0.0.1:8000/storage/uploads/users/${user.picture_user}`}
+            src={profileImage}
             alt={user.name_user}
             className="w-64 h-64 object-cover"
           />

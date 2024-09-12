@@ -2,6 +2,8 @@ import React from "react";
 import logoImage from "../../assets/images/logo.png";
 const Footer = () => {
   return (
+    // resoltion du probleme darkmode mettre les classe dans les :
+    // <footer className="bg-[var(--background-color)] text-[var(--text-color)] py-10 px-6">
     <footer className=" flex secondary-500 text-[#d9b99b] p-5">
       <div className=" flex w-full justify-between ">
         <div className="flex row w-1/2 justify-around ">
@@ -25,9 +27,9 @@ const Footer = () => {
               <p className="font-bold"> Confidentialité</p>
             </h6>
             <p className="col ">
-              <a href="">Mensions Légales</a>
+              <a href="/mentions">Mensions Légales</a>
               <br />
-              <a href="">Politique de confidentialité</a>
+              <a href="/policy">Politique de confidentialité</a>
             </p>
           </div>
         </div>

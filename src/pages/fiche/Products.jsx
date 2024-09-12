@@ -18,7 +18,7 @@ const Products = ({ userId }) => {
   const { user, isAuthenticated } = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [newProduct, setNewProduct] = useState({
+  const [formData, setFormData] = useState({
     name_product: "",
     picture_product: "",
     price: "",
@@ -46,22 +46,22 @@ const Products = ({ userId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
   const handleFileChange = (e) => {
-    setNewProduct({
-      ...newProduct,
+    setFormData({
+      ...formData,
       // Ne prend que le premier fichier si plusieurs sont sélectionnés
       picture_product: e.target.files[0],
     });
   };
   const handleCategoryChange = (e) => {
-    setNewProduct((prev) => ({ ...prev, id_category: e.target.value }));
+    setFormData((prev) => ({ ...prev, id_category: e.target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const productData = { ...newProduct, id_company: ficheId };
+    const productData = { ...formData, id_company: ficheId };
     // Add logic to send `productData` to the backend API
     console.log("Submitting product:", productData);
     handleModalClose(); // Close the modal after submission
@@ -166,7 +166,7 @@ const Products = ({ userId }) => {
               <input
                 type="text"
                 name="name_product"
-                value={newProduct.name_product}
+                value={formData.name_product}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
@@ -178,7 +178,7 @@ const Products = ({ userId }) => {
               </label>
               <textarea
                 name="description_product"
-                value={newProduct.description_product}
+                value={formData.description_product}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 rows="4"
@@ -204,7 +204,7 @@ const Products = ({ userId }) => {
               </label>
               <select
                 name="id_category"
-                value={newProduct.id_category}
+                value={formData.id_category}
                 onChange={handleCategoryChange}
                 className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
@@ -224,7 +224,7 @@ const Products = ({ userId }) => {
               <input
                 type="text"
                 name="price"
-                value={newProduct.price}
+                value={formData.price}
                 onChange={handleChange}
                 className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required

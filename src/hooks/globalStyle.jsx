@@ -5,12 +5,12 @@ import { createGlobalStyle } from "styled-components";
 const StyledGlobalStyle = createGlobalStyle`
   :root {
     /* Couleurs pour le mode clair */
-    --primary-color: #d9b99b;
-    --secondary-color: #9a7d6b;
+    --primary-color: #d9b99b; /* Background principale */
+    --secondary-color: #9a7d6b; /* Navbar et Footer */
     --tertiary-color: #d5bab9;
-    --hover-color: #9a7d6b;
-    --background-color-light: #ffffff;
-    --text-color-light: #000000;
+    --hover-color: #9a7d6b; /* Hover couleur */
+    --background-color-light: #d9b99b;
+    --text-color-light: #ffffff;
 
     /* Couleurs pour le mode sombre */
     --primary-color-dark: #1a1a1a;
@@ -88,6 +88,24 @@ const StyledGlobalStyle = createGlobalStyle`
     background-color: var(--hover-color);
     border-color: var(--hover-color);
   }
+
+  .navbar, .footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+
+  .card {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .header {
+    color: var(--primary-color);
+  }
+
+  /* Ajoutez d'autres styles globaux ici si nécessaire */
 `;
 
 export const GlobalStyle = () => {

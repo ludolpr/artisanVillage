@@ -3,10 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/baseUrl";
 import { UserContext } from "../../hooks/UserContext";
 import artisanPlaceholder from "../../assets/images/worker1.jpg";
-import Products from "./Products";
+// import Products from "./Products";
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
-
-const ShowSheet = () => {
+import ProductOwner from "./ProductsOwner";
+import LoadingSpinner from "../../components/globals/LoadingSpinner";
+const ShowSheetOwner = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useContext(UserContext);
@@ -145,7 +146,7 @@ const ShowSheet = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (error) {
@@ -181,7 +182,7 @@ const ShowSheet = () => {
                 value={formData.name_company}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Company Name"
+                placeholder="Nom de société"
               />
               <input
                 type="file"
@@ -202,7 +203,7 @@ const ShowSheet = () => {
                 value={formData.address}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Address"
+                placeholder="Adresse"
               />
               <input
                 type="text"
@@ -210,7 +211,7 @@ const ShowSheet = () => {
                 value={formData.town}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Town"
+                placeholder="Ville"
               />
               <input
                 type="text"
@@ -218,7 +219,7 @@ const ShowSheet = () => {
                 value={formData.zipcode}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Zipcode"
+                placeholder="Code postal"
               />
               <input
                 type="text"
@@ -226,7 +227,7 @@ const ShowSheet = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Phone"
+                placeholder="Téléphone"
               />
               <input
                 type="text"
@@ -234,7 +235,7 @@ const ShowSheet = () => {
                 value={formData.siret}
                 onChange={handleChange}
                 className="block w-full mb-4 p-2 border rounded"
-                placeholder="Siret Number"
+                placeholder="Numéro SIRET"
               />
               <div className="flex justify-between mt-6">
                 <button
@@ -246,7 +247,7 @@ const ShowSheet = () => {
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="bg-[#9a7d6b] text-white p-3 rounded-lg shadow hover:bg-[#9a7d6b] transition flex items-center"
+                  className="bg-[#9a7d6b] text-white p-3 rounded-lg shadow hover:bg-[#d9b99b] transition flex items-center"
                 >
                   <FaTimes className="mr-2" />
                   Retour
@@ -261,11 +262,14 @@ const ShowSheet = () => {
               <p className="text-gray-700 mb-4">
                 {company.description_company}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 mt-10">
-                <p className="text-gray-500">Address: {company.address}</p>
-                <p className="text-gray-500">Town: {company.town}</p>
-                <p className="text-gray-500">Zipcode: {company.zipcode}</p>
-                <p className="text-gray-500">Phone: {company.phone}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <p className="text-gray-500">Adresse: {company.address}</p>
+                <p className="text-gray-500">Ville: {company.town}</p>
+                <p className="text-gray-500">Code postal: {company.zipcode}</p>
+                <p className="text-gray-500">
+                  Numéro de téléphone: {company.phone}
+                </p>
+                <p className="text-gray-500">Numéro SIRET: {company.siret}</p>
               </div>
               {isOwner && (
                 <div className="flex space-x-4 mb-6">
@@ -289,14 +293,12 @@ const ShowSheet = () => {
           )}
         </div>
       </div>
-      <div className="w-full max-w-6xl bg-[#d9b99b] shadow-lg rounded-lg p-6 mb-6">
-        <h3 className="text-2xl font-semibold text-white mb-4 flex justify-center">
-          Produits
-        </h3>
-        <Products companyId={company.id} />
+      <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6 mb-6">
+        <h3 className="text-2xl font-semibold text-[#9a7d6b] mb-4">Produits</h3>
+        <ProductOwner />
       </div>
     </div>
   );
 };
 
-export default ShowSheet;
+export default ShowSheetOwner;

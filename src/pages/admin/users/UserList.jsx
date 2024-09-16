@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../../services/baseUrl";
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
+import userImage from "../../../assets/images/user.png";
 
 const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
   const [users, setUsers] = useState([]);

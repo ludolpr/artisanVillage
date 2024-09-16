@@ -9,6 +9,7 @@ const NavbarLeft = () => {
   const [ficheId, setFicheId] = useState(null);
   const { user, isAuthenticated } = useContext(UserContext);
   const role = auth.getRoles();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUserFiche = () => {
@@ -30,10 +31,12 @@ const NavbarLeft = () => {
             } else {
               setHasFiche(false);
             }
+            setLoading(true);
           })
           .catch((error) => {
             console.error("Error fetching company data:", error);
             setHasFiche(false);
+            setLoading(false);
           });
       }
     };
@@ -42,7 +45,7 @@ const NavbarLeft = () => {
   }, [isAuthenticated, user]);
   // console.log("mon user : " + user);
   // console.log("fiche id :" + ficheId);
-  console.log("role :" + role);
+  // console.log("role :" + role);
 
   return (
     <div className="hidden md:flex flex-1 justify-center space-x-4">
@@ -65,8 +68,8 @@ const NavbarLeft = () => {
       </NavLink>
 
       {hasFiche && ficheId && role >= 2 && (
-        <NavLink className="m-2" to={`/showsheet/${ficheId}`}>
-          Ma fiche
+        <NavLink className="m-2" to={`/showsheetowner/${ficheId}`}>
+          Votre fiche d'entreprise
         </NavLink>
       )}
     </div>

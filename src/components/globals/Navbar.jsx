@@ -4,6 +4,7 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import { UserContext } from "../../hooks/UserContext";
 import { Menu, X, Moon, Sun, Eye } from "lucide-react";
 import auth from "../../services/token";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useContext(ThemeContext);
@@ -22,7 +23,7 @@ const Navbar = () => {
   const role = auth.getRoles();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -36,7 +37,7 @@ const Navbar = () => {
                 Connexion
               </NavLink>
               <NavLink
-                className="primary-500 pl-2 pr-2 bg-light-brown"
+                className="secondary pl-2 pr-2 bg-light-brown"
                 to="/register"
               >
                 S'enregistrer
@@ -78,7 +79,10 @@ const Navbar = () => {
           {!isAuthenticated ? (
             <>
               <NavLink to="/login">Connexion</NavLink>
-              <NavLink className="primary-500 pl-2 pr-2" to="/register">
+              <NavLink
+                className="secondary bg-[primary] pl-2 pr-2"
+                to="/register"
+              >
                 S'enregistrer
               </NavLink>
             </>

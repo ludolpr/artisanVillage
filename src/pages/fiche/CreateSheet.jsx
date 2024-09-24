@@ -3,21 +3,21 @@ import { api } from "../../services/baseUrl";
 import { useNavigate } from "react-router-dom";
 
 const CreateSheet = () => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Utilisation de la navigation pour rediriger après la soumission réussie
+  const [loading, setLoading] = useState(false); // État pour gérer le chargement
 
   // État pour gérer les données du formulaire, y compris les détails de l'entreprise et les coordonnées géographiques
   const [formData, setFormData] = useState({
     name_company: "",
     description_company: "",
-    picture_company: null,
+    picture_company: null, // Image de l'entreprise
     zipcode: "",
     phone: "",
     address: "",
     siret: "",
     town: "",
-    lat: "",
-    long: "",
+    lat: "", // Latitude obtenue via Nominatim
+    long: "", // Longitude obtenue via Nominatim
   });
 
   // Fonction pour gérer les changements dans les champs de texte et mettre à jour l'état formData
@@ -25,7 +25,7 @@ const CreateSheet = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value, // Mise à jour de l'état pour le champ modifié
     });
   };
 
@@ -33,56 +33,59 @@ const CreateSheet = () => {
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
-      // take the last picture if you try to send more
+      // On prend la dernière image sélectionnée si l'utilisateur en télécharge plusieurs
       picture_company: e.target.files[0],
     });
   };
 
-  // function for submit form
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (e) => {
-    // stop sending default form
-    e.preventDefault();
-    setLoading(true);
-    // construct full address
+    e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+    setLoading(true); // Indique que le processus de soumission a commencé
+
+    // Construction de l'adresse complète en utilisant les informations du formulaire
     const completeAddress = `${formData.address}, ${formData.zipcode}, ${formData.town}`;
 
     try {
-      // catch data lat and long with the address of the input
+      // Utilisation de Nominatim pour obtenir les coordonnées (latitude et longitude) à partir de l'adresse saisie
       const response = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`
       );
       const data = await response.json();
 
       if (data.length > 0) {
-        // if the address was found, updating lat and long in formdata
+        // Si l'adresse est trouvée, on met à jour la latitude et la longitude dans formData
         const updatedFormData = {
           ...formData,
           lat: data[0].lat,
           long: data[0].lon,
         };
 
-        // Créer un objet FormData pour l'envoi des données au backend
+        // Créer un objet FormData pour l'envoi des données au backend, utile pour gérer les fichiers
         const formDataToSend = new FormData();
         Object.keys(updatedFormData).forEach((key) => {
           formDataToSend.append(key, updatedFormData[key]);
         });
 
-        // Envoyer les données au backend Laravel via l'API
+        // Envoi des données au backend Laravel via une requête POST à l'API
         await api.post("/company", formDataToSend, {
           headers: {
-            // Spécifie que les données envoyées sont multipart/form-data
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data", // Spécifie que les données envoyées sont de type form-data (incluant le fichier)
           },
         });
+
+        // Après la soumission réussie, désactiver le chargement et rediriger vers la page d'accueil
         setLoading(false);
         navigate("/");
 
-        alert("Fiche créée avec succès !");
+        alert("Fiche créée avec succès !"); // Notification à l'utilisateur
       } else {
+        // Si l'adresse n'est pas trouvée, afficher un message d'erreur
         setLoading(false);
         alert("Impossible de trouver les coordonnées pour cette adresse.");
       }
     } catch (error) {
+      // Gestion des erreurs lors de la soumission ou de l'appel API
       setLoading(false);
       console.error("Erreur lors de la soumission : ", error);
     }
@@ -94,8 +97,10 @@ const CreateSheet = () => {
         <h2 className="text-2xl font-bold text-center text-[#9a7d6b] mb-6">
           Créer une fiche entreprise
         </h2>
+        {/* Formulaire pour la création de la fiche */}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4 mb-4">
+            {/* Champ pour le nom de l'entreprise */}
             <div>
               <label
                 htmlFor="name_company"
@@ -108,13 +113,14 @@ const CreateSheet = () => {
                 id="name_company"
                 name="name_company"
                 value={formData.name_company}
-                onChange={handleChange}
+                onChange={handleChange} // Mise à jour des données du formulaire
                 className="w-full p-3 border border-gray-300 rounded-lg"
                 placeholder="Entrez le nom de l'entreprise"
                 required
               />
             </div>
 
+            {/* Champ pour la description de l'entreprise */}
             <div className="col-span-2">
               <label
                 htmlFor="description_company"
@@ -134,6 +140,7 @@ const CreateSheet = () => {
               ></textarea>
             </div>
 
+            {/* Champ pour télécharger la photo de l'entreprise */}
             <div>
               <label
                 htmlFor="picture_company"
@@ -145,13 +152,14 @@ const CreateSheet = () => {
                 type="file"
                 id="picture_company"
                 name="picture_company"
-                onChange={handleFileChange}
+                onChange={handleFileChange} // Gérer le téléchargement de l'image
                 className="w-full p-3 border border-gray-300 rounded-lg"
                 accept="image/*"
                 required
               />
             </div>
 
+            {/* Champ pour l'adresse */}
             <div className="col-span-2">
               <label
                 htmlFor="address"
@@ -171,6 +179,7 @@ const CreateSheet = () => {
               />
             </div>
 
+            {/* Champ pour le code postal */}
             <div>
               <label
                 htmlFor="zipcode"
@@ -190,6 +199,7 @@ const CreateSheet = () => {
               />
             </div>
 
+            {/* Champ pour la ville */}
             <div>
               <label
                 htmlFor="town"
@@ -209,6 +219,7 @@ const CreateSheet = () => {
               />
             </div>
 
+            {/* Champ pour le téléphone */}
             <div>
               <label
                 htmlFor="phone"
@@ -228,6 +239,7 @@ const CreateSheet = () => {
               />
             </div>
 
+            {/* Champ pour le numéro SIRET */}
             <div>
               <label
                 htmlFor="siret"
@@ -247,22 +259,22 @@ const CreateSheet = () => {
               />
             </div>
 
-            <div className="col-span-2">
-              <input type="hidden" id="lat" name="lat" value={formData.lat} />
-              <input
-                type="hidden"
-                id="long"
-                name="long"
-                value={formData.long}
-              />
+            {/* Champs cachés pour la latitude et la longitude */}
+            <div className="col-span-2 hidden">
+              <input type="hidden" name="lat" value={formData.lat} />
+              <input type="hidden" name="long" value={formData.long} />
             </div>
           </div>
 
+          {/* Bouton de soumission avec gestion du chargement */}
           <button
             type="submit"
-            className="w-full bg-[#9a7d6b] text-white p-3 rounded-lg font-bold hover:bg-[#816556] transition duration-300"
+            className={`w-full ${
+              loading ? "bg-gray-500" : "bg-[#9a7d6b]"
+            } text-white p-3 rounded-lg font-bold hover:bg-[#816556] transition duration-300`}
+            disabled={loading} // Désactiver le bouton pendant le chargement
           >
-            Créer la fiche
+            {loading ? "Création en cours..." : "Créer la fiche"}
           </button>
         </form>
       </div>

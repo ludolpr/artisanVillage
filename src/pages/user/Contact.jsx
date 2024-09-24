@@ -1,63 +1,38 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../hooks/UserContext";
 import { api } from "../../services/baseUrl";
+import { useNavigate } from "react-router-dom";
 
-const ContactArtisan = (refreshKey) => {
+const ContactArtisan = () => {
+  const { user: currentUser, isAuthenticated } = useContext(UserContext);
   const [error, setError] = useState("");
   const [users, setUsers] = useState([]);
-  const [adminEmail, setAdminEmail] = useState(process.env.MAIL_ADMIN);
+  const [recipientType, setRecipientType] = useState("artisan");
+  const navigate = useNavigate();
+  const adminEmail = process.env.REACT_APP_MAIL_ADMIN;
+  const [name, setName] = useState(
+    isAuthenticated ? currentUser?.name_user || "" : ""
+  );
+  const [email, setEmail] = useState(
+    isAuthenticated ? currentUser?.email || "" : ""
+  );
+  const [recipientEmail, setRecipientEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
-  const { user: currentUser, isAuthenticated } = useContext(UserContext);
-
-  // Fetch users with id_role == 2 (artisans) and filter them
+  // Fetch artisans when component loads
   useEffect(() => {
-    const fetchUsers = () => {
-      api
-        .get("/users")
-        .then((response) => {
-          const fetchedUsers = response.data;
+    fetchArtisans();
+  }, []);
 
-          // Filter out artisans (id_role == 2)
-          const artisans = fetchedUsers.filter((user) => user.id_role === 2);
-          setUsers(artisans);
-          setError("");
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération des users", error);
-          setError("Erreur lors de la récupération des utilisateurs.");
-        });
-    };
-
-    fetchUsers();
-  }, [refreshKey]);
-
-  // État pour gérer le type de destinataire (administrateur ou artisan)
-  const [recipientType, setRecipientType] = useState("admin");
-
-  // Initialisation des données du formulaire
-  const [formData, setFormData] = useState({
-    name: isAuthenticated ? currentUser?.name_user || "" : "",
-    email: isAuthenticated ? currentUser?.email || "" : "",
-    recipientEmail: adminEmail,
-    subject: "",
-    message: "",
-  });
-
-  // Mise à jour de l'email du destinataire lorsque le type ou l'artisan change
-  useEffect(() => {
-    if (recipientType === "admin") {
-      setFormData((prevData) => ({
-        ...prevData,
-        recipientEmail: adminEmail,
-      }));
+  const fetchArtisans = async () => {
+    try {
+      const response = await api.get("/users");
+      const artisans = response.data.filter((user) => user.id_role === 2);
+      setUsers(artisans);
+    } catch (error) {
+      setError("Erreur lors de la récupération des artisans");
     }
-  }, [recipientType, adminEmail]);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
   };
 
   const handleRecipientChange = (e) => {
@@ -67,42 +42,59 @@ const ContactArtisan = (refreshKey) => {
     );
 
     if (selectedArtisan) {
-      setFormData({
-        ...formData,
-        recipientEmail: selectedArtisan.email,
-      });
+      setRecipientEmail(selectedArtisan.email);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if all fields are filled in, even for non-authenticated users
-    if (!formData.name || !formData.email) {
-      alert("Veuillez remplir votre nom et votre email.");
+    // Si le type de destinataire est "admin", on force recipientEmail à adminEmail
+    if (recipientType === "admin") {
+      setRecipientEmail(adminEmail); // Assigner l'email admin ici
+    }
+    // Vérifier si tous les champs sont remplis (sauf recipientEmail pour admin)
+    if (
+      !name ||
+      !email ||
+      !subject ||
+      !message ||
+      (recipientType === "artisan" && !recipientEmail)
+    ) {
+      alert("Tous les champs doivent être remplis.");
       return;
     }
 
+    // Limiter le contact avec l'admin uniquement si l'utilisateur est authentifié
+    if (recipientType === "admin" && !isAuthenticated) {
+      alert("Vous devez être connecté pour contacter l'administrateur.");
+      return;
+    }
+
+    // determinate finaly mail address : if admin, used adminEmail
+    const finalRecipientEmail =
+      recipientType === "admin" ? adminEmail : recipientEmail;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("subject", subject);
+    formData.append("message", message);
+    formData.append("recipientEmail", finalRecipientEmail); // use finaly mail address here
+    formData.append("recipientType", recipientType);
+
     try {
-      await fetch("http://localhost:8000/api/mettreicicliendecontact", {
-        method: "POST",
+      const response = await api.post("/contact", formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(formData),
       });
-
-      alert("Votre message a été envoyé avec succès!");
-
-      setFormData({
-        ...formData,
-        subject: "",
-        message: "",
-      });
+      console.log(response.data);
+      alert("Votre message a été envoyé avec succès !");
     } catch (error) {
-      console.error("Erreur lors de l'envoi du message:", error);
+      console.error(error);
       alert("Une erreur est survenue lors de l'envoi de votre message.");
     }
+    navigate(-1);
   };
 
   return (
@@ -115,6 +107,7 @@ const ContactArtisan = (refreshKey) => {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Recipient Selection */}
           <div>
             <label className="block text-lg font-semibold text-gray-700 mb-2">
               Choisissez le destinataire
@@ -125,11 +118,15 @@ const ContactArtisan = (refreshKey) => {
               onChange={(e) => setRecipientType(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
             >
-              <option value="admin">Contacter l'administrateur</option>
               <option value="artisan">Contacter un artisan</option>
+              <option value="admin" disabled={!isAuthenticated}>
+                Contacter l'administrateur{" "}
+                {isAuthenticated ? "" : "(connexion requise)"}
+              </option>
             </select>
           </div>
 
+          {/* Artisan Selection (only if contacting an artisan) */}
           {recipientType === "artisan" && (
             <div>
               <label className="block text-lg font-semibold text-gray-700 mb-2">
@@ -150,64 +147,64 @@ const ContactArtisan = (refreshKey) => {
             </div>
           )}
 
+          {/* Name Input */}
           <div>
             <label className="block text-lg font-semibold text-gray-700 mb-2">
               Votre nom
             </label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Entrez votre nom"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
             />
           </div>
 
+          {/* Email Input */}
           <div>
             <label className="block text-lg font-semibold text-gray-700 mb-2">
               Votre email
             </label>
             <input
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Entrez votre email"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
             />
           </div>
 
+          {/* Subject Input */}
           <div>
             <label className="block text-lg font-semibold text-gray-700 mb-2">
               Sujet
             </label>
             <input
               type="text"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
               required
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
               placeholder="Sujet du message"
             />
           </div>
 
+          {/* Message Input */}
           <div>
             <label className="block text-lg font-semibold text-gray-700 mb-2">
               Message
             </label>
             <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               required
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
               placeholder="Votre message"
               rows="6"
             ></textarea>
           </div>
-
+          {/* btn for send this form */}
           <button
             type="submit"
             className="w-full py-3 bg-[#9a7d6b] text-white font-bold rounded-lg hover:bg-[#7f6957] transition-colors"
@@ -221,3 +218,4 @@ const ContactArtisan = (refreshKey) => {
 };
 
 export default ContactArtisan;
+

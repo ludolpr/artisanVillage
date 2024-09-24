@@ -12,7 +12,7 @@ import CreateSheet from "../../pages/fiche/CreateSheet";
 import ShowSheet from "../../pages/fiche/ShowSheet";
 import ShowSheetOwner from "../../pages/fiche/ShowSheetOwner";
 import Products from "../../pages/fiche/Products";
-import ProductsOwner from "../../pages/fiche/ProductsOwner";
+import EditProductOwner from "../../pages/fiche/EditProductOwner";
 import Profil from "../../pages/user/Profil";
 import VerifyEmail from "../../pages/user/VerifyEmail";
 import Contact from "../../pages/user/Contact";
@@ -40,8 +40,11 @@ const RouteContainer = () => {
           <Route path="/showsheet/:id" element={<ShowSheet />} />
           <Route path="/showsheetowner/:id" element={<ShowSheetOwner />} />
           {/* products */}
-          <Route path="/product/:product" component={<Products />} />
           <Route path="/product" component={<Products />} />
+          <Route
+            path="/editproduct/:productId"
+            element={<EditProductOwner />}
+          />
           <Route path="/profil" element={<Profil />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/email/verify" element={<VerifyEmail />} />

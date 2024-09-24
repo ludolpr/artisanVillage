@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { UserContext } from "../../hooks/UserContext";
+import { api } from "../../services/baseUrl";
 
 const Login = () => {
   const {
@@ -29,13 +29,9 @@ const Login = () => {
       formData.append("email", data.email);
       formData.append("password", data.password);
 
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/login",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const res = await api.post("http://127.0.0.1:8000/api/login", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       if (res.status === 200) {
         localStorage.setItem("access_token", res.data.data.access_token.token);

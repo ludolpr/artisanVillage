@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../services/baseUrl";
 import { FaEdit, FaTrashAlt, FaFilter } from "react-icons/fa";
-import EditProductOwner from "./EditProductOwner";
+import { useParams, useNavigate } from "react-router-dom";
 import addProduct from "../../assets/images/addproduct.jpg";
 import AddProductForm from "./AddProductForm";
-import { useParams } from "react-router-dom";
 
 const ProductsOwner = () => {
   const [products, setProducts] = useState([]);
@@ -12,34 +11,21 @@ const ProductsOwner = () => {
   const [tags, setTags] = useState([]);
   const [company, setCompany] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
-  const [editingProduct, setEditingProduct] = useState(null);
   const [showAddProductForm, setShowAddProductForm] = useState(false);
-  // id fetch from params in url
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch company details and products
     const fetchCompanyData = async () => {
       try {
         const companyResponse = await api.get(`/company/${id}`);
         setCompany(companyResponse.data);
 
-        const productstagsResponse = await api.get("/productstags");
-        // console.log(
-        //   "productstagsResponse:",
-        //   productstagsResponse.data.data,
-        //   "test de console log pour récupérer les tags associés aux produits"
-        // );
-
-        // Assuming each product has a 'tags' property which is an array of tags
-        productstagsResponse.data.data.forEach((product) => {
-          console.log(
-            `Product: ${product.name_product}, Tags: ${product.tags.join(", ")}`
-          );
-        });
-
+        const productstagsResponse = await api.get(`/productstags`);
         const filteredProducts = productstagsResponse.data.data.filter(
           (product) => product.id_company === companyResponse.data.id
         );
@@ -50,7 +36,6 @@ const ProductsOwner = () => {
       }
     };
 
-    // Fetch categories and tags
     const fetchCategoriesAndTags = async () => {
       try {
         const [categoriesResponse, tagsResponse] = await Promise.all([
@@ -68,8 +53,10 @@ const ProductsOwner = () => {
     fetchCategoriesAndTags();
   }, [id]);
 
-  const handleEdit = (product) => {
-    setEditingProduct(product);
+  const handleEdit = (productId) => {
+    navigate(`/editproduct/${productId}`, {
+      state: { categories, tags, idCompany: company.id },
+    });
   };
 
   const handleDelete = async (productId) => {
@@ -86,7 +73,6 @@ const ProductsOwner = () => {
     }
   };
 
-  // Filter products by category or tag
   const filteredProducts = products.filter((product) => {
     const isCategoryMatch =
       !selectedCategory || product.id_category === Number(selectedCategory);
@@ -99,9 +85,7 @@ const ProductsOwner = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto mt-10">
-      {/* Header with Filter */}
       <div className="flex justify-between items-center p-4 bg-white border-2 border-[#9a7d6b] shadow-md">
-        {/* Add Product Button */}
         <img
           src={addProduct}
           alt="Ajouter un produit"
@@ -140,7 +124,6 @@ const ProductsOwner = () => {
         </div>
       </div>
 
-      {/* Product List */}
       <div className="bg-white border-2 border-[#9a7d6b] shadow-md mt-4">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
@@ -154,14 +137,6 @@ const ProductsOwner = () => {
                   alt={product.name_product}
                   className="w-16 h-16 object-cover border-2 border-[#9a7d6b] rounded-lg"
                 />
-                {/* <div>
-                  <span className="text-lg text-[#9a7d6b]">
-                    Nom du produit: {product.name_product}
-                  </span>
-                  <span className="block text-lg text-[#9a7d6b]">
-                    Description: {product.description_product}
-                  </span>
-                </div> */}
                 <div>
                   <span className="text-lg text-[#9a7d6b]">
                     Nom du produit: {product.name_product}
@@ -189,7 +164,7 @@ const ProductsOwner = () => {
               <div className="flex space-x-4">
                 <button
                   className="bg-[#d9b99b] hover:bg-[#9a7d6b] text-white p-2 rounded-lg"
-                  onClick={() => handleEdit(product)}
+                  onClick={() => handleEdit(product.id)}
                 >
                   <FaEdit />
                 </button>
@@ -209,23 +184,6 @@ const ProductsOwner = () => {
         )}
       </div>
 
-      {/* Edit Product Modal */}
-      {editingProduct && (
-        <EditProductOwner
-          product={editingProduct}
-          onClose={() => setEditingProduct(null)}
-          onSave={(updatedProduct) => {
-            setProducts((prevProducts) =>
-              prevProducts.map((p) =>
-                p.id === updatedProduct.id ? updatedProduct : p
-              )
-            );
-            setEditingProduct(null);
-          }}
-        />
-      )}
-
-      {/* Add Product Form */}
       {showAddProductForm && company && (
         <AddProductForm
           categories={categories}

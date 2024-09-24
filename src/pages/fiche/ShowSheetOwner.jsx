@@ -295,7 +295,7 @@ const ShowSheetOwner = () => {
       </div>
       <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6 mb-6">
         <h3 className="text-2xl font-semibold text-[#9a7d6b] mb-4">Produits</h3>
-        <ProductOwner />
+        <ProductOwner companyId={company.id} />
       </div>
     </div>
   );

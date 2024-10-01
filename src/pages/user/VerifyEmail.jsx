@@ -42,7 +42,7 @@ const VerifyEmail = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="p-6 bg-white rounded-lg shadow-lg max-w-md text-center">
+      <div className="p-6  rounded-lg shadow-lg max-w-md text-center">
         <h2
           className={`text-4xl mb-4 ${
             statusType === "success"

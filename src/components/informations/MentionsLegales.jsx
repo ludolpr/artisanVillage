@@ -23,6 +23,7 @@ const MentionsLegales = () => {
       <p className="mb-4">
         <strong>Hébergeur :</strong> OVH Cloud
       </p>
+
       <h2 className="text-2xl font-semibold mt-6 mb-4">
         Propriété intellectuelle
       </h2>
@@ -30,26 +31,27 @@ const MentionsLegales = () => {
         Tout le contenu du site Artisan Village, incluant, de façon non
         limitative, les graphismes, images, textes, vidéos, animations, sons,
         logos, gifs et icônes ainsi que leur mise en forme sont la propriété
-        exclusive de la société Artisan Village à l’exception des marques, logos
-        ou contenus appartenant à d’autres sociétés partenaires ou auteurs.
+        exclusive de la société Artisan Village, à l’exception des marques,
+        logos ou contenus appartenant à d’autres sociétés partenaires ou
+        auteurs.
       </p>
+
       <h2 className="text-2xl font-semibold mt-6 mb-4">
         Conditions d’utilisation
       </h2>
-      <p>
+      <p className="mb-4">
         L’utilisation de ce site implique l’acceptation pleine et entière des
         conditions générales d’utilisation décrites ci-après. Ces conditions
         d’utilisation sont susceptibles d’être modifiées ou complétées à tout
         moment.
       </p>
-      <NavLink
-        to="/"
-        className="text-primary hover:text-secondary mt-6 inline-block"
-      >
+
+      <NavLink to="/" className=" mt-6 inline-block">
         Retour à l'accueil
       </NavLink>
     </div>
   );
+  
 };
 
 export default MentionsLegales;

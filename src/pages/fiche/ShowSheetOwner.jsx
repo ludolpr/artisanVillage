@@ -132,7 +132,9 @@ const ShowSheetOwner = () => {
   };
 
   const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this company?")) {
+    if (
+      window.confirm("Etes-vous sûr de vouloir supprimer cette entreprise ?")
+    ) {
       api
         .delete(`/company/${id}`)
         .then(() => {
@@ -150,18 +152,18 @@ const ShowSheetOwner = () => {
   }
 
   if (error) {
-    return <div className="text-red-500 text-center">{error}</div>;
+    return <div className="decline text-center">{error}</div>;
   }
 
   if (!company) {
-    return <div className="text-center">No company data available</div>;
+    return <div className="text-center">Pas de données d'entreprises</div>;
   }
 
   const isOwner = isAuthenticated && user?.id === company.id_user;
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6">
-      <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden mb-6">
+    <div className="flex flex-col items-center min-h-screen p-6">
+      <div className="gradient1 w-full max-w-6xl shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden mb-6">
         <div className="lg:w-1/2">
           <img
             src={
@@ -170,7 +172,7 @@ const ShowSheetOwner = () => {
                 : artisanPlaceholder
             }
             alt={company.name_company}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover p-5"
           />
         </div>
         <div className="lg:w-1/2 p-6">
@@ -240,14 +242,14 @@ const ShowSheetOwner = () => {
               <div className="flex justify-between mt-6">
                 <button
                   onClick={handleSave}
-                  className="bg-[#d9b99b] text-white p-3 rounded-lg shadow hover:bg-[#9a7d6b] transition flex items-center"
+                  className="p-3 rounded-lg shadow transition flex items-center button3"
                 >
                   <FaCheck className="mr-2" />
                   Enregistrer
                 </button>
                 <button
                   onClick={handleCancel}
-                  className="bg-[#9a7d6b] text-white p-3 rounded-lg shadow hover:bg-[#d9b99b] transition flex items-center"
+                  className="p-3 rounded-lg shadow transition flex items-center button3"
                 >
                   <FaTimes className="mr-2" />
                   Retour
@@ -256,33 +258,29 @@ const ShowSheetOwner = () => {
             </div>
           ) : (
             <div>
-              <h2 className="text-4xl font-semibold text-[#9a7d6b] mb-4">
+              <h2 className="text-4xl font-semibold mb-4">
                 {company.name_company}
               </h2>
-              <p className="text-gray-700 mb-4">
-                {company.description_company}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <p className="text-gray-500">Adresse: {company.address}</p>
-                <p className="text-gray-500">Ville: {company.town}</p>
-                <p className="text-gray-500">Code postal: {company.zipcode}</p>
-                <p className="text-gray-500">
-                  Numéro de téléphone: {company.phone}
-                </p>
-                <p className="text-gray-500">Numéro SIRET: {company.siret}</p>
+              <p className="mb-4">{company.description_company}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 mt-10">
+                <p>Adresse: {company.address}</p>
+                <p>Ville: {company.town}</p>
+                <p>Code postal: {company.zipcode}</p>
+                <p>Téléphone: {company.phone}</p>
+                <p>Numéro SIRET: {company.siret}</p>
               </div>
               {isOwner && (
                 <div className="flex space-x-4 mb-6">
                   <button
                     onClick={handleEdit}
-                    className="bg-[#d9b99b] text-white p-3 rounded-lg shadow hover:bg-[#9a7d6b] transition flex items-center"
+                    className="p-3 rounded-lg shadow transition flex items-center button3"
                   >
                     <FaEdit className="mr-2" />
                     Edition
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="bg-[#9a7d6b] text-white p-3 rounded-lg shadow hover:bg-[#d9b99b] transition flex items-center"
+                    className="p-3 rounded-lg shadow transition flex items-center button3"
                   >
                     <FaTrash className="mr-2" />
                     Supprimer
@@ -293,12 +291,15 @@ const ShowSheetOwner = () => {
           )}
         </div>
       </div>
-      <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h3 className="text-2xl font-semibold text-[#9a7d6b] mb-4">Produits</h3>
+      <div className="gradient1 w-full max-w-6xl shadow-lg rounded-lg p-6 mb-6">
+        <h3 className="text-2xl font-semibold mb-4 flex justify-center">
+          Produits
+        </h3>
         <ProductOwner companyId={company.id} />
       </div>
     </div>
   );
+  
 };
 
 export default ShowSheetOwner;

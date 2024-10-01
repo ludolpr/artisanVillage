@@ -22,16 +22,13 @@ const UserForm = ({ user, onSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md mb-6"
-    >
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
+    <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
+      <h2 className="text-xl font-bold mb-4 ">
         Formulaire d'ajout d'utilisateur
       </h2>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name">
+      <div className=" mb-4">
+        <label className="block  mb-2" htmlFor="name">
           Nom
         </label>
         <input
@@ -40,13 +37,13 @@ const UserForm = ({ user, onSuccess }) => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border "
           required
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="email">
+        <label className="block  mb-2" htmlFor="email">
           Email
         </label>
         <input
@@ -55,7 +52,7 @@ const UserForm = ({ user, onSuccess }) => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
@@ -70,13 +67,13 @@ const UserForm = ({ user, onSuccess }) => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="picture">
+        <label className="block  mb-2" htmlFor="picture">
           Image de profil
         </label>
         <input
@@ -84,18 +81,18 @@ const UserForm = ({ user, onSuccess }) => {
           id="picture"
           name="picture"
           onChange={handleFileChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="role">
+        <label className="block  mb-2" htmlFor="role">
           Rôle de l'utilisateur
         </label>
         <select
           value={formData.role}
           onChange={handleChange}
-          className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+          className="w-full px-3 py-2 mb-2 border  rounded"
         >
           <option value="1">Utilisateur</option>
           <option value="2">Artisan</option>
@@ -103,10 +100,7 @@ const UserForm = ({ user, onSuccess }) => {
         </select>
       </div>
 
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className=" px-4 py-2 rounded">
         Créer utilisateur
       </button>
     </form>

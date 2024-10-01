@@ -47,7 +47,7 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md mb-6"
+      className="decline p-6 rounded-lg shadow-md mb-6"
     >
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
         {mode === "edit"
@@ -55,7 +55,7 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
           : "Créer une nouvelle catégorie"}
       </h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name_category">
+        <label className="block decline mb-2" htmlFor="name_category">
           Nom de la catégorie
         </label>
         <input
@@ -64,15 +64,12 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
           name="name_category"
           value={formData.name_category}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border decline rounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label
-          className="block text-gray-700 mb-2"
-          htmlFor="description_category"
-        >
+        <label className="block decline mb-2" htmlFor="description_category">
           Description de la catégorie
         </label>
         <textarea
@@ -80,16 +77,13 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
           name="description_category"
           value={formData.description_category}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border decline rounded"
           rows="3"
         />
       </div>
-      {message && <div className="text-green-500 mb-4">{message}</div>}
-      {error && <div className="text-red-500 mb-4">{error}</div>}
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      {message && <div className="added mb-4">{message}</div>}
+      {error && <div className="decline mb-4">{error}</div>}
+      <button type="submit" className=" px-4 py-2 rounded ">
         {mode === "edit"
           ? "Sauvegarder les modifications"
           : "Créer la catégorie"}

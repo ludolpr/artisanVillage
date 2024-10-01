@@ -39,10 +39,7 @@ const RolesForm = ({ role, onSuccess, mode }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md mb-6"
-    >
+    <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
         {mode === "edit" ? "Modifier le rôle" : "Créer un nouveau rôle"}
       </h2>
@@ -60,8 +57,8 @@ const RolesForm = ({ role, onSuccess, mode }) => {
           required
         />
       </div>
-      {message && <div className="text-green-500 mb-4">{message}</div>}
-      {error && <div className="text-red-500 mb-4">{error}</div>}
+      {message && <div className="added mb-4">{message}</div>}
+      {error && <div className="decline mb-4">{error}</div>}
       <button
         type="submit"
         className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"

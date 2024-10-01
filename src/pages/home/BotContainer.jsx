@@ -43,7 +43,7 @@ const BotContainer = () => {
     fetchUserFiche();
   }, [isAuthenticated, user]);
   return (
-    <div className="bg-gradient-to-t from-[#b48a6f] to-[#d9b99b] text-white flex flex-col lg:flex-row items-center justify-between py-12 px-6 lg:px-16 rounded-lg space-y-8 lg:space-y-0">
+    <div className="relative gradient1 flex flex-col lg:flex-row items-center justify-between py-12 px-6 lg:px-16 space-y-8 lg:space-y-0">
       <div className="lg:w-1/2 space-y-6">
         {role <= 1 ? (
           <>
@@ -62,7 +62,7 @@ const BotContainer = () => {
             {role == 1 && (
               <NavLink
                 to="/create-fiche"
-                className="inline-block bg-white text-[#d9b99b] px-6 py-3 rounded-lg shadow-md hover:bg-[#9a7d6b] hover:text-white transition-all"
+                className="inline-block   px-6 py-3 rounded-lg shadow-md "
               >
                 Créer une nouvelle fiche
               </NavLink>
@@ -84,7 +84,7 @@ const BotContainer = () => {
             {role <= 2 && (
               <NavLink
                 to={`/showsheet/${ficheId}`}
-                className="inline-block bg-white text-[#d9b99b] px-6 py-3 rounded-lg shadow-md hover:bg-[#9a7d6b] hover:text-white transition-all"
+                className="inline-block px-6 py-3 rounded-lg shadow-md"
               >
                 Voir ma fiche artisan
               </NavLink>

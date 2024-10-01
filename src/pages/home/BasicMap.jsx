@@ -61,7 +61,7 @@ const BasicMap = () => {
             icon={artisanIcon}
           >
             <Popup>
-              <div className="p-2 rounded-lg shadow-lg bg-white text-gray-800">
+              <div className="p-2 rounded-lg shadow-lg">
                 <div className="flex items-center mb-2">
                   {/* Image de l'entreprise */}
                   <img

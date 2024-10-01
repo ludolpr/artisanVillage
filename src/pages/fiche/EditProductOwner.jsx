@@ -127,51 +127,43 @@ const EditProductOwner = (onSave) => {
     navigate(-1);
   };
 
-  if (error) return <div>{error}</div>;
+  if (error) return <div className="decline">{error}</div>;
   if (!product) return <LoadingSpinner />;
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md border-2 border-[#9a7d6b]">
-      <h2 className="text-3xl font-bold text-[#9a7d6b] mb-4">
-        Modifier le produit
-      </h2>
+    <div className="card1 w-full max-w-4xl mx-auto mt-10  p-6 rounded-lg shadow-md border-2 ">
+      <h2 className="text-3xl font-bold  mb-4">Modifier le produit</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-lg mb-1 text-[#9a7d6b]">
-            Nom du produit
-          </label>
+          <label className="block text-lg mb-1 ">Nom du produit</label>
           <input
             type="text"
             name="name_product"
             value={formData.name_product}
             onChange={handleChange}
-            className="block w-full p-2 border border-[#9a7d6b] rounded-lg"
+            className="block w-full p-2 border  rounded-lg"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 text-[#9a7d6b]">
-            Description
-          </label>
+          <label className="block text-lg mb-1 ">Description</label>
           <textarea
             name="description_product"
             value={formData.description_product}
             onChange={handleChange}
-            className="block w-full p-2 border border-[#9a7d6b] rounded-lg"
+            className="block w-full p-2 border  rounded-lg"
           ></textarea>
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 text-[#9a7d6b]">
-            Image du produit
-          </label>
+          <label className="block text-lg mb-1 ">Image du produit</label>
           <input
             type="file"
             name="picture_product"
             onChange={handleFileChange}
-            className="block w-full p-2 border border-[#9a7d6b] rounded-lg"
+            className="block w-full p-2 border  rounded-lg"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 text-[#9a7d6b]">Catégorie</label>
+          <label className="block text-lg mb-1 ">Catégorie</label>
           <select
             name="id_category"
             value={formData.id_category}
@@ -179,7 +171,7 @@ const EditProductOwner = (onSave) => {
               setFormData({ ...formData, id_category: e.target.value });
               setSelectedCategory(e.target.value);
             }}
-            className="block w-full p-2 border border-[#9a7d6b] rounded-lg"
+            className="block w-full p-2 border  rounded-lg"
           >
             <option value="">Sélectionnez une catégorie</option>
             {categories.map((category) => (
@@ -191,13 +183,13 @@ const EditProductOwner = (onSave) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Tags</label>
+          <label className="block  mb-2">Tags</label>
           {tagFields.map((field, index) => (
             <div key={index} className="flex items-center mb-2">
               <select
                 value={field.value}
                 onChange={(e) => handleTagChange(index, e.target.value)}
-                className="w-full border border-gray-300 rounded-lg p-2"
+                className="w-full border  rounded-lg p-2"
               >
                 <option value="">Sélectionner un tag</option>
                 {tags.map((tag) => (
@@ -209,7 +201,7 @@ const EditProductOwner = (onSave) => {
               <button
                 type="button"
                 onClick={() => handleRemoveTagField(index)}
-                className="ml-2 bg-[#d9b99b] text-white px-2 py-1 rounded-lg"
+                className="ml-2   px-2 py-1 rounded-lg button3"
               >
                 Supprimer
               </button>
@@ -218,20 +210,20 @@ const EditProductOwner = (onSave) => {
           <button
             type="button"
             onClick={handleAddTagField}
-            className="bg-[#d9b99b] text-white px-4 py-2 rounded-lg"
+            className="  px-4 py-2 rounded-lg button3"
           >
             Ajouter un tag
           </button>
         </div>
 
         <div className="mb-4">
-          <label className="block text-lg mb-1 text-[#9a7d6b]">Prix en €</label>
+          <label className="block text-lg mb-1 ">Prix en €</label>
           <input
             type="number"
             name="price"
             value={formData.price}
             onChange={handleChange}
-            className="block w-full p-2 border border-[#9a7d6b] rounded-lg"
+            className="block w-full p-2 border  rounded-lg"
           />
         </div>
         <div>
@@ -243,7 +235,7 @@ const EditProductOwner = (onSave) => {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-[#9a7d6b] text-white p-3 rounded-lg w-full hover:bg-[#7c634f] transition-all"
+          className="mt-4   p-3 rounded-lg w-full  transition-all button3"
         >
           Enregistrer le changement
         </button>

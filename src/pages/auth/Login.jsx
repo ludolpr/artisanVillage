@@ -48,53 +48,45 @@ const Login = () => {
   };
 
   return (
-    <div className="mt-10 login-page max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl text-black font-semibold mb-4">Connexion</h1>
+    <div className="card1 mt-10 login-page max-w-md mx-auto p-6  shadow-md rounded-lg">
+      <h1 className="text-2xl  font-semibold mb-4">Connexion</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="email" className="block text-sm font-medium ">
             Email:
           </label>
           <input
             id="email"
             type="email"
             {...register("email", { required: "Adresse mail obligatoire" })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:border-[#9a7d6b] sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm    sm:text-sm"
           />
           {errors.email && (
-            <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+            <p className="mt-2 text-sm decline">{errors.email.message}</p>
           )}
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="password" className="block text-sm font-medium ">
             Mot de passe:
           </label>
           <input
             id="password"
             type="password"
             {...register("password", { required: "Mot de passe obligatoire" })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:border-[#9a7d6b] sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm   sm:text-sm"
           />
           {errors.password && (
-            <p className="mt-2 text-sm text-red-600">
-              {errors.password.message}
-            </p>
+            <p className="mt-2 text-sm decline">{errors.password.message}</p>
           )}
         </div>
 
-        {authError && <p className="mt-2 text-sm text-red-600">{authError}</p>}
+        {authError && <p className="mt-2 text-sm decline">{authError}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 primary-500 text-white font-semibold rounded-md shadow-sm hover:bg-[#9a7d6b] focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:ring-offset-2"
+          className="w-full py-2 px-4 primary-500  font-semibold rounded-md shadow-sm    focus:ring-offset-2 button3"
         >
           {loading ? "Connexion en cours..." : "Connexion"}
         </button>

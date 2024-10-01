@@ -17,10 +17,7 @@ const TicketForm = ({ ticket, onSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-md mb-6"
-    >
+    <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Ticket Form</h2>
       <div className="mb-4">
         <label className="block text-gray-700 mb-2" htmlFor="title">

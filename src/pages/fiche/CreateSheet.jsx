@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { api } from "../../services/baseUrl";
 import { useNavigate } from "react-router-dom";
-
+import LoadingSpinner from "../../components/globals/LoadingSpinner";
 const CreateSheet = () => {
   const navigate = useNavigate(); // Utilisation de la navigation pour rediriger après la soumission réussie
   const [loading, setLoading] = useState(false); // État pour gérer le chargement
@@ -92,9 +92,9 @@ const CreateSheet = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#f5f5f5] p-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
-        <h2 className="text-2xl font-bold text-center text-[#9a7d6b] mb-6">
+    <div className="flex justify-center items-center min-h-screen  p-4">
+      <div className="card1 shadow-lg rounded-lg p-8 w-full max-w-2xl">
+        <h2 className="text-2xl font-bold text-center  mb-6">
           Créer une fiche entreprise
         </h2>
         {/* Formulaire pour la création de la fiche */}
@@ -104,7 +104,7 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="name_company"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block text-lg font-medium mb-2"
               >
                 Nom de l'entreprise
               </label>
@@ -114,7 +114,7 @@ const CreateSheet = () => {
                 name="name_company"
                 value={formData.name_company}
                 onChange={handleChange} // Mise à jour des données du formulaire
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border rounded-lg"
                 placeholder="Entrez le nom de l'entreprise"
                 required
               />
@@ -124,7 +124,7 @@ const CreateSheet = () => {
             <div className="col-span-2">
               <label
                 htmlFor="description_company"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block text-lg font-medium mb-2"
               >
                 Description de l'entreprise
               </label>
@@ -133,7 +133,7 @@ const CreateSheet = () => {
                 name="description_company"
                 value={formData.description_company}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border  rounded-lg"
                 placeholder="Décrivez l'entreprise"
                 rows="4"
                 required
@@ -144,7 +144,7 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="picture_company"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block  text-lg font-medium mb-2"
               >
                 Photo de l'entreprise
               </label>
@@ -153,7 +153,7 @@ const CreateSheet = () => {
                 id="picture_company"
                 name="picture_company"
                 onChange={handleFileChange} // Gérer le téléchargement de l'image
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border  rounded-lg"
                 accept="image/*"
                 required
               />
@@ -163,7 +163,7 @@ const CreateSheet = () => {
             <div className="col-span-2">
               <label
                 htmlFor="address"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block  text-lg font-medium mb-2"
               >
                 Adresse
               </label>
@@ -173,7 +173,7 @@ const CreateSheet = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border rounded-lg"
                 placeholder="Entrez l'adresse"
                 required
               />
@@ -183,7 +183,7 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="zipcode"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block  text-lg font-medium mb-2"
               >
                 Code postal
               </label>
@@ -193,7 +193,7 @@ const CreateSheet = () => {
                 name="zipcode"
                 value={formData.zipcode}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border  rounded-lg"
                 placeholder="Entrez le code postal"
                 required
               />
@@ -201,10 +201,7 @@ const CreateSheet = () => {
 
             {/* Champ pour la ville */}
             <div>
-              <label
-                htmlFor="town"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
-              >
+              <label htmlFor="town" className="block  text-lg font-medium mb-2">
                 Ville
               </label>
               <input
@@ -213,7 +210,7 @@ const CreateSheet = () => {
                 name="town"
                 value={formData.town}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border  rounded-lg"
                 placeholder="Entrez la ville"
                 required
               />
@@ -223,7 +220,7 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="phone"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block  text-lg font-medium mb-2"
               >
                 Téléphone
               </label>
@@ -233,7 +230,7 @@ const CreateSheet = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3  rounded-lg"
                 placeholder="Entrez le numéro de téléphone"
                 required
               />
@@ -243,7 +240,7 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="siret"
-                className="block text-[#9a7d6b] text-lg font-medium mb-2"
+                className="block  text-lg font-medium mb-2"
               >
                 N° de Siret
               </label>
@@ -253,7 +250,7 @@ const CreateSheet = () => {
                 name="siret"
                 value={formData.siret}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border  rounded-lg"
                 placeholder="Entrez le numéro SIRET"
                 required
               />
@@ -270,8 +267,8 @@ const CreateSheet = () => {
           <button
             type="submit"
             className={`w-full ${
-              loading ? "bg-gray-500" : "bg-[#9a7d6b]"
-            } text-white p-3 rounded-lg font-bold hover:bg-[#816556] transition duration-300`}
+              loading ? <LoadingSpinner /> : "button3"
+            } p-3 rounded-lg font-bold  transition duration-300`}
             disabled={loading} // Désactiver le bouton pendant le chargement
           >
             {loading ? "Création en cours..." : "Créer la fiche"}

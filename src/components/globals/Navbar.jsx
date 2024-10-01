@@ -36,10 +36,7 @@ const Navbar = () => {
               <NavLink className="m-2" to="/login">
                 Connexion
               </NavLink>
-              <NavLink
-                className="secondary pl-2 pr-2 bg-light-brown"
-                to="/register"
-              >
+              <NavLink className=" pl-2 pr-2 bg-light-brown" to="/register">
                 S'enregistrer
               </NavLink>
             </>
@@ -56,7 +53,11 @@ const Navbar = () => {
               </button>
             </>
           )}
-          <button onClick={toggleTheme}>
+          <button
+            className="transition-all duration-300"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
             {theme === "light" ? (
               <Sun />
             ) : theme === "dark" ? (
@@ -69,20 +70,21 @@ const Navbar = () => {
 
         {/* Menu burger pour mobile */}
         <div className="md:hidden">
-          <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
+          <button onClick={toggleNavbar} aria-label="Toggle menu">
+            {isOpen ? <X /> : <Menu />}
+          </button>
         </div>
       </nav>
 
       {/* Menu déroulant pour mobile */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-brown-500 flex flex-col items-center md:hidden">
+        <div className="absolute top-full left-0 w-full bg-brown-500 flex flex-col items-center md:hidden transition-all duration-300">
           {!isAuthenticated ? (
             <>
-              <NavLink to="/login">Connexion</NavLink>
-              <NavLink
-                className="secondary bg-[primary] pl-2 pr-2"
-                to="/register"
-              >
+              <NavLink to="/login" className="m-2">
+                Connexion
+              </NavLink>
+              <NavLink className="m-2 pl-2 pr-2" to="/register">
                 S'enregistrer
               </NavLink>
             </>
@@ -103,17 +105,17 @@ const Navbar = () => {
               <NavLink className="m-2" to="/contact">
                 Contact
               </NavLink>
-              {/* {role >= 1 && (
-                <NavLink className="m-2" to="/profil">
-                  Profil
-                </NavLink>
-              )} */}
-              {role === 3 && (
+
+              {role == 3 && (
                 <NavLink to="/dashboard" className="m-2">
                   Panel admin
                 </NavLink>
               )}
-              <button onClick={toggleTheme}>
+              <button
+                className="transition-all duration-300"
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+              >
                 {theme === "light" ? (
                   <Sun />
                 ) : theme === "dark" ? (
@@ -131,6 +133,7 @@ const Navbar = () => {
       )}
     </>
   );
+  
 };
 
 export default Navbar;

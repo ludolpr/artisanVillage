@@ -108,31 +108,25 @@ const UserProfile = () => {
   }
 
   // Helper to handle verified status display
-  const emailStatus = user.email_verified_at
-    ? "text-green-600"
-    : "text-red-600";
+  const emailStatus = user.email_verified_at ? "added" : "decline";
 
   // Reusable component for user details
   const UserDetails = ({ user, emailStatus }) => (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-[#9a7d6b] mb-4">
-        Profil Utilisateur
-      </h2>
+    <div className="p-6 ">
+      <h2 className="text-2xl font-bold  mb-4">Profil Utilisateur</h2>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700">
-          Nom d'utilisateur:
-        </h3>
-        <p className="text-gray-600">{user.name_user || "votre nom ici"}</p>
+        <h3 className="text-lg font-semibold ">Nom d'utilisateur:</h3>
+        <p className="">{user.name_user || "votre nom ici"}</p>
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700">Email:</h3>
-        <p className={`text-gray-600 ${emailStatus}`}>
+        <h3 className="text-lg font-semibold  ">Email:</h3>
+        <p className={` ${emailStatus} `}>
           {user.email} {user.email_verified_at ? "(vérifié)" : "(non vérifié)"}
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700">Rôle:</h3>
-        <p className="text-gray-600">
+        <h3 className="text-lg font-semibold ">Rôle:</h3>
+        <p className="">
           {user.id_role === 1
             ? "Utilisateur"
             : user.id_role === 2
@@ -144,14 +138,14 @@ const UserProfile = () => {
         <div className="flex justify-end space-x-4">
           <button
             onClick={() => setEditMode(true)}
-            className="px-4 py-2 bg-blue-500 text-white rounded flex items-center"
+            className="px-4 py-2 rounded flex items-center button3"
           >
             <FaEdit className="mr-2" />
             Modifier
           </button>
           <button
             onClick={handleDelete}
-            className="px-4 py-2 bg-red-500 text-white rounded flex items-center"
+            className="px-4 py-2 rounded flex items-center button3"
           >
             <FaTrash className="mr-2" />
             Supprimer
@@ -162,29 +156,25 @@ const UserProfile = () => {
   );
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#f5f5f5] p-4">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-3xl">
+    <div className="flex gradient1 justify-center items-center min-h-screen p-4">
+      <div className="gradient2 shadow-lg rounded-lg overflow-hidden w-full max-w-3xl">
         <div className="relative">
           <img
             src={profileImage}
             alt={user.name_user}
             className="w-64 h-64 object-cover"
           />
-          <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white text-xl p-4">
+          <div className="absolute bottom-0 left-0 text-xl p-4 card1">
             {user.name_user || "votre nom ici"}
           </div>
         </div>
 
         {editMode ? (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-[#9a7d6b] mb-4">
-              Modifier Profil
-            </h2>
+            <h2 className="text-2xl font-bold mb-4">Modifier Profil</h2>
             {/* Form inputs for edit mode */}
             <div className="mb-4">
-              <label className="text-lg font-semibold text-gray-700">
-                Nom d'utilisateur:
-              </label>
+              <label className="font-semibold">Nom d'utilisateur:</label>
               <input
                 type="text"
                 name="name_user"
@@ -194,9 +184,7 @@ const UserProfile = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="text-lg font-semibold text-gray-700">
-                Email:
-              </label>
+              <label className="font-semibold">Email:</label>
               <input
                 type="email"
                 name="email"
@@ -206,9 +194,7 @@ const UserProfile = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="text-lg font-semibold text-gray-700">
-                Photo de profil:
-              </label>
+              <label className="font-semibold">Photo de profil:</label>
               <input
                 type="file"
                 name="picture_user"
@@ -218,19 +204,17 @@ const UserProfile = () => {
             </div>
             {/* Password change */}
             <div className="mb-4">
-              <label className="text-lg font-semibold text-gray-700">
-                Nouveau mot de passe:
-              </label>
+              <label className="font-semibold">Nouveau mot de passe:</label>
               <input
                 type="password"
                 name="newPassword"
                 value={passwordData.newPassword}
                 onChange={handlePasswordChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 rounded mt-1"
               />
             </div>
             <div className="mb-4">
-              <label className="text-lg font-semibold text-gray-700">
+              <label className="font-semibold">
                 Confirmer le mot de passe:
               </label>
               <input
@@ -238,30 +222,28 @@ const UserProfile = () => {
                 name="confirmPassword"
                 value={passwordData.confirmPassword}
                 onChange={handlePasswordChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 border rounded mt-1"
               />
             </div>
-            {passwordError && (
-              <div className="text-red-500 mb-4">{passwordError}</div>
-            )}
+            {passwordError && <div className="decline">{passwordError}</div>}
             {isAuthenticated && (
               <div className="flex justify-end space-x-4">
                 <button
                   onClick={() => setEditMode(false)}
-                  className="px-4 py-2 bg-gray-500 text-white rounded"
+                  className="px-4 py-2 rounded button3"
                 >
                   Annuler
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 bg-green-500 text-white rounded"
+                  className="px-4 py-2 rounded button3"
                 >
                   Sauvegarder
                 </button>
               </div>
             )}
 
-            {error && <div className="text-red-500 mt-4">{error}</div>}
+            {error && <div className="decline">{error}</div>}
           </div>
         ) : (
           <UserDetails user={user} emailStatus={emailStatus} />
@@ -269,6 +251,7 @@ const UserProfile = () => {
       </div>
     </div>
   );
+  
 };
 
 export default UserProfile;

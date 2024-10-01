@@ -54,40 +54,40 @@ const AddProductForm = ({ categories, tags, onClose, onSave, idCompany }) => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center  bg-gray-700 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md">
+      <div className="card1 p-6 rounded-lg shadow-lg w-11/12 max-w-md">
         <h2 className="text-xl font-bold mb-4 mt-10">Ajouter un produit</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Nom du produit</label>
+            <label className="block mb-2">Nom du produit</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg p-2"
+              className="w-full border  rounded-lg p-2"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Description</label>
+            <label className="block mb-2">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg p-2"
+              className="w-full border  rounded-lg p-2"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Prix</label>
+            <label className="block  mb-2">Prix</label>
             <input
               type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg p-2"
+              className="w-full border  rounded-lg p-2"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Image du produit</label>
+            <label className="block  mb-2">Image du produit</label>
             <input
               type="file"
               onChange={(e) => setPicture(e.target.files[0])}
@@ -95,11 +95,11 @@ const AddProductForm = ({ categories, tags, onClose, onSave, idCompany }) => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Catégorie</label>
+            <label className="block  mb-2">Catégorie</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg p-2"
+              className="w-full border rounded-lg p-2"
               required
             >
               <option value="">Sélectionner une catégorie</option>

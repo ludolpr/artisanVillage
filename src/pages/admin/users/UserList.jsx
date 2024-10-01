@@ -122,26 +122,18 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
-          Liste des utilisateurs
-        </h2>
-        {error && (
-          <div className="bg-red-200 text-red-800 p-4 rounded mb-4">
-            {error}
-          </div>
-        )}
+      <div className="card1 p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold mb-4 ">Liste des utilisateurs</h2>
+        {error && <div className="decline p-4 rounded mb-4">{error}</div>}
         {successMessage && (
-          <div className="bg-green-200 text-green-800 p-4 rounded mb-4">
-            {successMessage}
-          </div>
+          <div className="added p-4 rounded mb-4">{successMessage}</div>
         )}
         <ul>
           {users.length > 0 ? (
             users.map((user) => (
               <li
                 key={user.id}
-                className="mb-2 p-4 bg-[#d9b99b] rounded flex items-center justify-between cursor-pointer hover:bg-[#9a7d6b] hover:text-white"
+                className="card2 mb-2 p-4  rounded flex items-center justify-between cursor-pointer"
               >
                 {editingUserId === user.id ? (
                   <div className="w-full">
@@ -149,20 +141,20 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                       type="text"
                       value={newNameUser}
                       onChange={(e) => setNewNameUser(e.target.value)}
-                      className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+                      className="w-full px-3 py-2 mb-2 border   rounded"
                       placeholder="Nom"
                     />
                     <input
                       type="email"
                       value={newEmail}
                       onChange={(e) => setNewEmail(e.target.value)}
-                      className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+                      className="w-full px-3 py-2 mb-2 border rounded"
                       placeholder="Email"
                     />
                     <select
                       value={newRoleName}
                       onChange={(e) => setNewRoleName(e.target.value)}
-                      className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+                      className="w-full px-3 py-2 mb-2 border  rounded"
                     >
                       <option value="1">Utilisateur</option>
                       <option value="2">Artisan</option>
@@ -171,7 +163,7 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                     <input
                       type="file"
                       onChange={handleFileChange}
-                      className="w-full px-3 py-2 mb-2 border text-black border-gray-300 rounded"
+                      className="w-full px-3 py-2 mb-2 border rounded"
                       accept="image/*"
                     />
                     {previewImage && (
@@ -183,7 +175,7 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                     )}
                   </div>
                 ) : (
-                  <div className="flex items-center pointer-events-none">
+                  <div className=" flex items-center pointer-events-none">
                     <img
                       src={`http://127.0.0.1:8000/storage/uploads/users/${user.picture_user}`}
                       alt={user.name_user}
@@ -204,14 +196,14 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                     <>
                       <button
                         onClick={() => handleSaveEdit(user.id)}
-                        className="text-green-500 hover:text-green-700"
+                        className="added button3"
                         aria-label={`Save ${user.name_user}`}
                       >
                         <FaCheck />
                       </button>
                       <button
                         onClick={handleCancelEdit}
-                        className="text-red-500 hover:text-red-700"
+                        className="decline button3"
                         aria-label={`Cancel ${user.name_user}`}
                       >
                         <FaTimes />
@@ -221,14 +213,14 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                     <>
                       <button
                         onClick={() => handleEditClick(user)}
-                        className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                        className="button3"
                         aria-label={`Edit ${user.name_user}`}
                       >
                         <FaEdit />
                       </button>
                       <button
                         onClick={() => handleDelete(user.id)}
-                        className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                        className="button3"
                         aria-label={`Delete ${user.name_user}`}
                       >
                         <FaTrash />

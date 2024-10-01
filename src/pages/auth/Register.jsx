@@ -47,7 +47,7 @@ const Register = () => {
   };
 
   return (
-    <div className="mt-10 register-page max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="card1 mt-10 register-page max-w-md mx-auto p-6  shadow-md rounded-lg">
       <h1 className="text-2xl font-semibold mb-4">Inscription</h1>
 
       {/* Spinner d'attente */}
@@ -56,50 +56,37 @@ const Register = () => {
       {!isLoading && (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="name" className="block text-sm font-medium">
               Nom:
             </label>
             <input
               id="name"
               type="text"
               {...register("name_user", { required: "Nom obligatoire" })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:border-[#9a7d6b] sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm   sm:text-sm"
             />
             {errors.name_user && (
-              <p className="mt-2 text-sm text-red-600">
-                {errors.name_user.message}
-              </p>
+              <p className="mt-2 text-sm decline">{errors.name_user.message}</p>
             )}
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium ">
               Email:
             </label>
             <input
               id="email"
               type="email"
               {...register("email", { required: "Adresse mail obligatoire" })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:border-[#9a7d6b] sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm   sm:text-sm"
             />
             {errors.email && (
-              <p className="mt-2 text-sm text-red-600">
-                {errors.email.message}
-              </p>
+              <p className="mt-2 text-sm decline">{errors.email.message}</p>
             )}
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium">
               Mot de passe:
             </label>
             <input
@@ -117,30 +104,25 @@ const Register = () => {
                     "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial",
                 },
               })}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:border-[#9a7d6b] sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm    sm:text-sm"
             />
             {errors.password && (
-              <p className="mt-2 text-sm text-red-600">
-                {errors.password.message}
-              </p>
+              <p className="mt-2 text-sm decline">{errors.password.message}</p>
             )}
           </div>
 
           <div>
-            <label
-              htmlFor="picture_user"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="picture_user" className="block text-sm font-medium">
               Image:
             </label>
             <input
               id="picture_user"
               type="file"
               {...register("picture_user", { required: "Image obligatoire" })}
-              className="mt-1 block w-full text-sm text-gray-500 file:border file:border-gray-300 file:py-2 file:px-4 file:rounded-md file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+              className="mt-1 block w-full text-sm file:border file:py-2 file:px-4 file:rounded-md"
             />
             {errors.picture_user && (
-              <p className="mt-2 text-sm text-red-600">
+              <p className="mt-2 text-sm decline">
                 {errors.picture_user.message}
               </p>
             )}
@@ -148,7 +130,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full py-2 px-4 primary-500 text-white font-semibold rounded-md shadow-sm hover:bg-[#9a7d6b] focus:outline-none focus:ring-2 focus:ring-[#9a7d6b] focus:ring-offset-2"
+            className="w-full py-2 px-4 font-semibold rounded-md shadow-sm     focus:ring-offset-2"
           >
             Inscription
           </button>

@@ -4,22 +4,20 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center bg-[#d9b99b]">
-      <br />
+    <div className="flex flex-col items-center justify-center py-8">
+      <h1 className="text-6xl font-bold">404</h1>
 
-      <h1 className="text-6xl font-bold text">404</h1>
-      <br />
-
-      <p className="text-xl text-gray-600 mt-4">
+      <p className="text-xl mt-4">
         Oups! La page que vous recherchez n'existe pas ou vous n'y avez pas
         accès.
       </p>
-      <br />
-      <Link to="/" className="mt-6 text-gray-800 hover:underline text-lg">
+
+      <Link to="/" className="mt-6 hover:underline text-lg">
         Retour à la page principale
       </Link>
     </div>
   );
+  
 }
 
 export default NotFound;

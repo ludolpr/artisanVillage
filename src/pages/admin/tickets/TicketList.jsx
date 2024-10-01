@@ -7,7 +7,7 @@ const TicketList = ({ onSelect }) => {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className=" p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Ticket List</h2>
       <ul>
         {tickets.map((ticket) => (

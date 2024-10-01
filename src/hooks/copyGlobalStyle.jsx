@@ -24,7 +24,7 @@ const StyledGlobalStyle = createGlobalStyle`
     /* Couleurs des messages */
     --error-color: #B00000; /* Erreurs pour tous les thèmes */
     --validation-color-light: #4CAF50; /* Vert pour validations en mode clair */
-   
+l    
     /* Daltonien */
     --validation-color-daltonian: #0098FD; /* Couleur alternative en mode daltonien pour validations */
     --error-color-daltonian: #C600E9; /* Couleur alternative pour erreurs en mode daltonien */
@@ -59,46 +59,36 @@ const StyledGlobalStyle = createGlobalStyle`
 ////////////////////////////////      Thème Clair, Daltonian       ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-[data-theme="light"] {
-    --error-color: #B00000; /* Erreurs pour tous les thèmes */
-    --validation-color-light: #4CAF50; /* Vert pour validations en mode clair */
-    
-    .added {
-        color: var(--validation-color-light);
-    }
-
-    .decline {
-        color: var(--error-color);
-    }
-}
-
 /* Eye Theme */
 [data-theme="eye"] {
-    /* Daltonian Theme Styles (Eye Mode) */
-    --background-color: var(--secondary-bg-color-light);
-    --text-color: var(--text-primary-light);
-    --primary-color: var(--block-bg-color-light);
-    --secondary-color: var(--secondary-bg-color-light);
-    --hover-color: var(--hover-bg-color-light);
-    --validation-color: var(--validation-color-daltonian);
-    --error-color: var(--error-color-daltonian);
+  /* Daltonian Theme Styles (Eye Mode) */
+  --background-color: var(--secondary-bg-color-light);
+  --text-color: var(--text-primary-light);
+  --primary-color: var(--block-bg-color-light);
+  --secondary-color: var(--secondary-bg-color-light);
+  --hover-color: var(--button-color-daltonian);
+  --validation-color: var(--validation-color-daltonian);
+  --error-color: var(--error-color-daltonian);
+  
+  .added {
+    color: var(--validation-color-daltonian);
+  }
 
-    .added {
-        color: var(--validation-color-daltonian);
-    }
-
-    .decline {
-        color: var(--error-color-daltonian);
-    }
+  .decline {
+    color: var(--error-color-daltonian);
+  }
 }
 
+
+/* Light and Eye Theme Styles */
 [data-theme="light"] {
     --background-color: var(--secondary-bg-color-light);
     --text-color: var(--text-primary-light);
     --primary-color: var(--block-bg-color-light);
     --secondary-color: var(--secondary-bg-color-light);
     --hover-color: var(--hover-bg-color-light);
-    
+    --validation-color: var(--validation-color-light);
+
     .added {
         color: var(--validation-color-light);
     }
@@ -106,7 +96,23 @@ const StyledGlobalStyle = createGlobalStyle`
     .decline {
         color: var(--error-color);
     }
+
+    /* Appliquer des variables spécifiques pour le mode "eye" */
+    [data-theme="eye"] & {
+        --validation-color: var(--validation-color-daltonian);
+        --error-color: var(--error-color-daltonian);
+        --hover-color: var(--button-color-daltonian);
+
+        .added {
+            color: var(--validation-color-daltonian);
+        }
+
+        .decline {
+            color: var(--error-color-daltonian);
+        }
+    }
 }
+
 
 
  /* Navbar and Footer */
@@ -149,13 +155,10 @@ const StyledGlobalStyle = createGlobalStyle`
 
 .card1:hover {
     box-shadow: 0 4px 8px var(--shadow-color-light);
-    
 }
 
 .card2 {
     background-color: var(--secondary-color);
-    border: 1px solid var(--primary-bg-color-dark);
-
     border: 2px solid var(--primary-bg-color-light);
     border-radius: 8px;
 }
@@ -176,11 +179,6 @@ const StyledGlobalStyle = createGlobalStyle`
 }
 
 /* Gradients */
-.gradient {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 80%);
-   
-}
-
 .gradient1 {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 80%);
    
@@ -188,8 +186,6 @@ const StyledGlobalStyle = createGlobalStyle`
 
 .gradient2 {
     background: linear-gradient(135deg, var(--secondary-color) 0%, rgba(154, 125, 107, 0.3) 100%);
-    border: 1px solid var(--primary-bg-color-dark);
-
 }
 
 .gradient3 {
@@ -539,8 +535,6 @@ a:hover {
     /* Gradient Backgrounds */
     .gradient1 {
         background: linear-gradient(135deg, var(--secondary-bg-color-dark) 33%, rgba(255, 255, 255, 0.3) 100%);
-        border: 1px solid var(--primary-bg-color-dark);
-
         color: var(--text-color-dark);
         .button3 {
             background-color: var(--secondary-bg-color-dark);

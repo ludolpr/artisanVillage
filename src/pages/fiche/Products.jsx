@@ -54,7 +54,7 @@ const Products = ({ userId }) => {
   }
 
   if (error) {
-    return <div className="text-red-500 text-center">{error}</div>;
+    return <div className="decline text-center">{error}</div>;
   }
 
   if (products.length === 0) {
@@ -62,41 +62,33 @@ const Products = ({ userId }) => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto   ">
       {products.length > 1 ? (
         <Slider {...settings}>
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="p-4 transition-transform transform hover:scale-105"
-            >
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div key={product.id} className="card2 m-0">
+              <div className=" rounded-lg overflow-hidden p-4">
                 <img
                   src={`http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`}
                   alt={product.name_product}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover "
                 />
                 <div className="p-4">
                   <h3 className="text-lg font-semibold">
                     Nom du produit: {product.name_product}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm">
                     Description: {product.description_product}
                   </p>
-                  <p className="text-md font-bold text-gray-600">
-                    {product.price} €
-                  </p>
+                  <p className="text-md font-bold ">{product.price} €</p>
                 </div>
               </div>
             </div>
           ))}
         </Slider>
       ) : (
-        <div
-          key={products[0].id}
-          className="p-4 transition-transform transform hover:scale-105"
-        >
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div key={products[0].id}>
+          <div className=" overflow-hidden">
             <img
               src={`http://127.0.0.1:8000/storage/uploads/products/${products[0].picture_product}`}
               alt={products[0].name_product}
@@ -106,12 +98,8 @@ const Products = ({ userId }) => {
               <h3 className="text-lg font-semibold">
                 {products[0].name_product}
               </h3>
-              <p className="text-sm text-gray-500">
-                {products[0].description_product}
-              </p>
-              <p className="text-md font-bold text-gray-600">
-                {products[0].price} €
-              </p>
+              <p className="text-sm ">{products[0].description_product}</p>
+              <p className="text-md font-bold ">{products[0].price} €</p>
             </div>
           </div>
         </div>

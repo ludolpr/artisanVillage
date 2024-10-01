@@ -28,7 +28,9 @@ const ContactArtisan = () => {
   const fetchArtisans = async () => {
     try {
       const response = await api.get("/users");
-      const artisans = response.data.filter((user) => user.id_role === 2);
+      const artisans = response.data.filter(
+        (user) => user.id_role === 2 && user.email_verified_at
+      );
       setUsers(artisans);
     } catch (error) {
       setError("Erreur lors de la récupération des artisans");
@@ -48,11 +50,11 @@ const ContactArtisan = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Si le type de destinataire est "admin", on force recipientEmail à adminEmail
+    // If the recipient type is "admin", we force recipientEmail to adminEmail
     if (recipientType === "admin") {
-      setRecipientEmail(adminEmail); // Assigner l'email admin ici
+      setRecipientEmail(adminEmail); // Assign admin email here
     }
-    // Vérifier si tous les champs sont remplis (sauf recipientEmail pour admin)
+    // Check if all fields are filled (except recipientEmail for admin)
     if (
       !name ||
       !email ||
@@ -64,7 +66,7 @@ const ContactArtisan = () => {
       return;
     }
 
-    // Limiter le contact avec l'admin uniquement si l'utilisateur est authentifié
+    // Limit contact with admin only if user is authenticated
     if (recipientType === "admin" && !isAuthenticated) {
       alert("Vous devez être connecté pour contacter l'administrateur.");
       return;
@@ -98,9 +100,9 @@ const ContactArtisan = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#f5f5f5] p-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
-        <h2 className="text-3xl font-bold text-center text-[#9a7d6b] mb-6">
+    <div className=" flex justify-center items-center min-h-screen p-4">
+      <div className="card1 shadow-lg rounded-lg p-8 w-full max-w-2xl">
+        <h2 className="text-3xl font-bold text-center mb-6">
           {recipientType === "admin"
             ? "Contacter l'administrateur"
             : "Contacter un artisan"}
@@ -109,14 +111,14 @@ const ContactArtisan = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Recipient Selection */}
           <div>
-            <label className="block text-lg font-semibold text-gray-700 mb-2">
+            <label className="block text-lg font-semibold mb-2">
               Choisissez le destinataire
             </label>
             <select
               name="recipientType"
               value={recipientType}
               onChange={(e) => setRecipientType(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
             >
               <option value="artisan">Contacter un artisan</option>
               <option value="admin" disabled={!isAuthenticated}>
@@ -129,13 +131,13 @@ const ContactArtisan = () => {
           {/* Artisan Selection (only if contacting an artisan) */}
           {recipientType === "artisan" && (
             <div>
-              <label className="block text-lg font-semibold text-gray-700 mb-2">
+              <label className="block text-lg font-semibold mb-2">
                 Sélectionnez l'artisan
               </label>
               <select
                 name="artisan"
                 onChange={handleRecipientChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
               >
                 <option value="">-- Choisir un artisan --</option>
                 {users.map((artisan) => (
@@ -149,7 +151,7 @@ const ContactArtisan = () => {
 
           {/* Name Input */}
           <div>
-            <label className="block text-lg font-semibold text-gray-700 mb-2">
+            <label className="block text-lg font-semibold mb-2">
               Votre nom
             </label>
             <input
@@ -163,7 +165,7 @@ const ContactArtisan = () => {
 
           {/* Email Input */}
           <div>
-            <label className="block text-lg font-semibold text-gray-700 mb-2">
+            <label className="block text-lg font-semibold mb-2">
               Votre email
             </label>
             <input
@@ -177,37 +179,34 @@ const ContactArtisan = () => {
 
           {/* Subject Input */}
           <div>
-            <label className="block text-lg font-semibold text-gray-700 mb-2">
-              Sujet
-            </label>
+            <label className="block text-lg font-semibold mb-2">Sujet</label>
             <input
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
               placeholder="Sujet du message"
             />
           </div>
 
           {/* Message Input */}
           <div>
-            <label className="block text-lg font-semibold text-gray-700 mb-2">
-              Message
-            </label>
+            <label className="block text-lg font-semibold mb-2">Message</label>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#9a7d6b]"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
               placeholder="Votre message"
               rows="6"
             ></textarea>
           </div>
+
           {/* btn for send this form */}
           <button
             type="submit"
-            className="w-full py-3 bg-[#9a7d6b] text-white font-bold rounded-lg hover:bg-[#7f6957] transition-colors"
+            className="w-full py-3 font-bold rounded-lg transition-colors button3"
           >
             Envoyer le message
           </button>
@@ -215,6 +214,7 @@ const ContactArtisan = () => {
       </div>
     </div>
   );
+  
 };
 
 export default ContactArtisan;

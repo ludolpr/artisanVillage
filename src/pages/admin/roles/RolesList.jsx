@@ -71,15 +71,11 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className=" p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Liste des rôles</h2>
-      {error && (
-        <div className="bg-red-200 text-red-800 p-4 rounded mb-4">{error}</div>
-      )}
+      {error && <div className="decline p-4 rounded mb-4">{error}</div>}
       {successMessage && (
-        <div className="bg-green-200 text-green-800 p-4 rounded mb-4">
-          {successMessage}
-        </div>
+        <div className="added p-4 rounded mb-4">{successMessage}</div>
       )}
       <ul>
         {roles.length > 0 ? (
@@ -96,21 +92,26 @@ const RolesList = ({ onRoleSelect, onEdit, onDelete, refreshKey }) => {
                   className="w-full px-3 py-2 border text-black border-gray-300 rounded"
                 />
               ) : (
-                <span className="pointer-events-none" onClick={() => onRoleSelect(role)}>{role.name_role}</span>
+                <span
+                  className="pointer-events-none"
+                  onClick={() => onRoleSelect(role)}
+                >
+                  {role.name_role}
+                </span>
               )}
               <div className="flex space-x-2">
                 {editingRoleId === role.id ? (
                   <>
                     <button
                       onClick={() => handleSaveEdit(role.id)}
-                      className="text-green-500 hover:text-green-700"
+                      className="added "
                       aria-label={`Save ${role.name_role}`}
                     >
                       <FaCheck />
                     </button>
                     <button
                       onClick={handleCancelEdit}
-                      className="text-red-500 hover:text-red-700"
+                      className="decline"
                       aria-label={`Cancel ${role.name_role}`}
                     >
                       <FaTimes />

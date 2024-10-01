@@ -84,21 +84,19 @@ const ProductsOwner = () => {
   });
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-10">
-      <div className="flex justify-between items-center p-4 bg-white border-2 border-[#9a7d6b] shadow-md">
+    <div className="gradient w-full max-w-6xl mx-auto mt-10">
+      <div className="card1 flex justify-between items-center p-4  shadow-md">
         <img
           src={addProduct}
           alt="Ajouter un produit"
-          className="m-4 cursor-pointer w-16 h-auto rounded-lg shadow-lg"
+          className="m-4  cursor-pointer w-16 h-auto rounded-lg shadow-lg"
           onClick={() => setShowAddProductForm(true)}
         />
-        <h2 className="text-2xl font-bold text-[#9a7d6b]">
-          Liste des produits
-        </h2>
+        <h2 className="text-2xl font-bold ">Liste des produits</h2>
         <div className="flex items-center space-x-2">
-          <FaFilter className="text-[#9a7d6b]" />
+          <FaFilter className="" />
           <select
-            className="bg-white border-2 border-[#9a7d6b] text-[#9a7d6b] rounded-lg p-2"
+            className=" border-2   rounded-lg p-2"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -110,7 +108,7 @@ const ProductsOwner = () => {
             ))}
           </select>
           <select
-            className="bg-white border-2 border-[#9a7d6b] text-[#9a7d6b] rounded-lg p-2"
+            className=" border-2   rounded-lg p-2"
             value={selectedTag}
             onChange={(e) => setSelectedTag(e.target.value)}
           >
@@ -124,35 +122,33 @@ const ProductsOwner = () => {
         </div>
       </div>
 
-      <div className="bg-white border-2 border-[#9a7d6b] shadow-md mt-4">
+      <div className="">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="flex justify-between items-center p-4 border-t-2 border-[#9a7d6b]"
+              className="card1 mb-2  mt-2 flex justify-between items-center p-4 border-t-2 "
             >
               <div className="flex items-center space-x-4">
                 <img
                   src={`http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`}
                   alt={product.name_product}
-                  className="w-16 h-16 object-cover border-2 border-[#9a7d6b] rounded-lg"
+                  className="w-16 h-16 object-cover border-2  rounded-lg"
                 />
                 <div>
-                  <span className="text-lg text-[#9a7d6b]">
+                  <span className="text-lg ">
                     Nom du produit: {product.name_product}
                   </span>
-                  <span className="block text-lg text-[#9a7d6b]">
+                  <span className="block text-lg ">
                     Description: {product.description_product}
                   </span>
                   <div className="mt-2">
-                    <span className="text-sm text-[#9a7d6b] font-semibold">
-                      Tags:{" "}
-                    </span>
+                    <span className="text-sm  font-semibold">Tags: </span>
                     <div className="flex flex-wrap gap-2 mt-1">
                       {product.tags.map((tag) => (
                         <span
                           key={tag.id}
-                          className="bg-gray-200 text-[#9a7d6b] px-2 py-1 rounded-full text-xs"
+                          className="  px-2 py-1 rounded-full text-xs"
                         >
                           {tag.name_tag}
                         </span>
@@ -163,13 +159,13 @@ const ProductsOwner = () => {
               </div>
               <div className="flex space-x-4">
                 <button
-                  className="bg-[#d9b99b] hover:bg-[#9a7d6b] text-white p-2 rounded-lg"
+                  className=" p-2 rounded-lg button3"
                   onClick={() => handleEdit(product.id)}
                 >
                   <FaEdit />
                 </button>
                 <button
-                  className="bg-[#d9b99b] hover:bg-[#9a7d6b] text-white p-2 rounded-lg"
+                  className=" p-2 rounded-lg button3"
                   onClick={() => handleDelete(product.id)}
                 >
                   <FaTrashAlt />
@@ -178,9 +174,7 @@ const ProductsOwner = () => {
             </div>
           ))
         ) : (
-          <p className="p-4 text-center text-[#9a7d6b]">
-            Pas de produits trouvés
-          </p>
+          <p className="p-4 text-center ">Pas de produits trouvés</p>
         )}
       </div>
 

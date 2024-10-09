@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <div className="card1 mt-10 login-page max-w-md mx-auto p-6  shadow-md rounded-lg">
-      <h1 className="text-2xl  font-semibold mb-4">Connexion</h1>
+      <h1 className=" font-semibold mb-4 text-center">Connexion</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-sm font-medium ">

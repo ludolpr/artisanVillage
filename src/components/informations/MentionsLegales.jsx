@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const MentionsLegales = () => {
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Mentions Légales</h1>
+      <h1 className=" font-bold mb-4">Mentions Légales</h1>
       <p className="mb-4">
         <strong>Nom de l’entreprise :</strong> Artisan Village
       </p>
@@ -24,9 +24,7 @@ const MentionsLegales = () => {
         <strong>Hébergeur :</strong> OVH Cloud
       </p>
 
-      <h2 className="text-2xl font-semibold mt-6 mb-4">
-        Propriété intellectuelle
-      </h2>
+      <h2 className=" font-semibold mt-6 mb-4">Propriété intellectuelle</h2>
       <p className="mb-4">
         Tout le contenu du site Artisan Village, incluant, de façon non
         limitative, les graphismes, images, textes, vidéos, animations, sons,
@@ -36,9 +34,7 @@ const MentionsLegales = () => {
         auteurs.
       </p>
 
-      <h2 className="text-2xl font-semibold mt-6 mb-4">
-        Conditions d’utilisation
-      </h2>
+      <h2 className=" font-semibold mt-6 mb-4">Conditions d’utilisation</h2>
       <p className="mb-4">
         L’utilisation de ce site implique l’acceptation pleine et entière des
         conditions générales d’utilisation décrites ci-après. Ces conditions

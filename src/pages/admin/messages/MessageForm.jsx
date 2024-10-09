@@ -18,9 +18,9 @@ const MessageForm = ({ message, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Message Form</h2>
+      <h2 className=" font-bold mb-4 ">Message Form</h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="subject">
+        <label className="block  mb-2" htmlFor="subject">
           Subject
         </label>
         <input
@@ -29,12 +29,12 @@ const MessageForm = ({ message, onSuccess }) => {
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="body">
+        <label className="block  mb-2" htmlFor="body">
           Body
         </label>
         <textarea
@@ -42,14 +42,11 @@ const MessageForm = ({ message, onSuccess }) => {
           name="body"
           value={formData.body}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className="  px-4 py-2 rounded ">
         Submit
       </button>
     </form>

@@ -40,11 +40,11 @@ const TagsForm = ({ tag, onSuccess, mode }) => {
 
   return (
     <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
+      <h2 className=" font-bold mb-4 ">
         {mode === "edit" ? "Modifier le tag" : "Créer un nouveau tag"}
       </h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name_tag">
+        <label className="block  mb-2" htmlFor="name_tag">
           Nom du tag
         </label>
         <input
@@ -53,16 +53,13 @@ const TagsForm = ({ tag, onSuccess, mode }) => {
           name="name_tag"
           value={formData.name_tag}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
       {message && <div className="added mb-4">{message}</div>}
       {error && <div className="decline mb-4">{error}</div>}
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className="  px-4 py-2 rounded ">
         {mode === "edit" ? "Sauvegarder les modifications" : "Créer le tag"}
       </button>
     </form>

@@ -17,9 +17,9 @@ const ProductForm = ({ product, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Product Form</h2>
+      <h2 className=" font-bold mb-4 ">Product Form</h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name">
+        <label className="block  mb-2" htmlFor="name">
           Product Name
         </label>
         <input
@@ -28,12 +28,12 @@ const ProductForm = ({ product, onSuccess }) => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 borderrounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="price">
+        <label className="block mb-2" htmlFor="price">
           Price
         </label>
         <input
@@ -42,14 +42,11 @@ const ProductForm = ({ product, onSuccess }) => {
           name="price"
           value={formData.price}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border rounded"
           required
         />
       </div>
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className="button3 px-4 py-2 rounded">
         Submit
       </button>
     </form>

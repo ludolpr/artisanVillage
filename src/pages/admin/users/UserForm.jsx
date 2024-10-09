@@ -23,9 +23,7 @@ const UserForm = ({ user, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 ">
-        Formulaire d'ajout d'utilisateur
-      </h2>
+      <h2 className=" font-bold mb-4 ">Formulaire d'ajout d'utilisateur</h2>
 
       <div className=" mb-4">
         <label className="block  mb-2" htmlFor="name">
@@ -58,7 +56,7 @@ const UserForm = ({ user, onSuccess }) => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="password">
+        <label className="block  mb-2" htmlFor="password">
           Mot de passe
         </label>
         <input

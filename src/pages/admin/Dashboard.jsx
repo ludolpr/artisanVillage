@@ -70,13 +70,14 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-full gradient2 ">
-      <Sidebar activeItem={activeItem} setActiveItem={setActiveItem} />
-      <div className="flex-1 ml-64 p-10 text-2xl font-bold ">
+      <Sidebar
+        activeItem={activeItem}
+        setActiveItem={setActiveItem}
+        className="sm:flex"
+      />
+      <div className="flex-1  p-10 sm:p-0  font-bold ">
         {itemsWithForms.includes(activeItem) && (
-          <button
-            onClick={handleFormToggle}
-            className=" px-4 py-2 rounded mb-4 "
-          >
+          <button onClick={handleFormToggle} className=" rounded button3 ">
             {showForm ? "Masquer le formulaire" : "Afficher le formulaire"}
           </button>
         )}

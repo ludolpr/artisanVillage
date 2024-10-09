@@ -18,9 +18,9 @@ const TicketForm = ({ ticket, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Ticket Form</h2>
+      <h2 className=" font-bold mb-4 ">Ticket Form</h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="title">
+        <label className="block  mb-2" htmlFor="title">
           Ticket Title
         </label>
         <input
@@ -29,12 +29,12 @@ const TicketForm = ({ ticket, onSuccess }) => {
           name="title"
           value={formData.title}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="description">
+        <label className="block  mb-2" htmlFor="description">
           Description
         </label>
         <textarea
@@ -42,14 +42,11 @@ const TicketForm = ({ ticket, onSuccess }) => {
           name="description"
           value={formData.description}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className="  px-4 py-2 rounded ">
         Submit
       </button>
     </form>

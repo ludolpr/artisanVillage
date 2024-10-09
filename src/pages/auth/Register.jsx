@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { api } from "../../services/baseUrl";
 import LoadingSpinner from "../../components/globals/LoadingSpinner";
 const Register = () => {
   const {
@@ -27,17 +27,13 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/register",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      setIsLoading(false); // Désactiver le spinner une fois terminé
+      const response = await api.post("/register", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setIsLoading(false);
       navigate("/login");
     } catch (error) {
-      setIsLoading(false); // Désactiver le spinner en cas d'erreur
+      setIsLoading(false);
       console.error("Erreur lors de l'inscription:", error);
       alert(
         "Erreur lors de l'inscription: " + error.response?.data?.message ||
@@ -48,7 +44,7 @@ const Register = () => {
 
   return (
     <div className="card1 mt-10 register-page max-w-md mx-auto p-6  shadow-md rounded-lg">
-      <h1 className="text-2xl font-semibold mb-4">Inscription</h1>
+      <h1 className=" font-semibold mb-4 text-center">Inscription</h1>
 
       {/* Spinner d'attente */}
       {isLoading && <LoadingSpinner />}
@@ -56,37 +52,37 @@ const Register = () => {
       {!isLoading && (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium">
+            <label htmlFor="name" className="block  font-medium">
               Nom:
             </label>
             <input
               id="name"
               type="text"
               {...register("name_user", { required: "Nom obligatoire" })}
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm   sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm   sm:"
             />
             {errors.name_user && (
-              <p className="mt-2 text-sm decline">{errors.name_user.message}</p>
+              <p className="mt-2  decline">{errors.name_user.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium ">
+            <label htmlFor="email" className="block  font-medium ">
               Email:
             </label>
             <input
               id="email"
               type="email"
               {...register("email", { required: "Adresse mail obligatoire" })}
-              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm   sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm   sm:"
             />
             {errors.email && (
-              <p className="mt-2 text-sm decline">{errors.email.message}</p>
+              <p className="mt-2  decline">{errors.email.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium">
+            <label htmlFor="password" className="block  font-medium">
               Mot de passe:
             </label>
             <input
@@ -104,27 +100,25 @@ const Register = () => {
                     "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial",
                 },
               })}
-              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm    sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm    sm:"
             />
             {errors.password && (
-              <p className="mt-2 text-sm decline">{errors.password.message}</p>
+              <p className="mt-2  decline">{errors.password.message}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="picture_user" className="block text-sm font-medium">
+            <label htmlFor="picture_user" className="block  font-medium">
               Image:
             </label>
             <input
               id="picture_user"
               type="file"
               {...register("picture_user", { required: "Image obligatoire" })}
-              className="mt-1 block w-full text-sm file:border file:py-2 file:px-4 file:rounded-md"
+              className="mt-1 block w-full  file:border file:py-2 file:px-4 file:rounded-md"
             />
             {errors.picture_user && (
-              <p className="mt-2 text-sm decline">
-                {errors.picture_user.message}
-              </p>
+              <p className="mt-2  decline">{errors.picture_user.message}</p>
             )}
           </div>
 

@@ -70,8 +70,8 @@ const TagsList = ({ onTagSelect, onEdit, onDelete, refreshKey }) => {
   };
 
   return (
-    <div className=" p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Liste des tags</h2>
+    <div className="card1 p-6 rounded-lg shadow-md">
+      <h2 className=" font-bold mb-4 ">Liste des tags</h2>
       {error && <div className="decline p-4 rounded mb-4">{error}</div>}
       {successMessage && (
         <div className="added p-4 rounded mb-4">{successMessage}</div>
@@ -81,14 +81,14 @@ const TagsList = ({ onTagSelect, onEdit, onDelete, refreshKey }) => {
           tags.map((tag) => (
             <li
               key={tag.id}
-              className="mb-2 p-4 bg-[#d9b99b] rounded flex items-center justify-between cursor-pointer hover:bg-[#9a7d6b] hover:text-white"
+              className="card2 mb-2 p-4 rounded flex items-center justify-between cursor-pointer "
             >
               {editingTagId === tag.id ? (
                 <input
                   type="text"
                   value={newTagName}
                   onChange={(e) => setNewTagName(e.target.value)}
-                  className="w-full px-3 py-2 border text-black border-gray-300 rounded"
+                  className="w-full px-3 py-2 border  rounded"
                 />
               ) : (
                 <span
@@ -120,14 +120,14 @@ const TagsList = ({ onTagSelect, onEdit, onDelete, refreshKey }) => {
                   <>
                     <button
                       onClick={() => handleEditClick(tag)}
-                      className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                      className="button3"
                       aria-label={`Edit ${tag.name_tag}`}
                     >
                       <FaEdit />
                     </button>
                     <button
                       onClick={() => handleDelete(tag.id)}
-                      className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                      className=" button3"
                       aria-label={`Delete ${tag.name_tag}`}
                     >
                       <FaTrash />

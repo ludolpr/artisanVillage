@@ -74,12 +74,10 @@ const Products = ({ userId }) => {
                   className="w-full h-48 object-cover "
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold">
+                  <h3 className=" font-semibold">
                     Nom du produit: {product.name_product}
                   </h3>
-                  <p className="text-sm">
-                    Description: {product.description_product}
-                  </p>
+                  <p className="">Description: {product.description_product}</p>
                   <p className="text-md font-bold ">{product.price} €</p>
                 </div>
               </div>
@@ -95,10 +93,8 @@ const Products = ({ userId }) => {
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-semibold">
-                {products[0].name_product}
-              </h3>
-              <p className="text-sm ">{products[0].description_product}</p>
+              <h3 className=" font-semibold">{products[0].name_product}</h3>
+              <p className=" ">{products[0].description_product}</p>
               <p className="text-md font-bold ">{products[0].price} €</p>
             </div>
           </div>

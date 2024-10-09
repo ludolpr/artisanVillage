@@ -19,7 +19,7 @@ const Index = () => {
         setError("");
       } catch (error) {
         console.error("Error fetching companies:", error);
-        setError("Error fetching companies.");
+        setError("Pas de données d'entreprise pour le moment.");
       }
     };
 
@@ -43,7 +43,7 @@ const Index = () => {
   return (
     <div className="flex justify-center items-center min-h-screen p-4 ">
       <div className="w-full max-w-7xl card1 ">
-        <h2 className="text-3xl font-bold text-center">Liste des artisans</h2>
+        <h2 className=" font-bold text-center">Liste des artisans</h2>
         {error && <div className="text-center mb-4 decline">{error}</div>}
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {artisans.length > 0 ? (
@@ -63,12 +63,10 @@ const Index = () => {
                 />
                 <div className="p-4">
                   <Link to={`/showsheet/${artisan.id}`}>
-                    <h3 className="text-xl font-bold mb-2">
-                      {artisan.name_company}
-                    </h3>
+                    <h3 className=" font-bold mb-2">{artisan.name_company}</h3>
                   </Link>
                   <p className="mb-4">{artisan.description_company}</p>
-                  <div className="text-sm mb-4">
+                  <div className=" mb-4">
                     <p>
                       {artisan.zipcode}, {artisan.town}
                     </p>

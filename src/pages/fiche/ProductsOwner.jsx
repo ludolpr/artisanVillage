@@ -92,7 +92,7 @@ const ProductsOwner = () => {
           className="m-4  cursor-pointer w-16 h-auto rounded-lg shadow-lg"
           onClick={() => setShowAddProductForm(true)}
         />
-        <h2 className="text-2xl font-bold ">Liste des produits</h2>
+        <h2 className=" font-bold ">Liste des produits</h2>
         <div className="flex items-center space-x-2">
           <FaFilter className="" />
           <select
@@ -136,19 +136,19 @@ const ProductsOwner = () => {
                   className="w-16 h-16 object-cover border-2  rounded-lg"
                 />
                 <div>
-                  <span className="text-lg ">
+                  <span className=" ">
                     Nom du produit: {product.name_product}
                   </span>
-                  <span className="block text-lg ">
+                  <span className="block  ">
                     Description: {product.description_product}
                   </span>
                   <div className="mt-2">
-                    <span className="text-sm  font-semibold">Tags: </span>
+                    <span className="  font-semibold">Tags: </span>
                     <div className="flex flex-wrap gap-2 mt-1">
                       {product.tags.map((tag) => (
                         <span
                           key={tag.id}
-                          className="  px-2 py-1 rounded-full text-xs"
+                          className="card2  px-2 py-1 rounded-full "
                         >
                           {tag.name_tag}
                         </span>

@@ -5,13 +5,11 @@ import { api } from "../../services/baseUrl";
 import { UserContext } from "../../hooks/UserContext";
 
 import artisan3 from "../../assets/images/worker3.jpg";
-import auth from "../../services/token";
 
 const BotContainer = () => {
   const [hasFiche, setHasFiche] = useState(false);
   const [ficheId, setFicheId] = useState(null);
-  const { user, isAuthenticated } = useContext(UserContext);
-  const role = auth.getRoles();
+  const { user, isAuthenticated, role } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserFiche = () => {
@@ -47,10 +45,10 @@ const BotContainer = () => {
       <div className="lg:w-1/2 space-y-6">
         {role <= 1 ? (
           <>
-            <h2 className="text-4xl lg:text-5xl font-extrabold leading-snug">
+            <h2 className=" font-extrabold leading-snug">
               Déposez votre fiche et faites briller votre talent !
             </h2>
-            <p className="text-lg lg:text-xl">
+            <p>
               Vous êtes artisan créatif ? Rejoignez notre communauté et déposez
               votre fiche dès aujourd'hui ! En créant votre profil, vous pouvez
               présenter votre savoir-faire, partager des photos de vos
@@ -61,8 +59,8 @@ const BotContainer = () => {
             </p>
             {role == 1 && (
               <NavLink
-                to="/create-fiche"
-                className="inline-block   px-6 py-3 rounded-lg shadow-md "
+                to="/creerfiche"
+                className="inline-block   px-6 py-3 rounded-lg shadow-md button2 "
               >
                 Créer une nouvelle fiche
               </NavLink>
@@ -70,10 +68,10 @@ const BotContainer = () => {
           </>
         ) : (
           <>
-            <h2 className="text-4xl lg:text-5xl font-extrabold leading-snug">
+            <h2 className=" lg:text-5xl font-extrabold leading-snug">
               Améliorez votre fiche d'entreprise
             </h2>
-            <p className="text-lg lg:text-xl mr-5">
+            <p className=" lg: mr-5">
               Votre fiche d'entreprise est essentielle pour attirer de nouveaux
               clients et partenaires. Ajoutez des informations détaillées sur
               vos services, partagez vos réussites et montrez ce qui vous
@@ -84,7 +82,7 @@ const BotContainer = () => {
             {role <= 2 && (
               <NavLink
                 to={`/showsheet/${ficheId}`}
-                className="inline-block px-6 py-3 rounded-lg shadow-md"
+                className="inline-block px-6 py-3 rounded-lg shadow-md button2"
               >
                 Voir ma fiche artisan
               </NavLink>

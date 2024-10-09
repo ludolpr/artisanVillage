@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../../services/baseUrl";
 import { FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 
-const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
+const CompaniesList = ({ onCompanySelect, onDelete, refreshKey }) => {
   const [companies, setCompanies] = useState([]);
   const [editingCompanyId, setEditingCompanyId] = useState(null);
   const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
   });
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -27,11 +28,9 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
         setCompanies(response.data || []);
         setError("");
       } catch (error) {
-        console.error("Erreur lors de la récupération des compagnies:", error);
         setError("Erreur lors de la récupération des compagnies.");
       }
     };
-
     fetchCompanies();
   }, [refreshKey]);
 
@@ -49,11 +48,31 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
       lat: company.lat,
       long: company.long,
     });
+    setPreviewImage(
+      `http://127.0.0.1:8000/public/storage/uploads/companies/${company.picture_company}`
+    );
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, picture_company: file });
+    setPreviewImage(URL.createObjectURL(file));
   };
 
   const handleSaveEdit = async (companyId) => {
     try {
-      await api.put(`/company/${companyId}`, formData);
+      const updateFormData = new FormData();
+      Object.keys(formData).forEach((key) =>
+        updateFormData.append(key, formData[key])
+      );
+      updateFormData.append("_method", "PUT");
+
+      await api.post(`/company/${companyId}`, updateFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       setCompanies(
         companies.map((company) =>
           company.id === companyId ? { ...company, ...formData } : company
@@ -63,7 +82,6 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
       setSuccessMessage("Compagnie modifiée avec succès.");
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error) {
-      console.error("Erreur lors de la modification de la compagnie:", error);
       setError(
         error.response?.data?.message ||
           "Erreur lors de la modification de la compagnie."
@@ -85,6 +103,7 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
       lat: "",
       long: "",
     });
+    setPreviewImage(null);
   };
 
   const handleDelete = async (companyId) => {
@@ -95,7 +114,6 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
       setTimeout(() => setSuccessMessage(""), 3000);
       if (onDelete) onDelete();
     } catch (error) {
-      console.error("Erreur lors de la suppression de la compagnie:", error);
       setError(
         error.response?.data?.message ||
           "Erreur lors de la suppression de la compagnie."
@@ -104,10 +122,8 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
   };
 
   return (
-    <div className="p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
-        Liste des entreprises
-      </h2>
+    <div className="card1 p-6 rounded-lg shadow-md">
+      <h2 className=" font-bold mb-4 ">Liste des entreprises</h2>
       {error && <div className="decline p-4 rounded mb-4">{error}</div>}
       {successMessage && (
         <div className="added p-4 rounded mb-4">{successMessage}</div>
@@ -117,23 +133,17 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
           companies.map((company) => (
             <li
               key={company.id}
-              className="mb-4 p-4 bg-[#d9b99b] rounded-lg flex items-center justify-between hover:bg-[#9a7d6b] hover:text-white transition-all duration-300"
+              className="mb-4 p-4 card2 rounded-lg flex items-center justify-between"
             >
               {editingCompanyId === company.id ? (
                 <div className="w-full">
-                  <label
-                    className="block text-gray-700 mb-2"
-                    htmlFor="name_company"
-                  >
-                    Nom de la compagnie
-                  </label>
                   <input
                     type="text"
                     value={formData.name_company}
                     onChange={(e) =>
                       setFormData({ ...formData, name_company: e.target.value })
                     }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
+                    className="w-full px-3 py-2 mb-2 border rounded"
                     placeholder="Nom de la compagnie"
                   />
                   <textarea
@@ -144,129 +154,80 @@ const CompaniesList = ({ onCompanySelect, onEdit, onDelete, refreshKey }) => {
                         description_company: e.target.value,
                       })
                     }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
+                    className="w-full px-3 py-2 mb-2 border rounded"
                     placeholder="Description de la compagnie"
-                    rows="3"
                   />
                   <input
-                    type="text"
-                    value={formData.picture_company}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        picture_company: e.target.value,
-                      })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="URL de l'image"
+                    type="file"
+                    onChange={handleFileChange}
+                    className="w-full px-3 py-2 mb-2 border rounded"
+                    accept="image/*"
                   />
-                  <input
-                    type="text"
-                    value={formData.zipcode}
-                    onChange={(e) =>
-                      setFormData({ ...formData, zipcode: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Code postal"
-                  />
-                  <input
-                    type="text"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Téléphone"
-                  />
-                  <input
-                    type="text"
-                    value={formData.address}
-                    onChange={(e) =>
-                      setFormData({ ...formData, address: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Adresse"
-                  />
-                  <input
-                    type="text"
-                    value={formData.siret}
-                    onChange={(e) =>
-                      setFormData({ ...formData, siret: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="SIRET"
-                  />
-                  <input
-                    type="text"
-                    value={formData.town}
-                    onChange={(e) =>
-                      setFormData({ ...formData, town: e.target.value })
-                    }
-                    className="w-full px-3 py-2 border text-black border-gray-300 rounded mb-2"
-                    placeholder="Ville"
-                  />
-                  <button
-                    onClick={() => handleSaveEdit(company.id)}
-                    className="added  mr-2"
-                    aria-label={`Save ${company.name_company}`}
-                  >
-                    <FaCheck />
-                  </button>
-                  <button
-                    onClick={handleCancelEdit}
-                    className="decline"
-                    aria-label={`Cancel ${company.name_company}`}
-                  >
-                    <FaTimes />
-                  </button>
+                  {previewImage && (
+                    <img
+                      src={previewImage}
+                      alt="Prévisualisation"
+                      className="w-32 h-32 object-cover rounded mt-2"
+                    />
+                  )}
+                  {/* Add other input fields for the rest of formData fields */}
                 </div>
               ) : (
-                <div className="flex items-center w-full">
+                <div className="flex items-center">
                   <img
-                    src={`http://127.0.0.1:8000/public/storage/uploads/users/${
-                      company.picture_company || "default.jpg"
-                    }`}
+                    src={`http://127.0.0.1:8000/storage/uploads/companies/${company.picture_company}`}
                     alt={company.name_company}
-                    className="w-24 h-24 object-cover rounded-lg shadow-lg mr-4"
+                    className="w-16 h-16 object-cover rounded-full mr-4"
                   />
-                  <div
-                    className="flex-1 cursor-pointer"
+                  <span
                     onClick={() => onCompanySelect(company)}
+                    className="pointer-events-none"
                   >
-                    <div className="font-bold text-lg">
-                      {company.name_company}
-                    </div>
-                    <div className="text-sm">{company.description_company}</div>
-                    <div className="mt-2 text-sm">
-                      <strong>Adresse :</strong> {company.address},{" "}
-                      {company.zipcode}, {company.town}
-                    </div>
-                    <div className="mt-2 text-sm">
-                      <strong>Téléphone :</strong> {company.phone}
-                    </div>
-                  </div>
-                  <div className="flex space-x-2">
+                    {company.name_company} - {company.town}
+                  </span>
+                </div>
+              )}
+              <div className="flex space-x-2">
+                {editingCompanyId === company.id ? (
+                  <>
+                    <button
+                      onClick={() => handleSaveEdit(company.id)}
+                      className="added button3"
+                      aria-label={`Save ${company.name_company}`}
+                    >
+                      <FaCheck />
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      className="decline button3"
+                      aria-label={`Cancel ${company.name_company}`}
+                    >
+                      <FaTimes />
+                    </button>
+                  </>
+                ) : (
+                  <>
                     <button
                       onClick={() => handleEditClick(company)}
-                      className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                      className="button3"
                       aria-label={`Edit ${company.name_company}`}
                     >
                       <FaEdit />
                     </button>
                     <button
                       onClick={() => handleDelete(company.id)}
-                      className="text-[#d9b99b] hover:text-[#9a7d6b]"
+                      className="button3"
                       aria-label={`Delete ${company.name_company}`}
                     >
                       <FaTrash />
                     </button>
-                  </div>
-                </div>
-              )}
+                  </>
+                )}
+              </div>
             </li>
           ))
         ) : (
-          <li>Aucune compagnie trouvée.</li>
+          <li>Aucune compagnie disponible</li>
         )}
       </ul>
     </div>

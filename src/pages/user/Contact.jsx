@@ -102,7 +102,7 @@ const ContactArtisan = () => {
   return (
     <div className=" flex justify-center items-center min-h-screen p-4">
       <div className="card1 shadow-lg rounded-lg p-8 w-full max-w-2xl">
-        <h2 className="text-3xl font-bold text-center mb-6">
+        <h2 className=" font-bold text-center mb-6">
           {recipientType === "admin"
             ? "Contacter l'administrateur"
             : "Contacter un artisan"}
@@ -111,14 +111,14 @@ const ContactArtisan = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Recipient Selection */}
           <div>
-            <label className="block text-lg font-semibold mb-2">
+            <label className="block  font-semibold mb-2">
               Choisissez le destinataire
             </label>
             <select
               name="recipientType"
               value={recipientType}
               onChange={(e) => setRecipientType(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
             >
               <option value="artisan">Contacter un artisan</option>
               <option value="admin" disabled={!isAuthenticated}>
@@ -131,13 +131,13 @@ const ContactArtisan = () => {
           {/* Artisan Selection (only if contacting an artisan) */}
           {recipientType === "artisan" && (
             <div>
-              <label className="block text-lg font-semibold mb-2">
+              <label className="block  font-semibold mb-2">
                 Sélectionnez l'artisan
               </label>
               <select
                 name="artisan"
                 onChange={handleRecipientChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
+                className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
               >
                 <option value="">-- Choisir un artisan --</option>
                 {users.map((artisan) => (
@@ -151,53 +151,49 @@ const ContactArtisan = () => {
 
           {/* Name Input */}
           <div>
-            <label className="block text-lg font-semibold mb-2">
-              Votre nom
-            </label>
+            <label className="block  font-semibold mb-2">Votre nom</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Entrez votre nom"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+              className="w-full p-3 border  rounded-lg focus:outline-none"
             />
           </div>
 
           {/* Email Input */}
           <div>
-            <label className="block text-lg font-semibold mb-2">
-              Votre email
-            </label>
+            <label className="block  font-semibold mb-2">Votre email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Entrez votre email"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+              className="w-full p-3 border  rounded-lg focus:outline-none"
             />
           </div>
 
           {/* Subject Input */}
           <div>
-            <label className="block text-lg font-semibold mb-2">Sujet</label>
+            <label className="block  font-semibold mb-2">Sujet</label>
             <input
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
               placeholder="Sujet du message"
             />
           </div>
 
           {/* Message Input */}
           <div>
-            <label className="block text-lg font-semibold mb-2">Message</label>
+            <label className="block  font-semibold mb-2">Message</label>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
               placeholder="Votre message"
               rows="6"
             ></textarea>

@@ -37,10 +37,10 @@ body {
   position: relative;
 }
 
-
-
-.margin10 {
-  margin: 0 10px;
+.verticalLine {
+  display: inline-block;
+  height: 130px;
+  margin: 0 20px;
 }
 
 .mapStyle {

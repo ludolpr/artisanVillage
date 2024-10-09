@@ -257,9 +257,7 @@ const ShowSheet = () => {
             </div>
           ) : (
             <div>
-              <h2 className="text-4xl font-semibold mb-4">
-                {company.name_company}
-              </h2>
+              <h2 className=" font-semibold mb-4">{company.name_company}</h2>
               <p className="mb-4">{company.description_company}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 mt-10">
                 <p>Adresse: {company.address}</p>
@@ -290,9 +288,7 @@ const ShowSheet = () => {
         </div>
       </div>
       <div className="gradient1 w-full max-w-6xl shadow-lg rounded-lg p-6 mb-6">
-        <h3 className=" text-2xl font-semibold mb-4 flex justify-center">
-          Produits
-        </h3>
+        <h3 className="  font-semibold mb-4 flex justify-center">Produits</h3>
         <div className="p-2">
           <Products companyId={company.id} className="card3" />
         </div>

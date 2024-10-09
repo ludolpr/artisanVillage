@@ -11,7 +11,7 @@ const TopContainer = () => {
           Artisan village: le rendez-vous des créateurs passionnés et de
           l'artisanat d'exception
         </h1>
-        <p className="text-lg lg:text-x opacity-90">
+        <p className=" lg:text-x opacity-90">
           Bienvenue sur notre plateforme de localisation d'artisans créatifs !
           Ici, vous découvrirez des talents exceptionnels et des savoir-faire
           uniques. Notre site vous permet de trouver facilement des artisans

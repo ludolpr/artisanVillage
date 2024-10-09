@@ -132,10 +132,10 @@ const EditProductOwner = (onSave) => {
 
   return (
     <div className="card1 w-full max-w-4xl mx-auto mt-10  p-6 rounded-lg shadow-md border-2 ">
-      <h2 className="text-3xl font-bold  mb-4">Modifier le produit</h2>
+      <h2 className=" font-bold  mb-4">Modifier le produit</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-lg mb-1 ">Nom du produit</label>
+          <label className="block  mb-1 ">Nom du produit</label>
           <input
             type="text"
             name="name_product"
@@ -145,7 +145,7 @@ const EditProductOwner = (onSave) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 ">Description</label>
+          <label className="block  mb-1 ">Description</label>
           <textarea
             name="description_product"
             value={formData.description_product}
@@ -154,7 +154,7 @@ const EditProductOwner = (onSave) => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 ">Image du produit</label>
+          <label className="block  mb-1 ">Image du produit</label>
           <input
             type="file"
             name="picture_product"
@@ -163,7 +163,7 @@ const EditProductOwner = (onSave) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-1 ">Catégorie</label>
+          <label className="block  mb-1 ">Catégorie</label>
           <select
             name="id_category"
             value={formData.id_category}
@@ -217,7 +217,7 @@ const EditProductOwner = (onSave) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-lg mb-1 ">Prix en €</label>
+          <label className="block  mb-1 ">Prix en €</label>
           <input
             type="number"
             name="price"

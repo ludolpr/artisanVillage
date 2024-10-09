@@ -41,22 +41,22 @@ const VerifyEmail = () => {
   }, [location.search]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="p-6  rounded-lg shadow-lg max-w-md text-center">
+    <div className="flex items-center justify-center min-h-screen gradient1 ">
+      <div className="card1 p-6  rounded-lg shadow-lg max-w-md text-center">
         <h2
-          className={`text-4xl mb-4 ${
+          className={` mb-4 ${
             statusType === "success"
-              ? "text-green-600"
+              ? "added"
               : statusType === "info"
               ? "text-blue-600"
-              : "text-red-600"
+              : "refuse"
           }`}
         >
           {statusType === "success" && "✔️"}
           {statusType === "info" && "ℹ️"}
           {statusType === "error" && "❌"}
         </h2>
-        <p className="text-lg text-gray-800">{message}</p>
+        <p className="">{message}</p>
       </div>
     </div>
   );

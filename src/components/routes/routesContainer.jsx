@@ -21,10 +21,11 @@ import Contact from "../../pages/user/Contact";
 import ProtectedRoute from "../globals/ProtectedRoute";
 import MentionsLegales from "../informations/MentionsLegales";
 import Policies from "../informations/Policies";
-
-// import ApiDocumentation from "../../configs/swagger";
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
 const RouteContainer = () => {
+  const swaggerUrl = "http://localhost:8000/api/documentation";
   return (
     <Router>
       <Header />
@@ -36,7 +37,7 @@ const RouteContainer = () => {
           <Route path="/login" element={<Login />} />
           {/* sheets */}
           <Route path="/sheet" element={<Sheet />} />
-          <Route path="/createsheet" element={<CreateSheet />} />
+          <Route path="/creerfiche" element={<CreateSheet />} />
           <Route path="/showsheet/:id" element={<ShowSheet />} />
           <Route path="/showsheetowner/:id" element={<ShowSheetOwner />} />
           {/* products */}
@@ -48,11 +49,7 @@ const RouteContainer = () => {
           <Route path="/profil" element={<Profil />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/email/verify" element={<VerifyEmail />} />
-
-          {/* documentation api  */}
-          {/* <Route part="api/documentation" element={<ApiDocumentation />} /> */}
           <Route path="*" element={<NotFound />} />
-
           <Route
             path="/dashboard"
             element={

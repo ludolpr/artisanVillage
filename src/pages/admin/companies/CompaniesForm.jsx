@@ -88,13 +88,13 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
+      <h2 className=" font-bold mb-4 ">
         {mode === "edit"
           ? "Modifier la compagnie"
           : "Créer une nouvelle compagnie"}
       </h2>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name_company">
+        <label className="block  mb-2" htmlFor="name_company">
           Nom de l'entreprise
         </label>
         <input
@@ -103,15 +103,12 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="name_company"
           value={formData.name_company}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label
-          className="block text-gray-700 mb-2"
-          htmlFor="description_company"
-        >
+        <label className="block  mb-2" htmlFor="description_company">
           Description de l'entreprise
         </label>
         <textarea
@@ -119,12 +116,12 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="description_company"
           value={formData.description_company}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           rows="3"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="picture_company">
+        <label className="block  mb-2" htmlFor="picture_company">
           URL de l'image ou télécharger une image
         </label>
         <input
@@ -132,13 +129,13 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           id="picture_company"
           name="picture_company"
           onChange={handleFileChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
           accept="image/*"
           required
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="zipcode">
+        <label className="block  mb-2" htmlFor="zipcode">
           Code postal
         </label>
         <input
@@ -147,12 +144,12 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="zipcode"
           value={formData.zipcode}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="address">
+        <label className="block  mb-2" htmlFor="address">
           Adresse
         </label>
         <input
@@ -161,11 +158,11 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="address"
           value={formData.address}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="town">
+        <label className="block  mb-2" htmlFor="town">
           Ville
         </label>
         <input
@@ -174,11 +171,11 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="town"
           value={formData.town}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="siret">
+        <label className="block  mb-2" htmlFor="siret">
           SIRET
         </label>
         <input
@@ -187,12 +184,12 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="siret"
           value={formData.siret}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="phone">
+        <label className="block  mb-2" htmlFor="phone">
           Téléphone
         </label>
         <input
@@ -201,15 +198,12 @@ const CompaniesForm = ({ company, onSuccess, mode }) => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
+          className="w-full px-3 py-2 border  rounded"
         />
       </div>
       {message && <div className="added mb-4">{message}</div>}
       {error && <div className="decline mb-4">{error}</div>}
-      <button
-        type="submit"
-        className="bg-[#9a7d6b] text-white px-4 py-2 rounded hover:bg-[#8b6d59]"
-      >
+      <button type="submit" className="button3 px-4 py-2 rounded ">
         {mode === "edit"
           ? "Sauvegarder les modifications"
           : "Créer la compagnie"}

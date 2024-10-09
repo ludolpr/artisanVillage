@@ -113,19 +113,19 @@ const UserProfile = () => {
   // Reusable component for user details
   const UserDetails = ({ user, emailStatus }) => (
     <div className="p-6 ">
-      <h2 className="text-2xl font-bold  mb-4">Profil Utilisateur</h2>
+      <h2 className=" font-bold  mb-4">Profil Utilisateur</h2>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold ">Nom d'utilisateur:</h3>
+        <h3 className=" font-semibold ">Nom d'utilisateur:</h3>
         <p className="">{user.name_user || "votre nom ici"}</p>
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold  ">Email:</h3>
+        <h3 className=" font-semibold  ">Email:</h3>
         <p className={` ${emailStatus} `}>
           {user.email} {user.email_verified_at ? "(vérifié)" : "(non vérifié)"}
         </p>
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold ">Rôle:</h3>
+        <h3 className=" font-semibold ">Rôle:</h3>
         <p className="">
           {user.id_role === 1
             ? "Utilisateur"
@@ -164,14 +164,14 @@ const UserProfile = () => {
             alt={user.name_user}
             className="w-64 h-64 object-cover"
           />
-          <div className="absolute bottom-0 left-0 text-xl p-4 card1">
+          <div className="absolute bottom-0 left-0  p-4 card1">
             {user.name_user || "votre nom ici"}
           </div>
         </div>
 
         {editMode ? (
           <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Modifier Profil</h2>
+            <h2 className=" font-bold mb-4">Modifier Profil</h2>
             {/* Form inputs for edit mode */}
             <div className="mb-4">
               <label className="font-semibold">Nom d'utilisateur:</label>
@@ -180,7 +180,7 @@ const UserProfile = () => {
                 name="name_user"
                 value={formData.name_user || ""}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 border  rounded mt-1"
               />
             </div>
             <div className="mb-4">
@@ -190,7 +190,7 @@ const UserProfile = () => {
                 name="email"
                 value={formData.email || ""}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 border  rounded mt-1"
               />
             </div>
             <div className="mb-4">
@@ -199,7 +199,7 @@ const UserProfile = () => {
                 type="file"
                 name="picture_user"
                 onChange={handleFileChange}
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 border  rounded mt-1"
               />
             </div>
             {/* Password change */}

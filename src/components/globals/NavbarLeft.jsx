@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import auth from "../../services/token";
 import { api } from "../../services/baseUrl";
 import { UserContext } from "../../hooks/UserContext";
 
 const NavbarLeft = () => {
   const [hasFiche, setHasFiche] = useState(false);
   const [ficheId, setFicheId] = useState(null);
-  const { user, isAuthenticated } = useContext(UserContext);
-  const role = auth.getRoles();
+  const { user, isAuthenticated, role } = useContext(UserContext);
+  console.log("role :" + role);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,12 +18,9 @@ const NavbarLeft = () => {
           .get("/company")
           .then((response) => {
             const companies = response.data;
-
-            // Find the fiche that matches the current user
             const userFiche = companies.find(
               (company) => company.id_user === user.id
             );
-            // console.log("fiche id et user id:" + userFiche.id, user.id);
 
             if (userFiche) {
               setFicheId(userFiche.id);
@@ -43,30 +40,23 @@ const NavbarLeft = () => {
 
     fetchUserFiche();
   }, [isAuthenticated, user]);
-  // console.log("mon user : " + user);
-  // console.log("fiche id :" + ficheId);
-  // console.log("role :" + role);
 
   return (
-    <div className="hidden md:flex flex-1 justify-center space-x-4">
+    <div className="hidden lg:flex flex-1 justify-center space-x-4">
       <NavLink className="m-2" to="/sheet">
         Fiche artisans
       </NavLink>
-
       {role == 1 && (
-        <NavLink className="m-2" to="/createsheet">
+        <NavLink className="m-2" to="/creerfiche">
           Déposer une fiche
         </NavLink>
       )}
-
       <NavLink className="m-2" to="/profil">
         Profil
       </NavLink>
-
       <NavLink className="m-2" to="/contact">
         Contact
       </NavLink>
-
       {hasFiche && ficheId && role >= 2 && (
         <NavLink className="m-2" to={`/showsheetowner/${ficheId}`}>
           Votre fiche d'entreprise

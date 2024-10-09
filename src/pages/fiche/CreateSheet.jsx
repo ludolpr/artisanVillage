@@ -94,7 +94,7 @@ const CreateSheet = () => {
   return (
     <div className="flex justify-center items-center min-h-screen  p-4">
       <div className="card1 shadow-lg rounded-lg p-8 w-full max-w-2xl">
-        <h2 className="text-2xl font-bold text-center  mb-6">
+        <h2 className=" font-bold text-center  mb-6">
           Créer une fiche entreprise
         </h2>
         {/* Formulaire pour la création de la fiche */}
@@ -102,10 +102,7 @@ const CreateSheet = () => {
           <div className="grid grid-cols-2 gap-4 mb-4">
             {/* Champ pour le nom de l'entreprise */}
             <div>
-              <label
-                htmlFor="name_company"
-                className="block text-lg font-medium mb-2"
-              >
+              <label htmlFor="name_company" className="block  font-medium mb-2">
                 Nom de l'entreprise
               </label>
               <input
@@ -124,7 +121,7 @@ const CreateSheet = () => {
             <div className="col-span-2">
               <label
                 htmlFor="description_company"
-                className="block text-lg font-medium mb-2"
+                className="block  font-medium mb-2"
               >
                 Description de l'entreprise
               </label>
@@ -144,9 +141,10 @@ const CreateSheet = () => {
             <div>
               <label
                 htmlFor="picture_company"
-                className="block  text-lg font-medium mb-2"
+                className="block   font-medium mb-2"
               >
-                Photo de l'entreprise
+                Photo de l'entreprise (de préférence une image au format
+                paysage)
               </label>
               <input
                 type="file"
@@ -161,10 +159,7 @@ const CreateSheet = () => {
 
             {/* Champ pour l'adresse */}
             <div className="col-span-2">
-              <label
-                htmlFor="address"
-                className="block  text-lg font-medium mb-2"
-              >
+              <label htmlFor="address" className="block   font-medium mb-2">
                 Adresse
               </label>
               <input
@@ -181,10 +176,7 @@ const CreateSheet = () => {
 
             {/* Champ pour le code postal */}
             <div>
-              <label
-                htmlFor="zipcode"
-                className="block  text-lg font-medium mb-2"
-              >
+              <label htmlFor="zipcode" className="block   font-medium mb-2">
                 Code postal
               </label>
               <input
@@ -201,7 +193,7 @@ const CreateSheet = () => {
 
             {/* Champ pour la ville */}
             <div>
-              <label htmlFor="town" className="block  text-lg font-medium mb-2">
+              <label htmlFor="town" className="block   font-medium mb-2">
                 Ville
               </label>
               <input
@@ -218,10 +210,7 @@ const CreateSheet = () => {
 
             {/* Champ pour le téléphone */}
             <div>
-              <label
-                htmlFor="phone"
-                className="block  text-lg font-medium mb-2"
-              >
+              <label htmlFor="phone" className="block   font-medium mb-2">
                 Téléphone
               </label>
               <input
@@ -238,10 +227,7 @@ const CreateSheet = () => {
 
             {/* Champ pour le numéro SIRET */}
             <div>
-              <label
-                htmlFor="siret"
-                className="block  text-lg font-medium mb-2"
-              >
+              <label htmlFor="siret" className="block   font-medium mb-2">
                 N° de Siret
               </label>
               <input

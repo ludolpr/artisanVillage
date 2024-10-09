@@ -1,17 +1,29 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import auth from "../services/token"; // Importation des fonctions pour gérer le token
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("access_token");
+  const token = auth.getToken();
 
   useEffect(() => {
     const fetchUser = async () => {
+      // If the token has expired, we avoid the call to the API and we reset the states
+      if (!auth.getExpiryTime()) {
+        setError("Session expirée. Veuillez vous reconnecter.");
+        localStorage.removeItem("access_token");
+        setUser(null);
+        setRole(null);
+        return;
+      }
+
       try {
+        // Retrieving user information from the API
         const response = await axios.get(
           "http://localhost:8000/api/currentuser",
           {
@@ -22,31 +34,51 @@ const UserProvider = ({ children }) => {
             },
           }
         );
-        setUser(response.data.data.user);
+
+        const userData = response.data.data.user;
+        // console.log("Response user data:", userData); // Debugging: Show user data
+
+        // Update user and role information directly from the API
+        setUser(userData);
+        // Use role from API instead of token
+        setRole(userData.id_role);
       } catch (error) {
+        // If the user is not authorized or the session has expired
         if (error.response && error.response.status === 401) {
           setError("Session expirée. Veuillez vous reconnecter.");
           localStorage.removeItem("access_token");
           setUser(null);
+          setRole(null);
         } else {
           setError("Erreur lors de la récupération des données utilisateur.");
         }
-      } finally {
-        console.log("impossible de connecter l'utilisateur");
       }
     };
 
+    // Immediate call to verify role and user information
     fetchUser();
+
+    // Added an event listener to monitor page refreshes
+    window.addEventListener("focus", fetchUser);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("focus", fetchUser);
+    };
   }, [token]);
 
   const isAuthenticated = !!user;
 
-  const login = (userData) => {
+  const login = (userData, userRole) => {
+    // Debug: Show role on login
+    // console.log("Login role passed:", userRole);
+    // Update role on login
     setUser(userData);
+    setRole(userRole);
   };
 
   return (
-    <UserContext.Provider value={{ user, login, isAuthenticated, error }}>
+    <UserContext.Provider value={{ user, role, login, isAuthenticated, error }}>
       {children}
     </UserContext.Provider>
   );

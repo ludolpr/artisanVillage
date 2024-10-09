@@ -9,12 +9,12 @@ const MessageList = ({ onSelect }) => {
 
   return (
     <div className=" p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">Message List</h2>
+      <h2 className=" font-bold mb-4 ">Message List</h2>
       <ul>
         {messages.map((message) => (
           <li
             key={message.id}
-            className="mb-2 p-4 bg-gray-100 rounded cursor-pointer hover:bg-[#9a7d6b] hover:text-white"
+            className="mb-2 p-4  rounded cursor-pointer  "
             onClick={() => onSelect(message)}
           >
             {message.subject} - {message.body}

@@ -9,13 +9,13 @@ const Header = () => {
 
   return (
     <header
-      className={`top-0 z-20 flex w-full items-center justify-between mx-auto flex-wrap`}
+      className={`row top-0 z-20 flex w-100 items-center justify-between  mx-auto flex-wrap`}
     >
-      <div className="flex items-center">
+      <div className="flex items-center space-x-4">
         <Logo />
         <NavbarLeft />
       </div>
-      <div className="flex mr-5">
+      <div className="flex justify-end mr-5">
         <Navbar />
       </div>
     </header>
@@ -23,3 +23,7 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+

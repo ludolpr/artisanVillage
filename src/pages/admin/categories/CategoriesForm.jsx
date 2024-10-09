@@ -45,11 +45,8 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="decline p-6 rounded-lg shadow-md mb-6"
-    >
-      <h2 className="text-xl font-bold mb-4 text-[#9a7d6b]">
+    <form onSubmit={handleSubmit} className="decline p-6 rounded-lg mb-6">
+      <h2 className=" font-bold mb-4 ">
         {mode === "edit"
           ? "Modifier la catégorie"
           : "Créer une nouvelle catégorie"}

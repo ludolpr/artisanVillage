@@ -72,17 +72,17 @@ const BasicMap = () => {
                   {/* Nom de l'entreprise */}
                 </div>
                 <h3
-                  className="text-lg font-bold cursor-pointer"
+                  className=" font-bold cursor-pointer"
                   onClick={() => navigate(`/showsheet/${artisan.id}`)}
                 >
                   {artisan.name_company}
                 </h3>
-                <p className="text-sm">{artisan.description}</p>
-                <div className="text-xs text-gray-600 mt-2">
+                <p className="">{artisan.description}</p>
+                <div className=" text-gray-600 mt-2">
                   <span className="font-semibold">Adresse:</span>{" "}
                   {artisan.address}
                 </div>
-                <div className="text-xs text-gray-600">
+                <div className=" text-gray-600">
                   <span className="font-semibold">Contact:</span>{" "}
                   {artisan.phone}
                 </div>

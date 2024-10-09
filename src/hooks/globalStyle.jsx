@@ -14,7 +14,18 @@ const StyledGlobalStyle = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     margin: 0; 
     padding: 0; 
+    
 }
+.menu-overlay {
+    position: absolute;
+    top: 64px; /* Ajustez selon vos besoins */
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: var(--background-color); 
+    box-shadow: 0 2px 10px var(--shadow-color-light);
+
+  }
   :root {
     /* Variables communes */
     --hover-color-primary: #9a7d6b; 
@@ -135,20 +146,22 @@ const StyledGlobalStyle = createGlobalStyle`
     height: 100%;
     background: linear-gradient(135deg, var(--hover-color) 100%, rgba(255, 255, 255, 0.3) 100%);
 }
-
+.map {
+    border: 1px solid var(--secondary-bg-color-light);
+    box-shadow: 7px 6px 5px var(--secondary-bg-color-light);
+    }
 /* Card Styles */
 .card1 {
     background-color: var(--primary-bg-color-light);
-    border: 1px solid var(--primary-bg-color-dark);
-    
+    border: 1px solid var(--secondary-bg-color-light);
+    box-shadow: 3px 2px 7px var(--secondary-bg-color-light);
     color: var(--text-color);
-    box-shadow: 0 2px 4px var(--shadow-color-light);
     border-radius: 8px;
     padding: 1rem;
 }
 
 .card1:hover {
-    box-shadow: 0 4px 8px var(--shadow-color-light);
+    border: 1px solid var(--secondary-bg-color-light);   
     
 }
 
@@ -183,13 +196,15 @@ const StyledGlobalStyle = createGlobalStyle`
 
 .gradient1 {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 80%);
-   
+    box-shadow: 2px 3px 7px var(--secondary-bg-color-light);
+
+    
 }
 
 .gradient2 {
     background: linear-gradient(135deg, var(--secondary-color) 0%, rgba(154, 125, 107, 0.3) 100%);
-    border: 1px solid var(--primary-bg-color-dark);
-
+    border: 1px solid var(--secondary-bg-color-light);
+    box-shadow: 2px 3px 7px var(--secondary-bg-color-light);
 }
 
 .gradient3 {
@@ -389,6 +404,8 @@ a {
     color: var(--text-color); /* Default link color */
     text-decoration: none; /* Remove underline */
     transition: color 0.3s; /* Smooth transition for color */
+    font-size: 0.95rem;
+    
 }
 
 a:hover {
@@ -423,6 +440,279 @@ a:hover {
     padding: 1rem;
 }
 
+  
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////        RESPONSIVE       /////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ /* Large Tablets and Smaller Desktops (max-width: 1200px) */
+@media (max-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  a {
+    font-size: 1.2rem;
+  }
+    .gradient4 {
+    padding: 0.5rem;
+    }
+}
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  a, button, svg, span,  .input-field, .textarea, .select {
+
+    font-size: 1.0rem;
+  }
+    .gradient4 {
+    padding: 0.5rem;
+    }
+}
+/* Tablets (max-width: 992px) */
+@media (max-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+    a, button, svg, span,  .input-field, .textarea, .select {
+
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 957px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+     a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+@media (max-width: 925px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+
+@media (max-width: 912px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+  @media (max-width: 863px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+    @media (max-width: 828px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+/* Small Tablets and Large Phones (max-width: 768px) */
+@media (max-width: 776px) {
+  html {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+    h6 {
+        font-size: 0.70rem;
+
+
+    }
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+     
+}
+@media (max-width: 624px) {
+  html {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+    h6 {
+         font-size: 0.6rem;
+    
+
+    }
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+/* Small Phones (max-width: 576px) */
+@media (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+        font-size: 0.80rem;
+
+  }
+    h6{
+        font-size: 0.70rem;
+
+    }
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+     button{
+     padding:1px; 
+     }
+    
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -451,12 +741,14 @@ a:hover {
 
     /* Navbar and Footer */
     header, footer {
-        background-color: var(--primary-bg-color-light);
-        color: var(--secondary-color);
+        background-color: var(--primary-bg-color-dark);
+        color: var(--primary-color);
          a {
-        background-color: var(--primary-bg-color-light);
+        background-color: var(--primary-bg-color-dark);
+        font-size: 0.95rem;
 
-        color: var(--secondary-color);
+
+        color: var(--primary-color);
         text-decoration: none;
         transition: color 0.3s;
         }
@@ -494,28 +786,29 @@ a:hover {
 
     /* Card Styles */
     .card1 {
+        border: 1px solid var(--secondary-bg-color-dark);
+        box-shadow: 3px 2px 7px var(--secondary-bg-color-dark);
         background-color: var(--secondary-color);
         color: var(--block-bg-color-dark );
-        border-color: var(--secondary-color-dark);
         border-radius: 8px;
         padding: 1rem;
         transition: transform 0.3s;
+        
         select {
         color: var(--secondary-color)
         }
-
+        
     
     }
     
 
     .card1:hover {
-        box-shadow: 0 4px 8px var(--shadow-color-light);
-    }
+        border: 1px solid var(--secondary-bg-color-dark);
+        }
 
     .card2 {
         background-color: var(--secondary-color);
         border: 2px solid var(--primary-bg-color-light);
-        padding: 1rem;
         border-radius: 8px;
     }
 
@@ -554,6 +847,8 @@ a:hover {
 
     .gradient2 {
         background: linear-gradient(135deg, var(--secondary-color), var(--hover-color));
+        border: 1px solid var(--secondary-bg-color-dark);
+        
     }
 
     .gradient3 {
@@ -740,25 +1035,277 @@ p {
         border-radius: 8px;
         padding: 1rem;
     }
-}
- 
 
-  
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////        RESPONSIVE       /////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem; /* Reduce size for mobile */
-    }
-
-    h2 {
-      font-size: 1.75rem; /* Reduce size for mobile */
-    }
+ /* Large Tablets and Smaller Desktops (max-width: 1200px) */
+@media (max-width: 1200px) {
+  html {
+    font-size: 14px;
   }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  a {
+    font-size: 1.2rem;
+  }
+    .gradient4 {
+    padding: 0.5rem;
+    }
+}
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  a, button, svg, span,  .input-field, .textarea, .select {
+
+    font-size: 1.0rem;
+  }
+    .gradient4 {
+    padding: 0.5rem;
+    }
+}
+/* Tablets (max-width: 992px) */
+@media (max-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+    a, button, svg, span,  .input-field, .textarea, .select {
+
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 957px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+     a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+@media (max-width: 925px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+
+@media (max-width: 912px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+  @media (max-width: 863px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+    @media (max-width: 828px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+/* Small Tablets and Large Phones (max-width: 768px) */
+@media (max-width: 776px) {
+  html {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+    h6 {
+        font-size: 0.70rem;
+
+
+    }
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+     
+}
+@media (max-width: 624px) {
+  html {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+    h6 {
+         font-size: 0.6rem;
+    
+
+    }
+    a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+}
+/* Small Phones (max-width: 576px) */
+@media (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+        font-size: 0.80rem;
+
+  }
+    h6{
+        font-size: 0.70rem;
+
+    }
+   a,svg, span,.input-field, textarea,  {
+     font-size: 12px;
+     margin:0;
+     padding:2px;
+     width:auto;
+  }
+     select {
+     width: 100%;
+    }
+     button{
+     padding:1px; 
+     }
+    
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////         END            //////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

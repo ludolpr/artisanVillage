@@ -122,8 +122,8 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="card1 p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4 ">Liste des utilisateurs</h2>
+      <div className="card1 p-6 rounded-lg shadow-md  sm:flex-col">
+        <h2 className=" font-bold mb-4 ">Liste des utilisateurs</h2>
         {error && <div className="decline p-4 rounded mb-4">{error}</div>}
         {successMessage && (
           <div className="added p-4 rounded mb-4">{successMessage}</div>

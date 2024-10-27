@@ -55,7 +55,7 @@ const Index = () => {
                 <img
                   src={
                     artisan.picture_company
-                      ? `http://127.0.0.1:8000/storage/uploads/companies/${artisan.picture_company}`
+                      ? `https://api.artisanvillage.fr/storage/uploads/companies/${artisan.picture_company}`
                       : artisanPlaceholder
                   }
                   alt={artisan.name_company}

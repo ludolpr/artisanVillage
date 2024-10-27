@@ -162,12 +162,12 @@ const ShowSheet = () => {
 
   return (
     <div className=" flex flex-col items-center min-h-screen p-6  ">
-      <div className="gradient1 w-full max-w-6xl shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden mb-6">
+      <div className="gradient3 w-full max-w-6xl shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden mb-6">
         <div className="lg:w-1/2 ">
           <img
             src={
               company.picture_company
-                ? `http://127.0.0.1:8000/storage/uploads/companies/${company.picture_company}`
+                ? `https://api.artisanvillage.fr/storage/uploads/companies/${company.picture_company}`
                 : artisanPlaceholder
             }
             alt={company.name_company}
@@ -287,7 +287,7 @@ const ShowSheet = () => {
           )}
         </div>
       </div>
-      <div className="gradient1 w-full max-w-6xl shadow-lg rounded-lg p-6 mb-6">
+      <div className="gradient3 w-full max-w-6xl shadow-lg rounded-lg p-6 mb-6">
         <h3 className="  font-semibold mb-4 flex justify-center">Produits</h3>
         <div className="p-2">
           <Products companyId={company.id} className="card3" />

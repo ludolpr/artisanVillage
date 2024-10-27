@@ -51,9 +51,11 @@ const NavbarLeft = () => {
           Déposer une fiche
         </NavLink>
       )}
-      <NavLink className="m-2" to="/profil">
-        Profil
-      </NavLink>
+      {role >= 1 && (
+        <NavLink className="m-2" to="/profil">
+          Profil
+        </NavLink>
+      )}
       <NavLink className="m-2" to="/contact">
         Contact
       </NavLink>

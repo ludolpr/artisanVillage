@@ -10,7 +10,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // Ajout de l'état isLoading
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoading(true); // Activer le spinner
@@ -95,7 +95,7 @@ const Register = () => {
                   message: "Longueur minimale de 8 caractères",
                 },
                 pattern: {
-                  value: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#:$%^&])/,
+                  value: process.env.REGEX_APP,
                   message:
                     "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial",
                 },

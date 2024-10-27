@@ -1,19 +1,18 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
 import auth from "../services/token"; // Importation des fonctions pour gérer le token
-
+import { api } from "../services/baseUrl";
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
+  const [role, setRole] = useState(null); // Ajouter un état pour le rôle
   const [error, setError] = useState(null);
   const token = auth.getToken();
 
   useEffect(() => {
     const fetchUser = async () => {
-      // If the token has expired, we avoid the call to the API and we reset the states
+      // Si le token a expiré, on évite l'appel à l'API et on réinitialise les états
       if (!auth.getExpiryTime()) {
         setError("Session expirée. Veuillez vous reconnecter.");
         localStorage.removeItem("access_token");
@@ -23,17 +22,12 @@ const UserProvider = ({ children }) => {
       }
 
       try {
-        // Retrieving user information from the API
-        const response = await axios.get(
-          "http://localhost:8000/api/currentuser",
-          {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        // Récupération des informations utilisateur à partir de l'API
+        const response = await api.get("/currentuser", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         const userData = response.data.data.user;
         // console.log("Response user data:", userData); // Debugging: Show user data

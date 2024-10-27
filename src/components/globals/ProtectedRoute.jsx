@@ -8,12 +8,12 @@ const ProtectedRoute = ({ element: Component, roleRequired }) => {
   // console.log("Required role:", roleRequired);
   // console.log("User role:", user?.id_role);
 
-  // Vérifiez si l'utilisateur est authentifié et possède le rôle requis
+  // Check if the user is authenticated and has the required role
   if (user && user.id_role === roleRequired) {
-    // Si l'utilisateur a le rôle requis, rendre le composant protégé
+    // If the user has the required role, make the component protected
     return Component;
   } else {
-    // Sinon, rediriger vers la page d'accueil
+    // Otherwise, redirect to the home page
     return <Navigate to="/" />;
   }
 };

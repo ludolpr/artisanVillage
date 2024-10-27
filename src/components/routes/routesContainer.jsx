@@ -16,7 +16,7 @@ import EditProductOwner from "../../pages/fiche/EditProductOwner";
 import Profil from "../../pages/user/Profil";
 import VerifyEmail from "../../pages/user/VerifyEmail";
 import Contact from "../../pages/user/Contact";
-
+import About from "../../pages/home/About";
 //proteted route for admin
 import ProtectedRoute from "../globals/ProtectedRoute";
 import MentionsLegales from "../informations/MentionsLegales";
@@ -25,7 +25,6 @@ import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 
 const RouteContainer = () => {
-  const swaggerUrl = "http://localhost:8000/api/documentation";
   return (
     <Router>
       <Header />
@@ -59,6 +58,7 @@ const RouteContainer = () => {
           {/* mentions and policies */}
           <Route path="/mentions" element={<MentionsLegales />} />
           <Route path="/policy" element={<Policies />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
       <Footer />

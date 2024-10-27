@@ -43,15 +43,6 @@ const Footer = () => {
                   Politique de confidentialité
                 </a>
               </li>
-              <li className="mb-2">
-                <a
-                  href="http://localhost:8000/api/documentation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Documentation de mon application
-                </a>
-              </li>
             </ul>
           </div>
         </div>

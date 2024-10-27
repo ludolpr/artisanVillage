@@ -14,12 +14,10 @@ const menuItems = [
   
 function Sidebar({ activeItem, setActiveItem }) {
   return (
-    <aside className="h-screen w-64 flex flex-col space-y-6 py-7 px-2">
-      {/* Logo */}
+    <aside className="sm:h-screen w-full sm:w-64 flex flex-col space-y-6 py-7 px-2">
       <div className="flex items-center space-x-2 px-4">
         <span className="title1 font-extrabold">Dashboard</span>
       </div>
-      {/* Menu Items */}
       <nav className="flex-1 card1">
         {menuItems.map((item) => (
           <button
@@ -36,6 +34,7 @@ function Sidebar({ activeItem, setActiveItem }) {
       </nav>
     </aside>
   );
-}
+};
+
 
 export default Sidebar;

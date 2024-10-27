@@ -41,7 +41,7 @@ const BotContainer = () => {
     fetchUserFiche();
   }, [isAuthenticated, user]);
   return (
-    <div className="relative gradient1 flex flex-col lg:flex-row items-center justify-between py-12 px-6 lg:px-16 space-y-8 lg:space-y-0">
+    <div className="relative gradient3 flex flex-col lg:flex-row items-center justify-between py-12 px-6 lg:px-16 space-y-8 lg:space-y-0">
       <div className="lg:w-1/2 space-y-6">
         {role <= 1 ? (
           <>

@@ -35,7 +35,7 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
     setNewPicture(user.picture_user);
     setNewRoleName(user.id_role);
     setPreviewImage(
-      `http://127.0.0.1:8000/public/storage/uploads/users/${user.picture_user}`
+      `https://api.artisanvillage.fr/public/storage/uploads/users/${user.picture_user}`
     );
   };
 
@@ -177,7 +177,7 @@ const UsersList = ({ onUserSelect, onDelete, refreshKey }) => {
                 ) : (
                   <div className=" flex items-center pointer-events-none">
                     <img
-                      src={`http://127.0.0.1:8000/storage/uploads/users/${user.picture_user}`}
+                      src={`https://api.artisanvillage.fr/storage/uploads/users/${user.picture_user}`}
                       alt={user.name_user}
                       className="w-16 h-16 object-cover rounded-full mr-4"
                     />

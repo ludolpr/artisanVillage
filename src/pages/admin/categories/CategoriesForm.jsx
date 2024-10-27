@@ -45,14 +45,14 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="decline p-6 rounded-lg mb-6">
+    <form onSubmit={handleSubmit} className=" p-6 rounded-lg mb-6">
       <h2 className=" font-bold mb-4 ">
         {mode === "edit"
           ? "Modifier la catégorie"
           : "Créer une nouvelle catégorie"}
       </h2>
       <div className="mb-4">
-        <label className="block decline mb-2" htmlFor="name_category">
+        <label className="block  mb-2" htmlFor="name_category">
           Nom de la catégorie
         </label>
         <input
@@ -61,12 +61,12 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
           name="name_category"
           value={formData.name_category}
           onChange={handleChange}
-          className="w-full px-3 py-2 border decline rounded"
+          className="w-full px-3 py-2 border  rounded"
           required
         />
       </div>
       <div className="mb-4">
-        <label className="block decline mb-2" htmlFor="description_category">
+        <label className="block  mb-2" htmlFor="description_category">
           Description de la catégorie
         </label>
         <textarea
@@ -74,7 +74,7 @@ const CategoriesForm = ({ category, onSuccess, mode }) => {
           name="description_category"
           value={formData.description_category}
           onChange={handleChange}
-          className="w-full px-3 py-2 border decline rounded"
+          className="w-full px-3 py-2 border  rounded"
           rows="3"
         />
       </div>

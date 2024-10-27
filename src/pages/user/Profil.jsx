@@ -22,7 +22,7 @@ const UserProfile = () => {
   const [passwordError, setPasswordError] = useState("");
   const profileImage =
     user && user.picture_user
-      ? `http://127.0.0.1:8000/storage/uploads/users/${user.picture_user}`
+      ? `https://api.artisanvillage.fr/storage/uploads/users/${user.picture_user}`
       : userImage;
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const UserProfile = () => {
 
   const handleDelete = async () => {
     try {
-      await api.delete(`/api/users/${user.id}`);
+      await api.delete(`/users/${user.id}`);
       alert("Profil supprimé avec succès !");
       // Add any additional actions needed after deletion (like logging out or redirecting)
     } catch (error) {
@@ -156,7 +156,7 @@ const UserProfile = () => {
   );
 
   return (
-    <div className="flex gradient1 justify-center items-center min-h-screen p-4">
+    <div className="flex gradient3 justify-center items-center min-h-screen p-4">
       <div className="gradient2 shadow-lg rounded-lg overflow-hidden w-full max-w-3xl">
         <div className="relative">
           <img

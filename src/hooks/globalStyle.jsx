@@ -11,11 +11,22 @@ const StyledGlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
-    font-family: "Roboto", sans-serif;
+
     margin: 0; 
     padding: 0; 
     
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100%;
+    max-height: auto;
+    height: 100vh;
+    font-family: 'Lora', Helvetica, sans-serif;
+}
+
 .menu-overlay {
     position: absolute;
     top: 64px; /* Ajustez selon vos besoins */
@@ -161,7 +172,8 @@ const StyledGlobalStyle = createGlobalStyle`
 }
 
 .card1:hover {
-    border: 1px solid var(--secondary-bg-color-light);   
+    border: 1px solid var(--secondary-bg-color-light);
+   
     
 }
 
@@ -442,276 +454,6 @@ a:hover {
 
   
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////        RESPONSIVE       /////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
- /* Large Tablets and Smaller Desktops (max-width: 1200px) */
-@media (max-width: 1200px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  a {
-    font-size: 1.2rem;
-  }
-    .gradient4 {
-    padding: 0.5rem;
-    }
-}
-@media (max-width: 1024px) {
-  html {
-    font-size: 15px;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  a, button, svg, span,  .input-field, .textarea, .select {
-
-    font-size: 1.0rem;
-  }
-    .gradient4 {
-    padding: 0.5rem;
-    }
-}
-/* Tablets (max-width: 992px) */
-@media (max-width: 992px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-    a, button, svg, span,  .input-field, .textarea, .select {
-
-    font-size: 1.05rem;
-  }
-}
-@media (max-width: 957px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-     a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-@media (max-width: 925px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-   a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-
-@media (max-width: 912px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-   a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-  @media (max-width: 863px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-    a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-    @media (max-width: 828px) {
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-   a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-/* Small Tablets and Large Phones (max-width: 768px) */
-@media (max-width: 776px) {
-  html {
-    font-size: 13px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-  }
-    h6 {
-        font-size: 0.70rem;
-
-
-    }
-    a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-     
-}
-@media (max-width: 624px) {
-  html {
-    font-size: 13px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-  }
-    h6 {
-         font-size: 0.6rem;
-    
-
-    }
-    a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-}
-/* Small Phones (max-width: 576px) */
-@media (max-width: 576px) {
-  html {
-    font-size: 12px;
-  }
-
-  h1 {
-    font-size: 1.75rem;
-  }
-
-  h2 {
-        font-size: 0.80rem;
-
-  }
-    h6{
-        font-size: 0.70rem;
-
-    }
-   a,svg, span,.input-field, textarea,  {
-     font-size: 12px;
-     margin:0;
-     padding:2px;
-     width:auto;
-  }
-     select {
-     width: 100%;
-    }
-     button{
-     padding:1px; 
-     }
-    
-}
 
 
 
@@ -1036,9 +778,10 @@ p {
         padding: 1rem;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////        RESPONSIVE       /////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
  /* Large Tablets and Smaller Desktops (max-width: 1200px) */
 @media (max-width: 1200px) {
@@ -1305,6 +1048,7 @@ p {
      }
     
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////         END            //////////////////////////////////////////////////

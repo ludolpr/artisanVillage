@@ -65,7 +65,7 @@ const BasicMap = () => {
                 <div className="flex items-center mb-2">
                   {/* Image de l'entreprise */}
                   <img
-                    src={`http://127.0.0.1:8000/storage/uploads/companies/${artisan.picture_company}`}
+                    src={`https://api.artisanvillage.fr/storage/uploads/companies/${artisan.picture_company}`}
                     alt={artisan.name_company}
                     className="w-12 h-12 rounded-full mr-3"
                   />

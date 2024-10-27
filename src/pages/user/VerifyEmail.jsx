@@ -41,7 +41,7 @@ const VerifyEmail = () => {
   }, [location.search]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen gradient1 ">
+    <div className="flex items-center justify-center min-h-screen gradient3 ">
       <div className="card1 p-6  rounded-lg shadow-lg max-w-md text-center">
         <h2
           className={` mb-4 ${

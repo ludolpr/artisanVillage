@@ -69,15 +69,15 @@ const Dashboard = () => {
   const itemsWithForms = ["Roles", "Tags", "Categories"];
 
   return (
-    <div className="flex h-full gradient2 ">
+    <div className="flex flex-col sm:flex-row h-full gradient2">
       <Sidebar
         activeItem={activeItem}
         setActiveItem={setActiveItem}
-        className="sm:flex"
+        className="sm:w-64"
       />
-      <div className="flex-1  p-10 sm:p-0  font-bold ">
+      <div className="flex-1 p-5 sm:p-10 font-bold">
         {itemsWithForms.includes(activeItem) && (
-          <button onClick={handleFormToggle} className=" rounded button3 ">
+          <button onClick={handleFormToggle} className="rounded button3 mb-4">
             {showForm ? "Masquer le formulaire" : "Afficher le formulaire"}
           </button>
         )}

@@ -87,9 +87,11 @@ const Navbar = () => {
                   Déposer une fiche
                 </NavLink>
               )}
-              <NavLink className="m-2" to="/profil" onClick={closeNavbar}>
-                Profil
-              </NavLink>
+              {role >= 1 && (
+                <NavLink className="m-2" to="/profil" onClick={closeNavbar}>
+                  Profil
+                </NavLink>
+              )}
               <button
                 className="flex button3 items-end mr-2 transition-transform duration-300 ease-in-out"
                 onClick={toggleTheme}

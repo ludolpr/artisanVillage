@@ -131,7 +131,7 @@ const ProductsOwner = () => {
             >
               <div className="flex items-center space-x-4">
                 <img
-                  src={`http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`}
+                  src={`https://api.artisanvillage.fr/storage/uploads/products/${product.picture_product}`}
                   alt={product.name_product}
                   className="w-16 h-16 object-cover border-2  rounded-lg"
                 />

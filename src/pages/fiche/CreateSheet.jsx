@@ -143,8 +143,7 @@ const CreateSheet = () => {
                 htmlFor="picture_company"
                 className="block   font-medium mb-2"
               >
-                Photo de l'entreprise (de préférence une image au format
-                paysage)
+                Photo de l'entreprise(de préférence une image au format paysage)
               </label>
               <input
                 type="file"
@@ -228,7 +227,7 @@ const CreateSheet = () => {
             {/* Champ pour le numéro SIRET */}
             <div>
               <label htmlFor="siret" className="block   font-medium mb-2">
-                N° de Siret
+                N° de Siret(en attaché)
               </label>
               <input
                 type="text"

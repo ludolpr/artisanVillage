@@ -29,7 +29,7 @@ const Login = () => {
       formData.append("email", data.email);
       formData.append("password", data.password);
 
-      const res = await api.post("http://127.0.0.1:8000/api/login", formData, {
+      const res = await api.post("/login", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

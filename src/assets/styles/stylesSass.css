@@ -12,6 +12,10 @@
   font-weight: normal;
   font-style: normal;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat";
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +23,7 @@ body {
   min-height: 100%;
   max-height: auto;
   height: 100vh;
-  font-family: "Ribeye", Helvetica, sans-serif;
+  font-family: "Lora", Helvetica, sans-serif;
 }
 
 .root {

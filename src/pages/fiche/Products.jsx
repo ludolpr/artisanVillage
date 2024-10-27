@@ -69,7 +69,7 @@ const Products = ({ userId }) => {
             <div key={product.id} className="card2 m-0">
               <div className=" rounded-lg overflow-hidden p-4">
                 <img
-                  src={`http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`}
+                  src={`https://api.artisanvillage.fr/storage/uploads/products/${product.picture_product}`}
                   alt={product.name_product}
                   className="w-full h-48 object-cover "
                 />
@@ -88,7 +88,7 @@ const Products = ({ userId }) => {
         <div key={products[0].id}>
           <div className=" overflow-hidden">
             <img
-              src={`http://127.0.0.1:8000/storage/uploads/products/${products[0].picture_product}`}
+              src={`https://api.artisanvillage.fr/storage/uploads/products/${products[0].picture_product}`}
               alt={products[0].name_product}
               className="w-full h-48 object-cover"
             />

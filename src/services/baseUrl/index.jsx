@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "https://api.artisanvillage.fr/api";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -8,20 +8,20 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // Récupère le token d'accès stocké dans le localStorage du navigateur
+    // Retrieves the access token stored in the browser's localStorage
     const token = localStorage.getItem("access_token");
-    
-    // Si un token existe, ajoute un header Authorization à la requête
+
+    // If a token exists, add an Authorization header to the request
     if (token) {
-      // Le format du header est "Bearer <token>", utilisé pour l'authentification
+      // The header format is "Bearer <token>", used for authentication
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
-    // Retourne la configuration de la requête (éventuellement modifiée) pour continuer le processus
+
+    // Returns the query configuration (possibly modified) to continue the process
     return config;
   },
   (error) => {
-    // Si une erreur se produit avant l'envoi de la requête, elle est rejetée et traitée
+    // If an error occurs before the request is sent, it is rejected and processed
     return Promise.reject(error);
   }
 );

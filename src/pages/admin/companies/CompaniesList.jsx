@@ -49,7 +49,7 @@ const CompaniesList = ({ onCompanySelect, onDelete, refreshKey }) => {
       long: company.long,
     });
     setPreviewImage(
-      `http://127.0.0.1:8000/public/storage/uploads/companies/${company.picture_company}`
+      `https://api.artisanvillage.fr/public/storage/uploads/companies/${company.picture_company}`
     );
   };
 
@@ -175,7 +175,7 @@ const CompaniesList = ({ onCompanySelect, onDelete, refreshKey }) => {
               ) : (
                 <div className="flex items-center">
                   <img
-                    src={`http://127.0.0.1:8000/storage/uploads/companies/${company.picture_company}`}
+                    src={`https://api.artisanvillage.fr/storage/uploads/companies/${company.picture_company}`}
                     alt={company.name_company}
                     className="w-16 h-16 object-cover rounded-full mr-4"
                   />

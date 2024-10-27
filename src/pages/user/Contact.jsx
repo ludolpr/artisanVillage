@@ -118,7 +118,7 @@ const ContactArtisan = () => {
               name="recipientType"
               value={recipientType}
               onChange={(e) => setRecipientType(e.target.value)}
-              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none "
             >
               <option value="artisan">Contacter un artisan</option>
               <option value="admin" disabled={!isAuthenticated}>
@@ -137,7 +137,7 @@ const ContactArtisan = () => {
               <select
                 name="artisan"
                 onChange={handleRecipientChange}
-                className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
+                className="w-full p-3 border  rounded-lg focus:outline-none "
               >
                 <option value="">-- Choisir un artisan --</option>
                 {users.map((artisan) => (
@@ -181,7 +181,7 @@ const ContactArtisan = () => {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               required
-              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none "
               placeholder="Sujet du message"
             />
           </div>
@@ -193,7 +193,7 @@ const ContactArtisan = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-              className="w-full p-3 border  rounded-lg focus:outline-none focus:ring"
+              className="w-full p-3 border  rounded-lg focus:outline-none "
               placeholder="Votre message"
               rows="6"
             ></textarea>

@@ -32,7 +32,7 @@ const ProductList = ({ refreshKey }) => {
     setEditingProductId(product.id);
     setFormData({ ...product });
     setPreviewImage(
-      `http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`
+      `https://api.artisanvillage.fr/storage/uploads/products/${product.picture_product}`
     );
   };
 
@@ -209,7 +209,7 @@ const ProductItem = ({ product }) => (
     <p>{product.description_product}</p>
     <p>{product.price} €</p>
     <img
-      src={`http://127.0.0.1:8000/storage/uploads/products/${product.picture_product}`}
+      src={`https://api.artisanvillage.fr/storage/uploads/products/${product.picture_product}`}
       alt={product.name_product}
       className="w-1/2"
     />

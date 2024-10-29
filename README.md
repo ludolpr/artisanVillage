@@ -12,7 +12,7 @@ npx tailwindcss -i ./src/assets/styles/index.css -o ./src/assets/styles/stylesTa
 sass --watch ./src/assets/styles/index.scss:./src/assets/styles/stylesSass.css
 
 
-HAVE FUN !!
+HAVE FUN !!!
 
 
 
